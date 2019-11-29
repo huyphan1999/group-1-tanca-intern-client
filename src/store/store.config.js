@@ -15,19 +15,20 @@ const persistConfig = {
 
 const enhancerList = [];
 const devToolsExtension = window && window.__REDUX_DEVTOOLS_EXTENSION__;
+const sagaMiddleware = createSagaMiddleware();
+
+if (typeof devToolsExtension === 'function') {
+  enhancerList.push(devToolsExtension());
+}
+
+const composedEnhancer = compose(
+  applyMiddleware(sagaMiddleware),
+  ...enhancerList,
+);
 
 const initStore = () => {
   // create the saga middleware
-  const sagaMiddleware = createSagaMiddleware();
 
-  if (typeof devToolsExtension === 'function') {
-    enhancerList.push(devToolsExtension());
-  }
-
-  const composedEnhancer = compose(
-    applyMiddleware(sagaMiddleware),
-    ...enhancerList,
-  );
   const persistedReducer = persistReducer(persistConfig, rootReducer);
   const store = createStore(persistedReducer, {}, composedEnhancer);
   persistStore(store, {}, () => {
