@@ -1,31 +1,22 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, CheckBox } from 'react-native';
+import signupRequest from '../../actions/signup.action';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { loginRequest } from '../../actions/login.action';
-
-class Login extends Component {
+class SignUp extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props)
         this.state = {
             checked: false,
-            email: null,
-            password: null
-        }
+            email:null,
+            password:null
+        };
     }
-    /*componentDidMount = () => {
-        let token = this.props.user.token
-        if (token != null) {
-            this.props.navigation.navigate("Home");
-        }
-    }*/
     render() {
-        let { email, password } = this.state;
         return (
             <View>
                 <View style={styles.textHeader}>
-                    <Text style={styles.txtSign}>Sign in</Text>
+                    <Text style={styles.txtSign}>Sign up</Text>
                 </View>
                 <View style={styles.textContent}>
                     <Text style={{ fontSize: 20 }}>Please enter the email And</Text>
@@ -35,16 +26,18 @@ class Login extends Component {
                     <View style={styles.textInputContainer} >
                         <TextInput
                             style={styles.textInput}
-                            placeholder='Email'
-                            onChangeText={(text) => this.setState({ email: text })}
+                            textContentType='emailAddress'
+                            placeholder='email'
+                            onChangeText={(text) => this.setState({ email:text })}
                             value={this.state.email}
                         />
                     </View>
                     <View style={styles.textInputContainer} >
                         <TextInput
                             style={styles.textInput}
-                            placeholder='Password'
-                            onChangeText={(text) => this.setState({ password: text })}
+                            textContentType='telephoneNumber'
+                            placeholder='Your phone number'
+                            onChangeText={(text) => this.setState({ password:text })}
                             value={this.state.password}
                         />
                     </View>
@@ -53,9 +46,9 @@ class Login extends Component {
                     <View style={{ paddingTop: 20 }}>
                         <TouchableOpacity
                             style={styles.loginBtn}
-                            onPress={() => this.props.loginRequest({ email, password })}
+                            /*onPress={this.props.signupRequest(this.state.email,this.state.password)}*/
                         >
-                            <Text>SIGN IN</Text>
+                            <Text>SIGN UP</Text>
 
                         </TouchableOpacity>
                     </View>
@@ -78,6 +71,14 @@ class Login extends Component {
         )
     }
 }
+const mapStateToProps = state => ({
+    login: state.login,
+})
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({signupRequest}, dispatch)
+}
+export default connect(mapStateToProps,mapDispatchToProps)(SignUp)
+
 
 const styles = StyleSheet.create(
     {
@@ -141,13 +142,3 @@ const styles = StyleSheet.create(
         }
     });
 
-const mapStateToProps = state => ({
-    user: state.user,
-})
-function mapDispatchToProps(dispatch) {
-    return {
-        loginRequest: ({ email, password }) => dispatch(loginRequest({ email, password }))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login)

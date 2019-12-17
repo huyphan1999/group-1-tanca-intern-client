@@ -7,7 +7,7 @@
  */
 
 import React,{Component} from 'react';
-import {SafeAreaView, StyleSheet, StatusBar, Text} from 'react-native';
+import {SafeAreaView, StyleSheet, StatusBar, View} from 'react-native';
 import initStore from './store/store.config';
 
 import {Provider} from 'react-redux';
@@ -19,9 +19,9 @@ class App extends Component {
   return (
     <Provider store={store}>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
+      <View>
         <Login />
-      </SafeAreaView>
+      </View>
     </Provider>
   )
 }
