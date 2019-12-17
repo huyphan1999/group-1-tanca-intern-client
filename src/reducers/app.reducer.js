@@ -7,6 +7,7 @@ const intialState = {
 function appReducer(state = intialState, action) {
   switch (action.type) {
     case INITIALIZE_APP:
+      console.log('INITIALIZE_APP Reducer')
       return Object.assign(state, {
         appInitialized: true,
       });

@@ -28,7 +28,7 @@ import {
   
       case SIGNUP_ERROR:
         return {
-          errors: action.errors,
+          errors: action.error,
           requesting: false,
           successful: false,
         }

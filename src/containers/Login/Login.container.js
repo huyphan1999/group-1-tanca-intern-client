@@ -3,7 +3,9 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, CheckBox } from 'r
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { loginRequest } from '../../actions/login.action';
+import { navigate } from '../../utils/navigate';
 
+import { getUserToken } from '../../selectors/index';
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -14,12 +16,9 @@ class Login extends Component {
             password: null
         }
     }
-    /*componentDidMount = () => {
-        let token = this.props.user.token
-        if (token != null) {
-            this.props.navigation.navigate("Home");
-        }
-    }*/
+    componentDidUpdate() {
+        if(this.props.isLogin)  this.props.navigation.navigate('Home');
+    };
     render() {
         let { email, password } = this.state;
         return (
@@ -48,7 +47,7 @@ class Login extends Component {
                             value={this.state.password}
                         />
                     </View>
-                   
+
                     <View style={{ paddingTop: 20 }}>
                         <TouchableOpacity
                             style={styles.loginBtn}
@@ -60,7 +59,9 @@ class Login extends Component {
                     </View>
                     <TouchableOpacity style={{
                         justifyContent: 'center', alignItems: 'center', paddingTop: 40
-                    }}>
+                    }}
+                        onPress={() => this.props.navigation.navigate('SignUp')}
+                    >
                         <Text style={{ color: '#39e394', fontSize: 16 }}> FREE TRIAL</Text>
                     </TouchableOpacity>
                 </View>
@@ -140,13 +141,15 @@ const styles = StyleSheet.create(
         }
     });
 
-const mapStateToProps = state => ({
-    user: state.user,
-})
 function mapDispatchToProps(dispatch) {
     return {
         loginRequest: ({ email, password }) => dispatch(loginRequest({ email, password }))
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        isLogin: state.login.successful,
+    }
+}
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

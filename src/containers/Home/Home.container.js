@@ -10,7 +10,7 @@ import { createBottomTabNavigator} from 'react-navigation-tabs';
 
 import Add_Activity from '../Add/Add.container';
 
-import Input_Output_Activity from '../Vao_Ra_Ca/In_Out_container';
+import Input_Output_Activity from '../In_Out/In_Out_container';
 import Calendar_Activity from '../Calendar/Calendar.container';
 import TimeKeep_Activity from '../TimeKeep/TimeKeep.container';
 

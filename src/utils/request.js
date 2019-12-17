@@ -33,10 +33,25 @@ export async function postRequest(url, data) {
   console.log('Fetched')
   const json = await response.json();
   if (response.ok) {
-    console.log(json)
-    return {
-      json
-    };
+    return json;
+  }
+  else{
+  throw new Error(json);
+  }
+}
+
+export async function getRequest(url, id) {
+  var getURL=`${url}${id?`/${id}`:''}`
+  const response = await fetch(getURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      /*'Authorization':`Bearer ${global.token}`*/     
+    },
+  });
+  const json = await response.json();
+  if (response.ok) {
+    return json;
   }
   throw new Error(json);
 }

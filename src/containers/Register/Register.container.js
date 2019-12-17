@@ -1,38 +1,54 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, CheckBox } from 'react-native';
-export default class Register extends Component {
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { signupRequest } from '../../actions/signup.action';
+import { getUserToken } from '../../selectors/index';
+class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            checked: false
+            checked: false,
+            email:null,
+            password:null,
+        }
+    }
+    componentDidMount = () => {
+        let token = this.props.token
+        if (token) {
+            this.props.navigation.navigate("Home");
         }
     }
     render() {
+        let {email,password}=this.state;
         return (
             <View>
                 <View>
-                    <Text style={{ color: '#39e394', fontSize: 28,paddingBottom:80}}>Tanca</Text>
+                    <Text style={{ color: '#39e394', fontSize: 28, paddingBottom: 80 }}>Tanca</Text>
                 </View>
-         
+
                 <View style={styles.textHeader}>
-                    <Text style={{ color: '#39e394',fontSize:28}}>Phần mềm quản lý nhân sự 4.0 </Text>
+                    <Text style={{ color: '#39e394', fontSize: 28 }}>Phần mềm quản lý nhân sự 4.0 </Text>
                     <Text style={{ color: '#39e394', fontSize: 28 }}> cho công ty hiện đại </Text>
                     <Text style={{ fontSize: 18, paddingTop: 8 }}>Đa nền tảng - Dùng đơn giản - Dễ triển khai</Text>
-                    
+
                 </View>
-                
+
                 <View style={styles.textInput}>
                     <View style={styles.textInputContainer} >
                         <TextInput
                             style={styles.textInput}
                             textContentType='username'
                             placeholder='Tên đăng nhập'
+                            onChangeText={(text) => this.setState({ email: text })}
                         />
                     </View>
                     <View style={styles.textInputContainer} >
                         <TextInput
                             style={styles.textInput}
                             textContentType='telephoneNumber'
+                            onChangeText={(text) => this.setState({ password: text })}
                             placeholder='Số điện thoại'
                         />
                     </View>
@@ -49,19 +65,20 @@ export default class Register extends Component {
                     <View style={{ paddingTop: 20 }}>
                         <TouchableOpacity
                             style={styles.loginBtn}
+                            onPress={() => this.props.signupRequest({ email, password })}
                         >
                             <Text>DÙNG THỬ MIỄN PHÍ</Text>
 
                         </TouchableOpacity>
-                    </View>
-                    <TouchableOpacity style={{
-                        justifyContent: 'center', alignItems: 'center', paddingTop: 40
-                    }}>
-                        <Text style={{ color: '#000', fontSize: 16 }}> TANCA HR ĐƯỢC TIN TƯỞNG SỬ DỤNG BỞI +</Text>
-                        <Text style={{ color: '#000', fontSize: 16 }}>40,000 NGƯỜI DÙNG</Text>
-                    </TouchableOpacity>
                 </View>
+                <TouchableOpacity style={{
+                    justifyContent: 'center', alignItems: 'center', paddingTop: 40
+                }}>
+                    <Text style={{ color: '#000', fontSize: 16 }}> TANCA HR ĐƯỢC TIN TƯỞNG SỬ DỤNG BỞI +</Text>
+                    <Text style={{ color: '#000', fontSize: 16 }}>40,000 NGƯỜI DÙNG</Text>
+                </TouchableOpacity>
             </View>
+            </View >
 
         )
     }
@@ -79,17 +96,17 @@ const styles = StyleSheet.create(
             backgroundColor: '#ffff',
             justifyContent: 'center',
             alignItems: 'center',
-            paddingBottom:30
-          
-           
+            paddingBottom: 30
+
+
         },
-      
+
         textInput: {
             justifyContent: 'flex-start',
             backgroundColor: '#f2fcf8',
             alignItems: 'center'
         },
-      
+
         textInputContainer: {
             width: 390,
             marginTop: 20,
@@ -116,7 +133,17 @@ const styles = StyleSheet.create(
             justifyContent: 'center',
             alignItems: 'center',
             paddingTop: 30,
-           
+
         }
     });
 
+const mapStateToProps = state => ({
+    token: getUserToken(state),
+})
+function mapDispatchToProps(dispatch) {
+    return {
+        signupRequest: ({ email, password }) => dispatch(signupRequest({ email, password }))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register)
