@@ -48,8 +48,7 @@ class Login extends Component {
                             value={this.state.password}
                         />
                     </View>
-                    <View>
-                    </View>
+                   
                     <View style={{ paddingTop: 20 }}>
                         <TouchableOpacity
                             style={styles.loginBtn}

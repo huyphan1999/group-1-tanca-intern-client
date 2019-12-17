@@ -6,25 +6,24 @@
  * @flow
  */
 
-import React,{Component} from 'react';
-import {SafeAreaView, StyleSheet, StatusBar, View} from 'react-native';
+import React, {Component} from 'react';
+import {SafeAreaView, StyleSheet, StatusBar, Text, View} from 'react-native';
 import initStore from './store/store.config';
 
 import {Provider} from 'react-redux';
 import Login from './containers/Login/Login.container';
+import Register from './containers/Register/Register.container';
+import HomeApp from './containers/Home/Home.container';
 const store = initStore();
 
 class App extends Component {
   render() {
-  return (
-    <Provider store={store}>
-      <StatusBar barStyle="dark-content" />
-      <View>
-        <Login />
-      </View>
-    </Provider>
-  )
-}
+    return (
+      <Provider store={store}>
+        <HomeApp />
+      </Provider>
+    );
+  }
 }
 
 const styles = StyleSheet.create({});
