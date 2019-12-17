@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, CheckBox } from 'react-native';
-export default class Login extends Component {
+export default class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -10,53 +10,59 @@ export default class Login extends Component {
     render() {
         return (
             <View>
+                <View>
+                    <Text style={{ color: '#39e394', fontSize: 28,paddingBottom:80}}>Tanca</Text>
+                </View>
+         
                 <View style={styles.textHeader}>
-                    <Text style={styles.txtSign}>Sign in</Text>
+                    <Text style={{ color: '#39e394',fontSize:28}}>Phần mềm quản lý nhân sự 4.0 </Text>
+                    <Text style={{ color: '#39e394', fontSize: 28 }}> cho công ty hiện đại </Text>
+                    <Text style={{ fontSize: 18, paddingTop: 8 }}>Đa nền tảng - Dùng đơn giản - Dễ triển khai</Text>
+                    
                 </View>
-                <View style={styles.textContent}>
-                    <Text style={{ fontSize: 20 }}>Please enter the Username And</Text>
-                    <Text style={{ fontSize: 20 }}>Phone number</Text>
-                </View>
+                
                 <View style={styles.textInput}>
                     <View style={styles.textInputContainer} >
                         <TextInput
                             style={styles.textInput}
                             textContentType='username'
-                            placeholder='Username'
+                            placeholder='Tên đăng nhập'
                         />
                     </View>
                     <View style={styles.textInputContainer} >
                         <TextInput
                             style={styles.textInput}
                             textContentType='telephoneNumber'
-                            placeholder='Your phone number'
+                            placeholder='Số điện thoại'
                         />
                     </View>
-                   
+                    <View style={styles.checkBox}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <CheckBox
+                                value={this.state.checked}
+                                onValueChange={() => this.setState({ checked: !this.state.checked })}
+                            />
+                            <Text style={{ marginTop: 5 }}> Tôi đồng ý với điều khoản và chính sách bảo mật của Tanca</Text>
+                        </View>
+                    </View>
+
                     <View style={{ paddingTop: 20 }}>
                         <TouchableOpacity
                             style={styles.loginBtn}
                         >
-                            <Text>SIGN IN</Text>
+                            <Text>DÙNG THỬ MIỄN PHÍ</Text>
 
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity style={{
                         justifyContent: 'center', alignItems: 'center', paddingTop: 40
                     }}>
-                        <Text style={{ color: '#39e394', fontSize: 16 }}> FREE TRIAL</Text>
+                        <Text style={{ color: '#000', fontSize: 16 }}> TANCA HR ĐƯỢC TIN TƯỞNG SỬ DỤNG BỞI +</Text>
+                        <Text style={{ color: '#000', fontSize: 16 }}>40,000 NGƯỜI DÙNG</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.checkBox}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <CheckBox
-                            value={this.state.checked}
-                            onValueChange={() => this.setState({ checked: !this.state.checked })}
-                        />
-                        <Text style={{ marginTop: 5 }}> Accept the term of use of the application</Text>
-                    </View>
-                </View>
             </View>
+
         )
     }
 }
@@ -70,29 +76,20 @@ const styles = StyleSheet.create(
         },
         textHeader: {
             height: 80,
-            backgroundColor: '#39e394',
+            backgroundColor: '#ffff',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            paddingBottom:30
+          
+           
         },
-        txtSign: {
-            color: '#ffffff',
-            fontSize: 20,
-            marginTop: 10,
-
-        },
+      
         textInput: {
             justifyContent: 'flex-start',
             backgroundColor: '#f2fcf8',
             alignItems: 'center'
         },
-        textContent: {
-            height: 80,
-            backgroundColor: '#ffffff',
-            justifyContent: 'center',
-            alignContent: 'center',
-            alignItems: 'center'
-
-        },
+      
         textInputContainer: {
             width: 390,
             marginTop: 20,
@@ -118,7 +115,8 @@ const styles = StyleSheet.create(
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            paddingTop: 80
+            paddingTop: 30,
+           
         }
     });
 
