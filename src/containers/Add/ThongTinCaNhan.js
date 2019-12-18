@@ -1,6 +1,8 @@
 
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
+import { getUserData } from '../../selectors';
 
 class ButtonSave extends React.Component {
     render() {
@@ -11,16 +13,9 @@ class ButtonSave extends React.Component {
         );
     }
 }
-export default class ThongTinCaNhan extends Component {
+class ThongTinCaNhan extends Component {
     constructor(props) {
         super(props);
-        this.state={
-            MaNV:'XD000',
-            HoVaTen:'Tanca Xay Dung',
-            GioiTinh:'',
-
-
-        }
     }
     static navigationOptions = {
         headerRight: () => <ButtonSave />,
@@ -50,11 +45,11 @@ export default class ThongTinCaNhan extends Component {
                         <Text style={{fontSize: 18, backgroundColor: '#e3e7eb', padding: 20,borderBottomWidth:0.5 }}>THÔNG TIN CÁ NHÂN</Text>
                         <View style={styles.txtContent}>
                             <Text >Mã NV :</Text>
-                            <Text style={{ color:'#9c9c9c',fontSize:16,textAlign:'auto',borderStyle:'solid'}}>{this.state.MaNV}</Text>
+                            <Text style={{ color:'#9c9c9c',fontSize:16,textAlign:'auto',borderStyle:'solid'}}>{this.props.phone}</Text>
                         </View>
                         <View style={styles.txtContent}>
                             <Text >Họ và tên:</Text>
-                            <Text>{this.state.HoVaTen}</Text>
+                            <Text>{this.props.data.name}</Text>
                         </View>
                         
                         <Text style={styles.txtContent}>Giới tính:</Text>
@@ -96,3 +91,9 @@ const styles = StyleSheet.create({
     
 
 });
+
+const mapStateToProps = state => ({
+  data: getUserData(state),
+})
+
+export default connect(mapStateToProps, null)(ThongTinCaNhan)

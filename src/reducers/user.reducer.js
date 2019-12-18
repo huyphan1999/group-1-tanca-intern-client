@@ -2,6 +2,11 @@ import { USER_SET, USER_UNSET } from '../actionTypes/user.actiontypes'
 
 const initialSate = {
   token: null,
+  data:{
+    name: 'Tanca',
+    phone:'0322555',
+    role:'Quản lý'
+  }
 }
 
 const reducer = function UserReducer (state = initialSate, action) {
