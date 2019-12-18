@@ -13,6 +13,7 @@ import Add_Activity from '../Add/Add.container';
 import Input_Output_Activity from '../Vao_Ra_Ca/In_Out_container';
 import Calendar_Activity from '../Calendar/Calendar.container';
 import TimeKeep_Activity from '../TimeKeep/TimeKeep.container';
+import ThongTinCaNhan_Activity from '../Add/ThongTinCaNhan.container';
 
 const Input_OutputTab = createStackNavigator(
     {
@@ -65,6 +66,7 @@ const TimeKeep_Tab = createStackNavigator(
 const Add_Tab = createStackNavigator(
     {
         Add: Add_Activity,
+        ThongTinCaNhan:ThongTinCaNhan_Activity,
      
       
         
@@ -103,7 +105,7 @@ const Home = createBottomTabNavigator(
                     );
                 
                 }
-                else if (routeName === 'Calendar') {
+                if (routeName === 'Calendar') {
 
                     return (
                         <Image
@@ -112,7 +114,7 @@ const Home = createBottomTabNavigator(
                     );
 
                 }
-                else if (routeName === 'TimeKeep') {
+                if (routeName === 'TimeKeep') {
 
                     return (
                         <Image
@@ -121,7 +123,7 @@ const Home = createBottomTabNavigator(
                     );
 
                 }
-                else {
+                if (routeName === 'Add'){
                     return (
                         <Image
                             source={require('../image/add.png')}
