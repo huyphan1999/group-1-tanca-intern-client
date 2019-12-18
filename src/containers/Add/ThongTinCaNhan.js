@@ -2,7 +2,15 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 
-
+class ButtonSave extends React.Component {
+    render() {
+        return (
+            <TouchableOpacity style={{ paddingRight: 15 }}>
+                <Text style={{ color: 'white', fontSize: 18}}>Save</Text>
+            </TouchableOpacity >
+        );
+    }
+}
 export default class ThongTinCaNhan extends Component {
     constructor(props) {
         super(props);
@@ -14,17 +22,22 @@ export default class ThongTinCaNhan extends Component {
 
         }
     }
-    static navigationOptions =
-        {
-            title: 'Thông tin cá nhân',
-        };
+    static navigationOptions = {
+        headerRight: () => <ButtonSave />,
+        headerTitle: () => (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ color: 'white', fontSize: 18}}>Thông tin cá nhân</Text>
+            </View>
+
+        ),
+    };
 
     render() {
 
         return (
             <ScrollView>
                 <View style={{flex:1}}>
-                    <View style={{flex: 1, backgroundColor: '#e3e7eb', alignItems: 'center',justifyContent: 'center'}}>
+                    <View style={{ flex: 1, backgroundColor: '#e3e7eb', alignItems: 'center', justifyContent: 'center', paddingTop: 10}}>
                         <TouchableOpacity>
                             <Image
                                 style={styles.btnImage}
