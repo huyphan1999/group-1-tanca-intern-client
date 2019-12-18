@@ -13,18 +13,19 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import { Provider } from 'react-redux';
 import Navigation from './navigation/index';
+import Home from './containers/Home/Home';
 const store = initStore();
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-          <Navigation />
+        <Home />
       </Provider>
     );
   }
 }
 
-const styles = StyleSheet.create({});
+
 
 export default App;
