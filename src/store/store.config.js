@@ -38,6 +38,7 @@ const initStore = () => {
   });
   // then run the saga
   sagaMiddleware.run(rootSaga);
+  console.log('saga run here');
 
   return store;
 };

@@ -6,21 +6,20 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {SafeAreaView, StyleSheet, StatusBar, Text, View} from 'react-native';
+import React, { Component } from 'react';
+import { SafeAreaView, StyleSheet, StatusBar, Text, View } from 'react-native';
 import initStore from './store/store.config';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import {Provider} from 'react-redux';
-import Login from './containers/Login/Login.container';
-import Register from './containers/Register/Register.container';
-import HomeApp from './containers/Home/Home.container';
+import { Provider } from 'react-redux';
+import Navigation from './navigation/index';
 const store = initStore();
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <HomeApp />
+          <Navigation />
       </Provider>
     );
   }
