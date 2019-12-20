@@ -64,9 +64,9 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   header: {
-    fontSize: 32,
+    fontSize: 16,
   },
   title: {
-    fontSize: 24,
+    fontSize: 16,
   },
 });
