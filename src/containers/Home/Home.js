@@ -13,6 +13,7 @@ import Calendar_Activity from '../Calendar/Calendar';
 import TimeKeep_Activity from '../TimeKeep/TimeKeep';
 import ThongTinCaNhan_Activity from '../Add/ThongTinCaNhan';
 import Logout_Activity from '../Add/Logout';
+import Shift from '../Add/Shift/Shift';
 
 const Input_OutputTab = createStackNavigator(
   {
@@ -62,14 +63,14 @@ const TimeKeep_Tab = createStackNavigator(
     },
   }
 );
+
+
 const Add_Tab = createStackNavigator(
   {
     Add: Add_Activity,
     ThongTinCaNhan: ThongTinCaNhan_Activity,
     Logout:Logout_Activity,
-
-
-
+    Shift:Shift
   },
   {
     defaultNavigationOptions: {
@@ -78,7 +79,6 @@ const Add_Tab = createStackNavigator(
       },
       headerTintColor: '#FFFFFF',
       title: 'Add Tab',
-
     },
   }
 );

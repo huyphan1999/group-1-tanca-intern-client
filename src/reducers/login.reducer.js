@@ -7,7 +7,7 @@ import {
   const initialState = {
     requesting: false,
     successful: false,
-    errors:"",
+    errors:{},
   }
   
   const reducer = function loginReducer (state = initialState, action) {

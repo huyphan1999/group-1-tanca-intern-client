@@ -10,6 +10,7 @@ class Choose extends Component {
 
             <TouchableOpacity
                 style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15, borderBottomWidth: 0.4 }}
+                onPress={()=>this.props.navigation.navigate('Shift')}
             >
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View>
@@ -128,7 +129,7 @@ export default class Add extends Component {
                     <View style={{ flex: 3, backgroundColor: '#ffffff' }}>
                         <Text style={{ color: '#aaafb3', fontSize: 18, backgroundColor: '#e3e7eb', padding: 10, borderBottomWidth: 0.4 }}>CÔNG CỤ QUẢN LÝ</Text>
                         <Choose iconName1="store-alt" iconName2="chevron-right" txtName="Công ty" />
-                        <Choose iconName1="address-book" iconName2="chevron-right" txtName="Ca làm" />
+                        <Choose iconName1="address-book" iconName2="chevron-right" txtName="Ca làm" navigation={this.props.navigation}/>
                         <Choose iconName1="user-friends" iconName2="chevron-right" txtName="Nhân viên" />
                         <Choose iconName1="calendar-check" iconName2="chevron-right" txtName="Sắp xếp lịch công" />
                         <Choose iconName1="clipboard-list" iconName2="chevron-right" txtName="Chấm công nhanh" />

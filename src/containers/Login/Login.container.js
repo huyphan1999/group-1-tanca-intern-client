@@ -9,7 +9,6 @@ import { getUserToken } from '../../selectors/index';
 class Login extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props)
         this.state = {
             checked: false,
             email: null,
