@@ -1,16 +1,13 @@
 
 import React, { Component } from 'react'
-<<<<<<< HEAD
 import { View, StyleSheet, TouchableOpacity, Image, ScrollView, Text, Platform ,Button} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import {RadioGroup} from 'react-native-btr';
 import DateTimePicker from '@react-native-community/datetimepicker';
-=======
-import { View, StyleSheet, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
+
 import { connect } from 'react-redux';
 import { getUserData } from '../../selectors';
-
->>>>>>> 7ee6b580aca8b06f579a3624ccb142472bbcc494
+import Avatar, { Sizes, IconTypes} from 'rn-avatar';
 class ButtonSave extends React.Component {
     render() {
         return (
@@ -20,10 +17,11 @@ class ButtonSave extends React.Component {
         );
     }
 }
+
 class ThongTinCaNhan extends Component {
     constructor(props) {
         super(props);
-<<<<<<< HEAD
+
         this.state={
             Id:'XD000',
             FullName:'Tanca Xây Dựng',
@@ -35,8 +33,7 @@ class ThongTinCaNhan extends Component {
                     color: 'black',
                     disabled: false,
                     flexDirection: 'row',
-                    size: 6
-
+                    size: 6,
                 },
 
                 {
@@ -47,7 +44,6 @@ class ThongTinCaNhan extends Component {
                     disabled: false,
                     flexDirection: 'row',
                     size: 6
-
                 },
 
                 
@@ -60,17 +56,11 @@ class ThongTinCaNhan extends Component {
             Branch:'VP Công ty',
             Region:'HCM',
             Salary:'1000',
-
             date: new Date('2020-06-12T14:42:42'),
             mode: 'date',
             show: false,
-
-
-
-
         };
-=======
->>>>>>> 7ee6b580aca8b06f579a3624ccb142472bbcc494
+
     }
     static navigationOptions = {
         headerRight: () => <ButtonSave />,
@@ -78,7 +68,6 @@ class ThongTinCaNhan extends Component {
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ color: 'white', fontSize: 18}}>Thông tin cá nhân</Text>
             </View>
-
         ),
     };
     setDate = (event, date) => {
@@ -107,32 +96,41 @@ class ThongTinCaNhan extends Component {
 
     render() {
         const { show, date, mode } = this.state;
+        let selectedItem = this.state.radioButtons.find(e => e.checked == true);
+        selectedItem = selectedItem ? selectedItem.value : this.state.radioButtons[0].value;
+       
         return (
             <ScrollView>
                 <View style={{flex:1}}>
                     <View style={{ flex: 1, backgroundColor: '#e3e7eb', alignItems: 'center', justifyContent: 'center', paddingTop: 10}}>
-                        <TouchableOpacity>
-                            <Image
-                                style={styles.btnImage}
-                                source={require('../image/admin.png')}
+                        <Avatar
+                            rounded
+                            showEditButton
+                            size={Sizes.EXTRA_LARGE}
+                            source={require('../image/admin.png')}
+                            containerStyle={{ margin: 10 }}
+                            title='Admin'
+                            onPress={() => this.props.navigation.navigate('ThongTinCaNhan')}
+                            containerStyle={{ margin: 10 }}
+                            editButton={{
+                                name: 'edit',
+                                type: IconTypes.Entypo,
+                                color: '#ffffff',
+                                underlayColor: '#000',
+                            }}
 
-                            />
-                        </TouchableOpacity>
+                        />
                     </View>
                     <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
                         <Text style={{fontSize: 18, backgroundColor: '#e3e7eb', padding: 20,borderBottomWidth:0.5 }}>THÔNG TIN CÁ NHÂN</Text>
                         <View style={styles.txtContent}>
                             <Text >Mã NV :</Text>
-<<<<<<< HEAD
                             <Text style={styles.txtInfo}>{this.state.Id}</Text>
-=======
-                            <Text style={{ color:'#9c9c9c',fontSize:16,textAlign:'auto',borderStyle:'solid'}}>{this.props.phone}</Text>
->>>>>>> 7ee6b580aca8b06f579a3624ccb142472bbcc494
                         </View>
                         <View style={{
                             flexDirection: 'row', justifyContent: 'space-between', paddingLeft:10,paddingRight:10, fontSize: 16, borderBottomWidth: 0.5, alignItems: 'center'}}>
                             <Text >Họ và tên:</Text>
-<<<<<<< HEAD
+
                            <TextInput
                                 style={{ height: 40, fontSize: 14,justifyContent:'center',alignItems:'center'}}
                                 placeholder="Type Họ và Tên!"
@@ -140,24 +138,29 @@ class ThongTinCaNhan extends Component {
                                 value={this.state.FullName}
                            />
                         </View>
-                        <View style={{flexDirection: 'row', justifyContent: 'space-between', padding: 10, fontSize: 16, borderBottomWidth: 0.5, alignItems: 'center'}}>
-                            <Text>Giới tính:</Text>
+                        <View style={{flexDirection: 'row', justifyContent:'space-around', padding: 10, fontSize: 16, borderBottomWidth: 0.5, alignItems: 'center'}}>
+                            <Text style={{paddingRight:200}}>Giới tính:</Text>
                             <RadioGroup
                                 color='#0277BD'
                                 labelStyle={{ fontSize: 14}}
                                 radioButtons={this.state.radioButtons}
                                 onPress={radioButtons => this.setState({ radioButtons })}
-                                style={{ flexDirection:'row', backgroundColor: 'yellow',height:30,width:40}}
+                                style={{ flexDirection:'row',height:25}}
                                 
-                              
                             />
+                         
                         </View>
-                        
+                        <Text style={{justifyContent: 'center', padding: 10, fontSize: 16, borderBottomWidth: 0.5, alignItems: 'center' }}>Selected Item: {selectedItem}</Text>
                         
                         <View style={styles.txtContent}>
                             <Text >Ngày sinh:</Text>
                             <View>
-                                <Button onPress={this.datepicker} title="Show date picker!" />
+                                <TouchableOpacity
+                                    onPress={this.datepicker} 
+                                >
+                                  <Text>{this.state.date.toDateString()}</Text>
+                                </TouchableOpacity>
+                            
                             </View>
                             {show && <DateTimePicker value={date}
                                 mode={mode}
@@ -169,9 +172,7 @@ class ThongTinCaNhan extends Component {
                         <View style={styles.txtContent}>
                             <Text >Địa chỉ:</Text>
                             <Text style={styles.txtInfo}>{this.state.Address}</Text>
-=======
-                            <Text>{this.props.data.name}</Text>
->>>>>>> 7ee6b580aca8b06f579a3624ccb142472bbcc494
+
                         </View>
                         
                         <View style={styles.txtContent}>
@@ -211,11 +212,7 @@ class ThongTinCaNhan extends Component {
     }
 }
 const styles = StyleSheet.create({
-    btnImage: {
-     
-        width: 120,
-        height: 120,
-    },
+   
 
     txtContent:{
         padding: 10, 
