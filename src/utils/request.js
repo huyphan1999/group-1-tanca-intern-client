@@ -26,7 +26,7 @@ export async function postRequest(url, data) {
     headers: {
       'Content-Type': 'application/json',
       /*'Authorization':`Bearer ${global.token}`*/
-      
+
     },
     body: JSON.stringify(data),
   });
@@ -35,18 +35,18 @@ export async function postRequest(url, data) {
   if (response.ok) {
     return json;
   }
-  else{
-  throw new Error(json);
+  else {
+    let { message } = json
+    throw new Error(message);
   }
 }
 
 export async function getRequest(url, id) {
-  var getURL=`${url}${id?`/${id}`:''}`
-  const response = await fetch(getURL, {
+  const response = await fetch(URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      /*'Authorization':`Bearer ${global.token}`*/     
+      /*'Authorization':`Bearer ${global.token}`*/
     },
   });
   const json = await response.json();

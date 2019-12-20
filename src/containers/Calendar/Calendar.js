@@ -15,7 +15,7 @@ import {
 const DATA = [
   {
     date: 'Thứ 7, 14-12-2019',
-    data: [{ name: 'Ca thứ 7', time: '8:30-17:30', number: '00:00-00:00' },{ name: 'Ca tối', time: '8:30-17:30', number: '00:00-00:00' }],
+    data: [{ name: 'Ca thứ 7', time: '8:30-17:30', number: '00:00-00:00' }, { name: 'Ca tối', time: '8:30-17:30', number: '00:00-00:00' }],
   },
   {
     date: 'Thứ Hai, 14-12-2019',
@@ -24,7 +24,8 @@ const DATA = [
   {
     date: 'Thứ Hai, 14-12-2019',
     data: [{ name: 'Ca thực tập', time: '8:30-17:30', number: '00:00-00:00' }],
-  }
+  },
+
 ];
 
 function Item({ data }) {
@@ -34,23 +35,23 @@ function Item({ data }) {
       style={styles.item}
     >
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <View style={{ paddingLeft: 10,  }}>
-          <Text style={{  fontWeight: 'bold',}}>{data.name}</Text>
+        <View style={{ paddingLeft: 10, }}>
+          <Text style={{ fontWeight: 'bold', }}>{data.name}</Text>
           <Text>({data.time})</Text>
         </View>
       </View>
-      <View style={{ flexDirection: 'row',justifyContent: 'center',alignItems: 'center', }}>
-      <Icon
+      <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', }}>
+        <Icon
           name='subway'
           size={10}
-          style={{ paddingRight: 10 ,}}
+          style={{ paddingRight: 10, }}
         />
-        <Text  style={{ paddingRight: 10 ,fontWeight: 'bold'}}>{data.number}</Text>
+        <Text style={{ paddingRight: 10, fontWeight: 'bold' }}>{data.number}</Text>
         <Icon
           name='chevron-right'
           size={16}
           color='#aaafb3'
-          style={{ paddingRight: 10 ,}}
+          style={{ paddingRight: 10, }}
         />
 
       </View>
@@ -80,6 +81,7 @@ export default class Calendar_Activity extends Component {
           renderSectionHeader={({ section: { date } }) => (
             <Text style={styles.header}>{date}</Text>
           )}
+          stickySectionHeadersEnabled={true}
         />
       </SafeAreaView>
     );
