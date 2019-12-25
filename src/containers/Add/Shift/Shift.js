@@ -1,6 +1,7 @@
 import React from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text,TouchableOpacity } from 'react-native';
 
+import {navigate} from '../../../utils/navigate';
 const DATA = [
     {
         id: 'CA_VAN_PHONG',
@@ -21,6 +22,7 @@ const DATA = [
         timeEndMinute: '30',
         branch: 'VP Công ty',
         uptime: [1, 1, 1, 1, 1, 0]
+
     },
     {
         id: 'CA_VAN_PHONG2',
@@ -34,10 +36,11 @@ const DATA = [
     },
 ];
 
-function Item({ data }) {
+function Item({data}) {
     var time=`${data.timeStartHour}:${data.timeStartMinute}-${data.timeEndHour}:${data.timeEndMinute}`
     return (
-        <TouchableOpacity style={styles.txtContent}>
+        <TouchableOpacity style={styles.txtContent}
+        onPress={()=> navigate('ShiftDetail',data)} >
             <Text >{data.title}</Text>
             <Text>{time}</Text>
         </TouchableOpacity>
@@ -49,7 +52,7 @@ export default function Shift() {
         <SafeAreaView style={styles.container}>
             <FlatList
                 data={DATA}
-                renderItem={({ item }) => <Item data={item} />}
+                renderItem={({ item }) => <Item data={item}/>}
                 keyExtractor={item => item.id}
                 style={{borderBottomWidth:1,paddingLeft:10,}}
             />

@@ -23,7 +23,7 @@ const DATA = [
         data: [{ name: 'Phan Phú Huy', time: '13:30', activity: 'Vào ca-Ca thực tập chiều(13:30-17:30)' }],
     },
     {
-        date: 'Thứ Hai, 14-12-2019',
+        
         data: [{ name: 'Phan Phú Huy', time: '13:30', activity: 'Vào ca-Ca thực tập chiều(13:30-17:30)' }],
     },
 

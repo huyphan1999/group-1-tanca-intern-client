@@ -14,6 +14,7 @@ import TimeKeep_Activity from '../TimeKeep/TimeKeep';
 import ThongTinCaNhan_Activity from '../Add/ThongTinCaNhan';
 import Logout_Activity from '../Add/Logout';
 import Shift from '../Add/Shift/Shift';
+import ShiftDetail from '../Add/Shift/ShiftDetail';
 
 const Input_OutputTab = createStackNavigator(
   {
@@ -70,7 +71,8 @@ const Add_Tab = createStackNavigator(
     Add: Add_Activity,
     ThongTinCaNhan: ThongTinCaNhan_Activity,
     Logout:Logout_Activity,
-    Shift:Shift
+    Shift:Shift,
+    ShiftDetail:ShiftDetail
   },
   {
     defaultNavigationOptions: {

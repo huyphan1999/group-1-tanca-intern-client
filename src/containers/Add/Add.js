@@ -3,14 +3,15 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
+import { navigate } from '../../utils/navigate';
+
 class Choose extends Component {
     render() {
-
         return (
 
             <TouchableOpacity
                 style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15, borderBottomWidth: 0.4 }}
-                onPress={()=>this.props.navigation.navigate('Shift')}
+                onPress={() => navigate(this.props.route)}
             >
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View>
@@ -43,7 +44,7 @@ class Choose extends Component {
 }
 // class LogoTitle extends React.Component {
 //     render() {
-     
+
 //         return (
 //             <TouchableOpacity
 //              style={{paddingRight:15}}
@@ -55,7 +56,7 @@ class Choose extends Component {
 //                 source={require('../image/service_logout.png')}
 //                 style={{ width: 20, height: 20}}
 //                 tintColor='white'
-               
+
 //                 />
 //             </TouchableOpacity >    
 //         );
@@ -71,29 +72,29 @@ export default class Add extends Component {
 
         }
     }
-  
-    static navigationOptions = ({ navigate, navigation  }) => ({
-     
-        headerRight: (
-        <TouchableOpacity
-            style={{ paddingRight: 15 }}
-            onPress={() =>
-                navigation.navigate('Logout')
-            }
-        >
-            <Image
-                source={require('../image/service_logout.png')}
-                style={{ width: 20, height: 20 }}
-                tintColor='white'
 
-            />
-        </TouchableOpacity >   
+    static navigationOptions = ({ navigate, navigation }) => ({
+
+        headerRight: (
+            <TouchableOpacity
+                style={{ paddingRight: 15 }}
+                onPress={() =>
+                    navigation.navigate('Logout')
+                }
+            >
+                <Image
+                    source={require('../image/service_logout.png')}
+                    style={{ width: 20, height: 20 }}
+                    tintColor='white'
+
+                />
+            </TouchableOpacity >
         ),
         headerTitle: () => (
-            <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-                <Text style={{ color: 'white', fontSize: 18,paddingLeft:40}}>Quản lý tài khoản</Text>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>Quản lý tài khoản</Text>
             </View>
-            
+
         ),
     });
 
@@ -108,7 +109,7 @@ export default class Add extends Component {
 
                     <View style={{
                         flex: 2, backgroundColor: '#e3e7eb', alignItems: 'center',
-                        justifyContent: 'center',paddingTop:10
+                        justifyContent: 'center', paddingTop: 10
                     }}>
 
                         <TouchableOpacity
@@ -128,13 +129,13 @@ export default class Add extends Component {
                     </View>
                     <View style={{ flex: 3, backgroundColor: '#ffffff' }}>
                         <Text style={{ color: '#aaafb3', fontSize: 18, backgroundColor: '#e3e7eb', padding: 10, borderBottomWidth: 0.4 }}>CÔNG CỤ QUẢN LÝ</Text>
-                        <Choose iconName1="store-alt" iconName2="chevron-right" txtName="Công ty" />
-                        <Choose iconName1="address-book" iconName2="chevron-right" txtName="Ca làm" navigation={this.props.navigation}/>
-                        <Choose iconName1="user-friends" iconName2="chevron-right" txtName="Nhân viên" />
-                        <Choose iconName1="calendar-check" iconName2="chevron-right" txtName="Sắp xếp lịch công" />
-                        <Choose iconName1="clipboard-list" iconName2="chevron-right" txtName="Chấm công nhanh" />
-                        <Choose iconName1="tools" iconName2="chevron-right" txtName="Chỉnh sửa giờ công" />
-                        <Choose iconName1="laptop" iconName2="chevron-right" txtName="Web admin" />
+                        <Choose iconName1="store-alt" iconName2="chevron-right" txtName="Công ty" route='Shift' />
+                        <Choose iconName1="address-book" iconName2="chevron-right" txtName="Ca làm" route='Shift' />
+                        <Choose iconName1="user-friends" iconName2="chevron-right" txtName="Nhân viên" route='Shift' />
+                        <Choose iconName1="calendar-check" iconName2="chevron-right" txtName="Sắp xếp lịch công" route='Shift' />
+                        <Choose iconName1="clipboard-list" iconName2="chevron-right" txtName="Chấm công nhanh" route='Shift' />
+                        <Choose iconName1="tools" iconName2="chevron-right" txtName="Chỉnh sửa giờ công" route='Shift' />
+                        <Choose iconName1="laptop" iconName2="chevron-right" txtName="Web admin" route='Shift' />
                     </View>
 
                     <View style={{ flex: 1, backgroundColor: '#ffffff' }}>

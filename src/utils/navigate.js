@@ -1,12 +1,7 @@
-import { NavigationActions } from 'react-navigation';
+import NavigationService from '../navigation/NavigationService';
 
-export const navigate =(key,data)=>{ 
-  console.log(`Navigate ${key}`)
-  NavigationActions.navigate({
-  routeName: key,
-
-  params: {...data},
-
-});}
+export const navigate =(routename,data)=>{ 
+  NavigationService.navigate(routename, data);
+}
  
   
