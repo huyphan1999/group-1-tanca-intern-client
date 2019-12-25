@@ -14,7 +14,13 @@ import TimeKeep_Activity from '../TimeKeep/TimeKeep';
 import ThongTinCaNhan_Activity from '../Add/ThongTinCaNhan';
 import Logout_Activity from '../Add/Logout';
 import Shift from '../Add/Shift/Shift';
-
+import Company from '../Add/Company/Company';
+import Region from '../Add/Company/Region';
+import Position from '../Add/Company/Position';
+import Department from '../Add/Company/Department';
+import Branch from '../Add/Company/Branch';
+import AddRegion from '../Add//Company/AddRegion';
+import AddBranch from '../Add/Company/AddBranch';
 const Input_OutputTab = createStackNavigator(
   {
     Input_Output: Input_Output_Activity
@@ -70,7 +76,15 @@ const Add_Tab = createStackNavigator(
     Add: Add_Activity,
     ThongTinCaNhan: ThongTinCaNhan_Activity,
     Logout:Logout_Activity,
-    Shift:Shift
+    Shift:Shift,
+    Company:Company,
+    Region:Region,
+    Position:Position,
+    Department:Department,
+    Branch:Branch,
+    AddRegion:AddRegion,
+    AddBranch:AddBranch,
+
   },
   {
     defaultNavigationOptions: {

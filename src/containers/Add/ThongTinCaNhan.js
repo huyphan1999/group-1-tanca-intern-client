@@ -4,10 +4,10 @@ import { View, StyleSheet, TouchableOpacity, Image, ScrollView, Text, Platform ,
 import { TextInput } from 'react-native-gesture-handler';
 import {RadioGroup} from 'react-native-btr';
 import DateTimePicker from '@react-native-community/datetimepicker';
-
 import { connect } from 'react-redux';
 import { getUserData } from '../../selectors';
 import Avatar, { Sizes, IconTypes} from 'rn-avatar';
+import moment from "moment";
 class ButtonSave extends React.Component {
     render() {
         return (
@@ -56,7 +56,9 @@ class ThongTinCaNhan extends Component {
             Branch:'VP Công ty',
             Region:'HCM',
             Salary:'1000',
-            date: new Date('2020-06-12T14:42:42'),
+
+             date: new Date(),
+           
             mode: 'date',
             show: false,
         };
@@ -72,7 +74,6 @@ class ThongTinCaNhan extends Component {
     };
     setDate = (event, date) => {
         date = date || this.state.date;
-
         this.setState({
             show: Platform.OS === 'ios' ? true : false,
             date,
@@ -96,6 +97,7 @@ class ThongTinCaNhan extends Component {
 
     render() {
         const { show, date, mode } = this.state;
+        const dates = moment(this.state.date).format("DD-MM-YYYY");
         let selectedItem = this.state.radioButtons.find(e => e.checked == true);
         selectedItem = selectedItem ? selectedItem.value : this.state.radioButtons[0].value;
        
@@ -158,7 +160,7 @@ class ThongTinCaNhan extends Component {
                                 <TouchableOpacity
                                     onPress={this.datepicker} 
                                 >
-                                  <Text>{this.state.date.toDateString()}</Text>
+                                  <Text>{dates}</Text>
                                 </TouchableOpacity>
                             
                             </View>
@@ -166,6 +168,7 @@ class ThongTinCaNhan extends Component {
                                 mode={mode}
                                 is24Hour={true}
                                 display="default"
+                              
                                 onChange={this.setDate} />
                             }
                         </View>

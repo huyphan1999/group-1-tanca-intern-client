@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text,TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, TouchableOpacity,Image} from 'react-native';
 
 const DATA = [
     {
@@ -35,7 +35,7 @@ const DATA = [
 ];
 
 function Item({ data }) {
-    var time=`${data.timeStartHour}:${data.timeStartMinute}-${data.timeEndHour}:${data.timeEndMinute}`
+    var time = `${data.timeStartHour}:${data.timeStartMinute}-${data.timeEndHour}:${data.timeEndMinute}`
     return (
         <TouchableOpacity style={styles.txtContent}>
             <Text >{data.title}</Text>
@@ -44,18 +44,45 @@ function Item({ data }) {
     );
 }
 
-export default function Shift() {
-    return (
-        <SafeAreaView style={styles.container}>
-            <FlatList
-                data={DATA}
-                renderItem={({ item }) => <Item data={item} />}
-                keyExtractor={item => item.id}
-                style={{borderBottomWidth:1,paddingLeft:10,}}
-            />
-        </SafeAreaView>
-    );
+export default class Shift extends React.Component {
+    static navigationOptions = ({ navigate, navigation }) => ({
+
+        headerRight: (
+            <TouchableOpacity
+                style={{ paddingRight: 15 }}
+                onPress={() =>
+                    navigation.navigate('AddShift')
+                }
+            >
+                <Image
+                    source={require('../../image/add_object.png')}
+                    style={{ width: 20, height: 20 }}
+                    tintColor='white'
+
+                />
+            </TouchableOpacity >
+        ),
+        headerTitle: () => (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>Ca làm</Text>
+            </View>
+
+        ),
+    });
+    render() {
+        return (
+            <SafeAreaView style={styles.container}>
+                <FlatList
+                    data={DATA}
+                    renderItem={({ item }) => <Item data={item} />}
+                    keyExtractor={item => item.id}
+                    style={{ borderBottomWidth: 1, paddingLeft: 10, }}
+                />
+            </SafeAreaView>
+        );
+    }
 }
+
 
 const styles = StyleSheet.create({
     container: {
