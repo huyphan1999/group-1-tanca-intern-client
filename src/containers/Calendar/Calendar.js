@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-
 import {
   StyleSheet,
   Text,
@@ -10,7 +9,6 @@ import {
   SectionList,
   TouchableOpacity
 } from 'react-native';
-
 
 const DATA = [
   {
@@ -26,18 +24,28 @@ const DATA = [
     data: [{ name: 'Ca thực tập', time: '8:30-17:30', number: '00:00-00:00' }],
   },
 
+
 ];
 
 function Item({ data }) {
   return (
+    <View>
+    <SafeAreaView style={styles.container}>
+      <SectionList
+        sections={DATA}
+        keyExtractor={(item, index) => item + index}
+        renderItem={({ item }) => <Item title={item} />}
+        renderSectionHeader={({ section: { title } }) => (
+          <Text style={styles.header}>{title}</Text>
+        )}
+      />
+    </SafeAreaView>
 
-    <TouchableOpacity
-      style={styles.item}
-    >
+    <TouchableOpacity style={styles.item}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <View style={{ paddingLeft: 10, }}>
-          <Text style={{ fontWeight: 'bold', }}>{data.name}</Text>
-          <Text>({data.time})</Text>
+          <Text style={{ fontWeight: 'bold', }}>Son</Text>
+          <Text>10:11</Text>
         </View>
       </View>
       <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', }}>
@@ -46,21 +54,17 @@ function Item({ data }) {
           size={10}
           style={{ paddingRight: 10, }}
         />
-        <Text style={{ paddingRight: 10, fontWeight: 'bold' }}>{data.number}</Text>
+        <Text style={{ paddingRight: 10, fontWeight: 'bold' }}>1</Text>
         <Icon
           name='chevron-right'
           size={16}
           color='#aaafb3'
           style={{ paddingRight: 10, }}
         />
-
       </View>
-
-
-
     </TouchableOpacity>
+    </View>
   );
-
 }
 
 export default class Calendar_Activity extends Component {
@@ -110,5 +114,6 @@ const styles = StyleSheet.create({
   data: {
     fontSize: 24,
   },
+
 });
 

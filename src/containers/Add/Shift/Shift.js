@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text,TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, TouchableOpacity,Image} from 'react-native';
 
 import {navigate} from '../../../utils/navigate';
 const DATA = [
@@ -59,6 +59,7 @@ export default function Shift() {
         </SafeAreaView>
     );
 }
+
 
 const styles = StyleSheet.create({
     container: {

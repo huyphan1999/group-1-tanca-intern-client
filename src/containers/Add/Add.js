@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 
 import { navigate } from '../../utils/navigate';
 
@@ -32,6 +33,7 @@ class Choose extends Component {
                     size={16}
                     color='#aaafb3'
                     style={{ paddingRight: 20 }}
+
                 />
 
 
@@ -68,7 +70,9 @@ export default class Add extends Component {
         this.state = {
             iconName1: '',
             iconName2: '',
-            txtName: ''
+            txtName: '',
+        
+        
 
         }
     }
@@ -111,18 +115,25 @@ export default class Add extends Component {
                         flex: 2, backgroundColor: '#e3e7eb', alignItems: 'center',
                         justifyContent: 'center', paddingTop: 10
                     }}>
-
-                        <TouchableOpacity
-                            onPress={() =>
-                                this.props.navigation.push('ThongTinCaNhan')
-                            }
-                        >
-                            <Image
-                                style={styles.btnImage}
-                                source={require('../image/admin.png')}
-
-                            />
-                        </TouchableOpacity>
+                        <Avatar
+                            rounded
+                            showEditButton
+                            size={Sizes.EXTRA_LARGE}
+                            source={require('../image/admin.png')}
+                            containerStyle={{ margin: 10 }}
+                            title='Admin'
+                            onPress={() => this.props.navigation.navigate('ThongTinCaNhan')}
+                            containerStyle={{ margin: 10 }}
+                            editButton={{
+                                name:'edit',
+                                type: IconTypes.Entypo,
+                                color: '#ffffff',
+                                underlayColor: '#000',
+                                
+                             
+                            }}
+                    
+                />
                         <Text style={{ paddingTop: 10, fontSize: 18 }}>Tanca Xây Dựng</Text>
                         <Text style={{ color: '#aaafb3', fontSize: 16 }}>Quản lý- +84112233444</Text>
 
@@ -168,13 +179,6 @@ const styles = StyleSheet.create({
 
         color: '#fff'
     },
-    btnImage: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 120,
-        height: 120,
-
-
-    }
+  
 
 });
