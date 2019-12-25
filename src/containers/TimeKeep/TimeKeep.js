@@ -23,7 +23,7 @@ const DATA = [
         data: [{ name: 'Phan Phú Huy', time: '13:30', activity: 'Vào ca-Ca thực tập chiều(13:30-17:30)' }],
     },
     {
-        
+        date: 'Thứ Hai, 14-12-2019',
         data: [{ name: 'Phan Phú Huy', time: '13:30', activity: 'Vào ca-Ca thực tập chiều(13:30-17:30)' }],
     },
 
@@ -61,7 +61,7 @@ function Item({ data }) {
 
 }
 
-export default class Calendar_Activity extends Component {
+export default class Timekeep_Activity extends Component {
 
     static navigationOptions =
         {

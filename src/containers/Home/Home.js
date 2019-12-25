@@ -107,7 +107,6 @@ const Home = createBottomTabNavigator(
     Calendar: Calendar_Tab,
     TimeKeep: TimeKeep_Tab,
     Add: Add_Tab,
-
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({

@@ -115,23 +115,11 @@ export default class Add extends Component {
                         flex: 2, backgroundColor: '#e3e7eb', alignItems: 'center',
                         justifyContent: 'center', paddingTop: 10
                     }}>
-                        <Avatar
-                            rounded
-                            showEditButton
+                        <Avatar   
                             size={Sizes.EXTRA_LARGE}
                             source={require('../image/admin.png')}
-                            containerStyle={{ margin: 10 }}
                             title='Admin'
                             onPress={() => this.props.navigation.navigate('ThongTinCaNhan')}
-                            containerStyle={{ margin: 10 }}
-                            editButton={{
-                                name:'edit',
-                                type: IconTypes.Entypo,
-                                color: '#ffffff',
-                                underlayColor: '#000',
-                                
-                             
-                            }}
                     
                 />
                         <Text style={{ paddingTop: 10, fontSize: 18 }}>Tanca Xây Dựng</Text>
