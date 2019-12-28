@@ -106,21 +106,10 @@ class ThongTinCaNhan extends Component {
                 <View style={{flex:1}}>
                     <View style={{ flex: 1, backgroundColor: '#e3e7eb', alignItems: 'center', justifyContent: 'center', paddingTop: 10}}>
                         <Avatar
-                            rounded
-                            showEditButton
+                            rounded={true}
                             size={Sizes.EXTRA_LARGE}
                             source={require('../image/admin.png')}
-                            containerStyle={{ margin: 10 }}
                             title='Admin'
-                            onPress={() => this.props.navigation.navigate('ThongTinCaNhan')}
-                            containerStyle={{ margin: 10 }}
-                            editButton={{
-                                name: 'edit',
-                                type: IconTypes.Entypo,
-                                color: '#ffffff',
-                                underlayColor: '#000',
-                            }}
-
                         />
                     </View>
                     <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
@@ -132,7 +121,7 @@ class ThongTinCaNhan extends Component {
                         <View style={{
                             flexDirection: 'row', justifyContent: 'space-between', paddingLeft:10,paddingRight:10, fontSize: 16, borderBottomWidth: 0.5, alignItems: 'center'}}>
                             <Text >Họ và tên:</Text>
-
+                            
                            <TextInput
                                 style={{ height: 40, fontSize: 14,justifyContent:'center',alignItems:'center'}}
                                 placeholder="Type Họ và Tên!"

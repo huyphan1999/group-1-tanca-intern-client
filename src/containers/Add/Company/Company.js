@@ -32,9 +32,6 @@ class Choose extends Component {
 
 
             </TouchableOpacity>
-
-
-
         )
     }
 }
