@@ -39,8 +39,8 @@ export default class AddBranch extends Component {
                     
                     <Text >Vùng:</Text>
                     <TextInput
-                        style={{ height: 40, fontSize: 14, paddingLeft: 30 }}
-                        placeholder="Nhập chữ"
+                        style={{ height: 40, fontSize: 14, paddingLeft: 42 }}
+                        placeholder="Vùng"
                         onChangeText={(Name) => this.setState({ Name })}
                         value={this.state.Name}
                     />

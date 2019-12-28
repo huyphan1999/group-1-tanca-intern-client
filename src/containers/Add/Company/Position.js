@@ -8,7 +8,7 @@ export default class Position extends Component {
             <TouchableOpacity
                 style={{ paddingRight: 15 }}
                 onPress={() =>
-                    navigation.navigate('AddRegion')
+                    navigation.navigate('AddPosition')
                 }
             >
                 <Image

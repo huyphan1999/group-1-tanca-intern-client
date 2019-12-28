@@ -23,6 +23,10 @@ import Department from '../Add/Company/Department';
 import Branch from '../Add/Company/Branch';
 import AddRegion from '../Add//Company/AddRegion';
 import AddBranch from '../Add/Company/AddBranch';
+import AddDepartment from '../Add/Company/AddDepartment';
+import AddPosition from '../Add/Company/AddPosition';
+import Employee from '../Add/Employee/Employee';
+import AddEmployee from '../Add/Employee/AddEmployee';
 const Input_OutputTab = createStackNavigator(
   {
     Input_Output: Input_Output_Activity
@@ -87,6 +91,10 @@ const Add_Tab = createStackNavigator(
     Branch:Branch,
     AddRegion:AddRegion,
     AddBranch:AddBranch,
+    AddDepartment: AddDepartment,
+    AddPosition: AddPosition,
+    Employee: Employee,
+    AddEmployee:AddEmployee,
 
   },
   {
