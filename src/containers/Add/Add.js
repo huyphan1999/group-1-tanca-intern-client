@@ -2,10 +2,11 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import Avatar, { IconTypes, Sizes } from 'rn-avatar';
+
 
 import { navigate } from '../../utils/navigate';
-
+import { ListItem } from 'react-native-elements';
+import { Avatar } from "react-native-elements";
 class Choose extends Component {
     render() {
         return (
@@ -115,22 +116,26 @@ export default class Add extends Component {
                         flex: 2, backgroundColor: '#e3e7eb', alignItems: 'center',
                         justifyContent: 'center', paddingTop: 10
                     }}>
-                        <Avatar   
-                            size={Sizes.EXTRA_LARGE}
-                            source={require('../image/admin.png')}
-                            title='Admin'
-                            onPress={() => this.props.navigation.navigate('ThongTinCaNhan')}
-                    
+                        <Avatar
+                            size={150}
+                            rounded
+                            onPress={() => navigate('ThongTinCaNhan')}
+                            activeOpacity={0.7}
+                            containerStyle={{ flex: 2, marginLeft: 20}}
+                            source= {require('../image/admin.png')}
+                            showEditButton
                 />
+            
+    
                         <Text style={{ paddingTop: 10, fontSize: 18 }}>Tanca Xây Dựng</Text>
                         <Text style={{ color: '#aaafb3', fontSize: 16 }}>Quản lý- +84112233444</Text>
 
                     </View>
                     <View style={{ flex: 3, backgroundColor: '#ffffff' }}>
                         <Text style={{ color: '#aaafb3', fontSize: 18, backgroundColor: '#e3e7eb', padding: 10, borderBottomWidth: 0.4 }}>CÔNG CỤ QUẢN LÝ</Text>
-                        <Choose iconName1="store-alt" iconName2="chevron-right" txtName="Công ty" route='Shift' />
+                        <Choose iconName1="store-alt" iconName2="chevron-right" txtName="Công ty" route='Company' />
                         <Choose iconName1="address-book" iconName2="chevron-right" txtName="Ca làm" route='Shift' />
-                        <Choose iconName1="user-friends" iconName2="chevron-right" txtName="Nhân viên" route='Shift' />
+                        <Choose iconName1="user-friends" iconName2="chevron-right" txtName="Nhân viên" route='Employee' />
                         <Choose iconName1="calendar-check" iconName2="chevron-right" txtName="Sắp xếp lịch công" route='Shift' />
                         <Choose iconName1="clipboard-list" iconName2="chevron-right" txtName="Chấm công nhanh" route='Shift' />
                         <Choose iconName1="tools" iconName2="chevron-right" txtName="Chỉnh sửa giờ công" route='Shift' />
