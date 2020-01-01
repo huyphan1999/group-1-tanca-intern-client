@@ -31,25 +31,26 @@ function* loginFlow(email, password) {
 
   try {
     const res = yield call(postRequest, loginUrl, {
-      email,
-      password
+      name:email,
+      phone_number:password
     });
     yield console.log(`Reponse:${res}`);
 
-    const { token } = res;
+    const { data } = res;
 
     yield console.log(`Token:${token}`);
 
-    yield put(setUSER(token));
+    yield put(setUSER(data));
 
-    setToken(token);
+    setToken(data.token);
 
-    yield put({ type: LOGIN_SUCCESS });
+    yield put({ type: LOGIN_SUCCESS});
 
-    yield put(SwitchActions.jumpTo({ routeName: 'Home' }));
+    navigate('Home')
 
   } catch (error) {
 console.log(error)
+
     yield put({ type: LOGIN_ERROR, error })
 
   }
