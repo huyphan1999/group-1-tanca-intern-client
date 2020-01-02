@@ -17,16 +17,14 @@ import Shift from '../Add/Shift/Shift';
 import ShiftDetail from '../Add/Shift/ShiftDetail';
 
 import Company from '../Add/Company/Company';
-import Region from '../Add/Company/Region';
 import Position from '../Add/Company/Position';
 import Department from '../Add/Company/Department';
 import Branch from '../Add/Company/Branch';
-import AddRegion from '../Add//Company/AddRegion';
-import AddBranch from '../Add/Company/AddBranch';
-import AddDepartment from '../Add/Company/AddDepartment';
-import AddPosition from '../Add/Company/AddPosition';
+import AddObject from '../Add/Company/AddObject';
+
 import Employee from '../Add/Employee/Employee';
 import AddEmployee from '../Add/Employee/AddEmployee';
+import ObjectDetails from '../Add/Company/ObjectDetails';
 const Input_OutputTab = createStackNavigator(
   {
     Input_Output: Input_Output_Activity
@@ -85,16 +83,14 @@ const Add_Tab = createStackNavigator(
     Shift:Shift,
     ShiftDetail:ShiftDetail,
     Company:Company,
-    Region:Region,
+   
     Position:Position,
     Department:Department,
     Branch:Branch,
-    AddRegion:AddRegion,
-    AddBranch:AddBranch,
-    AddDepartment: AddDepartment,
-    AddPosition: AddPosition,
+    AddObject: AddObject,
     Employee: Employee,
     AddEmployee:AddEmployee,
+    ObjectDetails: ObjectDetails,
 
   },
   {
