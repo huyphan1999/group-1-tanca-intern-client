@@ -2,14 +2,30 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { getParams } from '../utils';
+
+const DATA = [
+    {
+        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+        title: 'VP Công Ty',
+    },
+    {
+        id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+        title: 'Chi nhánh Phú Nhuận',
+    },
+    {
+        id: '58694a0f-3da1-471f-bd96-145571e29d72',
+        title: 'Chi nhánh Cần Thơ',
+    },
+];
 
 
 class MultipleSelect extends Component {
     constructor(props) {
         super(props)
-
+        console.log(this.props.navigation.state.params)
         this.state = {
-            options: this.props.options,
+            options: getParams(this.props).options,
             selectedOptions: []
         }
     }
@@ -23,7 +39,7 @@ class MultipleSelect extends Component {
         } else {
             selectedOptions.splice(index, 1);
         }
-        this.setState({selectedOptions:[...selectedOptions]})
+        this.setState({ selectedOptions: [...selectedOptions] })
     }
 
     isSelected = (option) => {
@@ -52,7 +68,7 @@ class MultipleSelect extends Component {
         return (
             <View>
                 <TouchableOpacity
-                    style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 20,alignItems: 'center', }}
+                    style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 20, alignItems: 'center', }}
                     onPress={() => this.selectOption(option.title)}
                 >
                     <View >{this.renderText(option.title)}</View>
@@ -77,9 +93,9 @@ class MultipleSelect extends Component {
                     data={this.state.options}
                     renderItem={(item) => this.renderRow(item)}
                     keyExtractor={item => item.id}
-                   
+
                 />
-                <TouchableOpacity  style={{ flex: 1 }} onPress={()=>this.props.onSelection(this.state.selectedOptions)}>
+                <TouchableOpacity style={{ flex: 1 }} onPress={() => getParams(this.props).onSelection(this.state.selectedOptions)}>
                     <Text style={styles.option}>Chọn</Text>
                 </TouchableOpacity>
             </SafeAreaView>

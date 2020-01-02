@@ -20,7 +20,6 @@
 // }
 
 export async function postRequest(url, data) {
-  console.log(url)
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -42,16 +41,20 @@ export async function postRequest(url, data) {
 }
 
 export async function getRequest(url, id) {
-  const response = await fetch(URL, {
-    method: 'POST',
+  getUrl = id ? url + `?id=${id}`: url
+  const response = await fetch(getUrl, {
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      /*'Authorization':`Bearer ${global.token}`*/
+      'Authorization':`Bearer ${global.token}`
     },
   });
   const json = await response.json();
   if (response.ok) {
     return json;
   }
-  throw new Error(json);
+  else {
+    let { message } = json
+    throw new Error(message);
+  }
 }

@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 
-export default class Department extends Component {
+export default class Branch extends Component {
     static navigationOptions = ({ navigate, navigation }) => ({
 
         headerRight: (
             <TouchableOpacity
                 style={{ paddingRight: 15 }}
                 onPress={() =>
-                    navigation.navigate('AddBranch')
+                    navigation.navigate('AddBranch',{title:'Add'})
                 }
             >
                 <Image
@@ -26,6 +26,7 @@ export default class Department extends Component {
 
         ),
     });
+    
     render() {
         return (
             <View>
