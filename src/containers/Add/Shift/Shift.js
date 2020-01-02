@@ -40,7 +40,7 @@ function Item({data}) {
     var time=`${data.timeStartHour}:${data.timeStartMinute}-${data.timeEndHour}:${data.timeEndMinute}`
     return (
         <TouchableOpacity style={styles.txtContent}
-        onPress={()=> navigate('ShiftDetail',data)} >
+        onPress={()=> navigate('ShiftDetail',{data})} >
             <Text >{data.title}</Text>
             <Text>{time}</Text>
         </TouchableOpacity>

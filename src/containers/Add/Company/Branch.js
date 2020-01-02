@@ -38,14 +38,14 @@ function Item({ data }) {
     );
 }
 
-export default class Department extends Component {
+export default class Branch extends Component {
     static navigationOptions = ({ navigate, navigation }) => ({
 
         headerRight: (
             <TouchableOpacity
                 style={{ paddingRight: 15 }}
                 onPress={() =>
-                    navigation.navigate('AddObject', { title: 'Chi nhánh'})
+                    navigation.navigate('AddBranch',{title:'Add'})
                 }
             >
                 <Image
@@ -63,6 +63,7 @@ export default class Department extends Component {
 
         ),
     });
+    
     render() {
         return (
             <SafeAreaView style={styles.container}>

@@ -15,9 +15,6 @@ class Login extends Component {
             password: null
         }
     }
-    componentDidUpdate() {
-        if(this.props.isLogin)  this.props.navigation.navigate('Home');
-    };
     render() {
         let { email, password } = this.state;
         return (
@@ -146,9 +143,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        isLogin: state.login.successful,
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(null, mapDispatchToProps)(Login)
