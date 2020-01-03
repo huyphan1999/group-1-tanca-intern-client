@@ -6,4 +6,6 @@ import signup from './signup.reducer';
 import company from './company.reducer';
 import shift from './shift.reducer';
 import emp from './emp.reducer';
-export default combineReducers({app,user,login,signup,company,shift,emp});
+import calendar from './calendar.reducer';
+import timekeep from './timekeep.reducer';
+export default combineReducers({app,user,login,signup,company,shift,emp,calendar,timekeep});

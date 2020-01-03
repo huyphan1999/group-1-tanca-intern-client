@@ -8,15 +8,17 @@ import {
     View,
     SafeAreaView,
     SectionList,
-    TouchableOpacity
+    TouchableOpacity,
+    ActivityIndicator,
+    StatusBar
 } from 'react-native';
 
 
 const DATA = [
     {
         date: 'Thứ 7, 14-12-2019',
-        data: [{ name: 'Phan Phú Huy', time: '13:30', activity: 'Vào ca-Ca thực tập chiều(13:30-17:30)'}
-        ,{ name: 'Phan Phú Huy', time: '13:30', activity: 'Vào ca-Ca thực tập chiều(13:30-17:30)'}],
+        data: [{ name: 'Phan Phú Huy', time: '13:30', activity: 'Vào ca-Ca thực tập chiều(13:30-17:30)' }
+            , { name: 'Phan Phú Huy', time: '13:30', activity: 'Vào ca-Ca thực tập chiều(13:30-17:30)' }],
     },
     {
         date: 'Thứ Hai, 14-12-2019',
@@ -31,11 +33,10 @@ const DATA = [
 
 function Item({ data }) {
     return (
-
         <TouchableOpacity
             style={styles.item}
         >
-            <View style={{ flexDirection: 'row', alignItems: 'center' ,borderRightWidth:0.5}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', borderRightWidth: 0.5 }}>
                 <Text style={styles.data}>{data.time}</Text>
 
                 <Icon
@@ -46,7 +47,7 @@ function Item({ data }) {
                 />
 
             </View>
-            <View style={{paddingLeft:15}}>
+            <View style={{ paddingLeft: 15 }}>
 
                 <Text style={{ fontWeight: 'bold' }}>{data.name}</Text>
 
@@ -71,17 +72,24 @@ export default class Timekeep_Activity extends Component {
     render() {
 
         return (
-            <SafeAreaView style={styles.container}>
-                <SectionList
-                    sections={DATA}
-                    keyExtractor={(item, index) => item + index}
-                    renderItem={({ item }) => <Item data={item} />}
-                    renderSectionHeader={({ section: { date } }) => (
-                        <Text style={styles.header}>{date}</Text>
-                    )}
-                    stickySectionHeadersEnabled={true}
-                />
-            </SafeAreaView>
+            this.props.isLoading
+                ?
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    <ActivityIndicator size="large" color="#00ff00" />
+                    <StatusBar barStyle="default" />
+                </View>
+                :
+                <SafeAreaView style={styles.container}>
+                    <SectionList
+                        sections={DATA}
+                        keyExtractor={(item, index) => item + index}
+                        renderItem={({ item }) => <Item data={item} />}
+                        renderSectionHeader={({ section: { date } }) => (
+                            <Text style={styles.header}>{date}</Text>
+                        )}
+                        stickySectionHeadersEnabled={true}
+                    />
+                </SafeAreaView>
         );
     }
 }
@@ -96,7 +104,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         borderBottomWidth: 0.4,
-        marginLeft:10
+        marginLeft: 10
     },
     header: {
         fontSize: 20,

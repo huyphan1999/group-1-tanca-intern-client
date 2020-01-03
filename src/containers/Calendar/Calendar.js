@@ -7,7 +7,9 @@ import {
   View,
   SafeAreaView,
   SectionList,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator,
+  StatusBar
 } from 'react-native';
 
 const DATA = [
@@ -71,20 +73,28 @@ export default class Calendar_Activity extends Component {
     }
 
   render() {
-
+    console.log(this.props)
     return (
-      <SafeAreaView style={styles.container}>
-        <SectionList
-          sections={DATA}
-          keyExtractor={(item, index) => item + index}
-          renderItem={({ item }) => <Item data={item} />}
-          renderSectionHeader={({ section: { date } }) => (
-            <Text style={styles.header}>{date}</Text>
-          )}
-          stickySectionHeadersEnabled={true}
-        />
-      </SafeAreaView>
-    );
+      this.props.isLoading
+        ?
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <ActivityIndicator size="large" color="#00ff00" />
+          <StatusBar barStyle="default" />
+        </View>
+        :
+        <SafeAreaView style={styles.container}>
+          <SectionList
+            sections={DATA}
+            keyExtractor={(item, index) => item + index}
+            renderItem={({ item }) => <Item data={item} />}
+            renderSectionHeader={({ section: { date } }) => (
+              <Text style={styles.header}>{date}</Text>
+            )}
+            stickySectionHeadersEnabled={true}
+          />
+        </SafeAreaView>
+    )
+
   }
 }
 

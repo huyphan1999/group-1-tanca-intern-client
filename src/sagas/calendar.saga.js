@@ -21,6 +21,7 @@ function* getCalendarFlow() {
 }
 
 export function* calendarWatcher() {
+    console.log('CALENDAR WATCHING')
     yield takeLatest(CALENDAR_REQUESTING, getCalendarFlow)
 }
 
