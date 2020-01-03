@@ -48,7 +48,7 @@ export default class Department extends Component {
             <TouchableOpacity
                 style={{ paddingRight: 15 }}
                 onPress={() =>
-                    navigation.navigate('AddObject', { nameParam: 'Phòng ban' })
+                    navigation.navigate('AddDepartment')
                 }
             >
                 <Image
