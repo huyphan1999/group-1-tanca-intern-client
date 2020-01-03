@@ -14,10 +14,8 @@ import {
   const reducer = function calendarReducer (state = initialState, action) {
     switch (action.type) {
       case CALENDAR_REQUESTING:
-        return {
+        return {...state,
           requesting: true,
-          successful: false,
-          errors: [],
         }
   
       case CALENDAR_SUCCESS:
@@ -29,7 +27,7 @@ import {
         }
   
       case CALENDAR_ERROR:
-        return {
+        return {...state,
           errors: action.error,
           requesting: false,
           successful: false,

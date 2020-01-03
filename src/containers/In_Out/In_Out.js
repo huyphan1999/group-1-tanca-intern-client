@@ -8,44 +8,52 @@ import {
     SafeAreaView,
     TouchableOpacity
 } from 'react-native';
+import { connect } from 'react-redux';
 
-export default class Input_OutPut_Activity extends Component {
+import {IN_REQUESTING} from '../../actionTypes/in.actiontypes';
+
+class Input_OutPut_Activity extends Component {
 
     static navigationOptions =
         {
             title: 'Vào/Ra ca',
         };
+
     constructor(props) {
         super(props);
-        this.state = {
-            isIn: true,
-        }
-       
     }
 
+    componentDidUpdate = (prevProps, prevState) => {
+      console.log('Is in updated')
+    };
+    
+
     render() {
-        console.log(this.state)
+        console.log(this.props)
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 {
-                    this.state.isIn ?
-                        <TouchableOpacity style={{ alignItems: 'center'   }} onPress={() => this.setState({ isIn: !this.state.isIn })}>
-                            <Icon
-                                name='user-lock'
-                                size={100}
-                                color='#40ff00'                               
-                            />
-                            <Text style={{marginTop: 10, }}>Vào ca</Text>
-                        </TouchableOpacity>
-                        :
-                        <TouchableOpacity style={{ alignItems: 'center'  }} onPress={() => this.setState({ isIn: !this.state.isIn })}>
+                    this.props.isIn ?
+
+                        <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => this.props.dispatch({type:IN_REQUESTING})}>
                             <Icon
                                 name='user-clock'
                                 size={100}
                                 color='#ff4000'
                             />
-                            <Text style={{marginTop: 10, }}>Ra ca</Text>
+                            <Text style={{ marginTop: 10, }}>Ra ca</Text>
                         </TouchableOpacity>
+
+                        :
+                        <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => this.props.dispatch({type:IN_REQUESTING})}>
+                            <Icon
+                                name='user-lock'
+                                size={100}
+                                color='#40ff00'
+                            />
+                            <Text style={{ marginTop: 10, }}>Vào ca</Text>
+                        </TouchableOpacity>
+
                 }
 
             </View>
@@ -53,3 +61,8 @@ export default class Input_OutPut_Activity extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    isIn: state.user.isIn
+});
+export default connect(mapStateToProps, null)(Input_OutPut_Activity)

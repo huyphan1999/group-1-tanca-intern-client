@@ -9,18 +9,27 @@ import { USER_IN,USER_OUT} from '../actionTypes/user.actiontypes';
 
 import { getRequest } from '../utils/request'
 
-const inOutUrl = 'https://reqres.in/api/register'
+const inOutUrl = 'https://reqres.in/api/regist'
 
 function* inFlow() {
     try {
 
-        yield call(getRequest, inOutUrl);
-        yield put({ type: IN_SUCCESS })
-        yield put({type:USER_IN})
+        const res=yield call(getRequest, inOutUrl);
+        if (res.data.status==1) {
+            yield put({ type: IN_SUCCESS })
+            yield put({type:USER_IN})
+        }
+        else
+        {
+            yield put({ type: IN_SUCCESS })
+            yield put({type:USER_OUT})
+        }
+       
         
     } catch (error) {
+        console.log(error)
         yield put({ type: IN_ERROR, error })
-        yield put({USER_OUT})
+       
     }
 }
 
