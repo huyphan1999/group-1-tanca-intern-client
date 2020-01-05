@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { navigate } from '../../../utils/navigate'
 class Choose extends Component {
     render() {
         return (
 
             <TouchableOpacity
                 style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 15, borderBottomWidth: 0.4 }}
-                onPress={() => this.props.navigation.navigate(`${this.props.name}`)}
+                onPress={() => navigate(this.props.route)}
             >
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View>
@@ -55,10 +56,10 @@ export default class Company extends Component {
     render() {
         return (
             <View style={{backgroundColor:'white'}}>
-                <Choose iconName1="globe-asia" iconName2="chevron-right" txtName="Vùng" navigation={this.props.navigation} name="Region" />
-                <Choose iconName1="code-branch" iconName2="chevron-right" txtName="Chi nhánh" navigation={this.props.navigation} name="Branch" />
-                <Choose iconName1="user-tie" iconName2="chevron-right" txtName="Chức vụ" navigation={this.props.navigation} name="Position" />
-                <Choose iconName1="home" iconName2="chevron-right" txtName="Phòng ban" navigation={this.props.navigation} name="Department" />
+              
+                <Choose iconName1="code-branch" iconName2="chevron-right" txtName="Chi nhánh"  route="Branch" />
+                <Choose iconName1="user-tie" iconName2="chevron-right" txtName="Chức vụ"  route="Position" />
+                <Choose iconName1="home" iconName2="chevron-right" txtName="Phòng ban"  route="Department" />
                 
             </View>
         )

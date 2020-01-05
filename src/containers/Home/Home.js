@@ -1,12 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-
 import {Image} from 'react-native';
-
 import {createStackNavigator} from 'react-navigation-stack';
 import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
-
 import Add_Activity from '../Add/Add.container';
 import Input_Output_Activity from '../In_Out/In_Out';
 import Calendar_Activity from '../Calendar/Calendar.container';
@@ -15,19 +12,17 @@ import EmployeeInfo from '../Add/Employee/EmployeeInfo';
 import Logout_Activity from '../Add/Logout';
 import Shift from '../Add/Shift/Shift.container';
 import ShiftDetail from '../Add/Shift/ShiftDetail';
-
 import Company from '../Add/Company/Company';
-import Region from '../Add/Company/Region';
 import Position from '../Add/Company/Position';
 import Department from '../Add/Company/Department';
 import Branch from '../Add/Company/Branch';
-import AddRegion from '../Add//Company/AddRegion';
 import AddBranch from '../Add/Company/AddBranch';
 import AddDepartment from '../Add/Company/AddDepartment';
 import AddPosition from '../Add/Company/AddPosition';
 import Employee from '../Add/Employee/Employee';
 import AddEmployee from '../Add/Employee/AddEmployee';
 import MultiSelect from '../MultiSelect';
+
 const Input_OutputTab = createStackNavigator(
   {
     Input_Output: Input_Output_Activity,
@@ -79,11 +74,9 @@ const Add_Tab = createStackNavigator(
     Shift: Shift,
     ShiftDetail: ShiftDetail,
     Company: Company,
-    Region: Region,
     Position: Position,
     Department: Department,
     Branch: Branch,
-    AddRegion: AddRegion,
     AddBranch: AddBranch,
     AddDepartment: AddDepartment,
     AddPosition: AddPosition,
