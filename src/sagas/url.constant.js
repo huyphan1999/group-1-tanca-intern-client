@@ -18,7 +18,7 @@ export const BRANCH_REQUESTING = 'BRANCH_REQUESTING'
 export const BRANCH_SUCCESS = 'BRANCH_SUCCESS'
 export const BRANCH_ERROR = 'BRANCH_ERROR'
 export const BRANCH_ADD = 'BRANCH_ADD'
-export const BRANCH_DEL = 'BRANCH_DEL'
+export const BRANCH_DEL = 'http://p1.tanca.vn/api/branch/delete'
 export const BRANCH_EDIT = 'BRANCH_EDIT'
 
 

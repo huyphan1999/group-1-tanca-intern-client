@@ -15,7 +15,7 @@ function* postFlow(newdata, url) {
 
     try {
         const res = yield call(postRequest, url, newdata);
-        yield put({ type: SHIFT.EMP_REQUESTING })
+        yield put({ type: SHIFT.SHIFT_REQUESTING })
     } catch (error) {
         yield put({ type: SHIFT.SHIFT_ERROR, error })
     }
@@ -29,7 +29,7 @@ function* getFlow(url, id) {
     try {
         const res = yield call(getRequest, url, id);
         if (id) {
-            yield put({ type: SHIFT.EMP_REQUESTING })
+            yield put({ type: SHIFT.SHIFT_REQUESTING })
 
         } else {
             var { data } = res
@@ -52,7 +52,7 @@ export function* getShiftWatchcer() {
 
         console.log('Watching GET on SHIFT')
 
-        const action = yield take([SHIFT.EMP_REQUESTING, SHIFT.SHIFT_DEL]);
+        const action = yield take([SHIFT.SHIFT_REQUESTING, SHIFT.SHIFT_DEL]);
 
         console.log('Watched  GET on SHIFT')
         console.log(URL[action.type])

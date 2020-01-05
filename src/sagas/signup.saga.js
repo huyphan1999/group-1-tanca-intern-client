@@ -26,6 +26,7 @@ function* signupFlow(action) {
 }
 
 export function* signupWatcher() {
+    console.log('Watching SIGNUP')
     yield takeLatest(SIGNUP_REQUESTING, signupFlow)
 }
 

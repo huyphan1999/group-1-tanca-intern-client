@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image, ScrollView, Alert, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Fontisto';
 import { getParams, getParamsHeader } from '../../../utils/index';
-import { connect } from 'react-redux';
-import * as COMPANY from '../../../actionTypes/company.actiontypes';
-import { companyRequest } from '../../../actions/company.action';
-class AddBranch extends Component {
+export default class ObjectAdd extends Component {
     constructor(props) {
         super(props);
 
@@ -20,35 +17,30 @@ class AddBranch extends Component {
     };
 
     onPressHeader = () => {
-        console.log(this.state)
-        console.log('onPressed Branch Header')
-        this.props.dispatch(companyRequest(COMPANY.BRANCH_ADD, this.state, 'BRANCH', 'tanca.io'))
-        
+        getParams(this.props).onPress(this.state)
     };
 
 
-    static navigationOptions = ({ navigation }) => {
-        const params = getParamsHeader(navigation);
+    static navigationOptions = ({navigation}) => ({
 
-        return {
+        headerRight: (
+            <TouchableOpacity
+                style={{ paddingRight: 15 }}
+                onPress={() =>
+                    getParamsHeader(navigation).onPressHeader()
+                }
+            >
+                <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>TẠO</Text>
+            </TouchableOpacity >
+        ),
+        headerTitle: () => (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>TẠO MỚI</Text>
+            </View>
 
-            headerRight: (
-                <TouchableOpacity
-                    style={{ paddingRight: 15 }}
-                    onPress={() => params.onPressHeader()
-                    }
-                >
-                    <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>{params.title}</Text>
-                </TouchableOpacity >
-            ),
-            headerTitle: () => (
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>Chi nhánh</Text>
-                </View>
+        ),
+    });
 
-            ),
-        }
-    };
     render() {
         return (
             <View style={{ flex: 1, backgroundColor: '#e3e7eb' }}>
@@ -103,5 +95,3 @@ class AddBranch extends Component {
         )
     }
 }
-
-export default connect()(AddBranch)

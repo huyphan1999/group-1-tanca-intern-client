@@ -50,11 +50,11 @@ function* getFlow(url, id) {
 export function* getBranchWatchcer() {
     while (true) {
 
-        console.log('Watching GET on COMPANY')
+        console.log('Watching GET on BRANCH')
 
         const action = yield take([COMPANY.BRANCH_REQUESTING, COMPANY.BRANCH_DEL]);
 
-        console.log('Watched  GET on COMPANY')
+        console.log('Watched  GET on BRANCH')
         
         yield fork(getFlow, URL[action.type], action.id)
 
@@ -63,11 +63,11 @@ export function* getBranchWatchcer() {
 
 export function* postBranchWatchcer() {
     while (true) {
-        console.log('Watching POST on COMPANY')
+        console.log('Watching POST on BRANCH')
 
         const action = yield take([COMPANY.BRANCH_ADD, COMPANY.BRANCH_EDIT])
 
-        console.log('Watched  POST on COMPANY')
+        console.log('Watched  POST on BRANCH')
 
         yield fork(postFlow, action.newdata, URL[action.type])
 

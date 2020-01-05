@@ -15,7 +15,7 @@ class ShiftContainer extends Shift {
 
 
 const mapStateToProps = state => ({
-  data:getData(state,'shift','shifts'),
+  data:getData(state,'shift','data'),
   isLoading:getData(state,'shift','requesting')
 });
 

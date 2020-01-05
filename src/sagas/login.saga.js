@@ -62,9 +62,9 @@ console.log(error)
 
 export function* loginWatchcer() {
   while (true) {
-    console.log('Watching')
+    console.log('Watching LOGIN')
     const { email, password } = yield take(LOGIN_REQUESTING)
-    console.log('Watched')
+    console.log('Watched LOGIN')
     console.log({ email, password })
     yield fork(loginFlow, email, password)
   }

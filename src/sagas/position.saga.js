@@ -50,11 +50,11 @@ function* getFlow(url, id) {
 export function* getPosWatchcer() {
     while (true) {
 
-        console.log('Watching GET on COMPANY')
+        console.log('Watching GET on POSITION')
 
         const action = yield take([COMPANY.POS_REQUESTING, COMPANY.POS_DEL]);
 
-        console.log('Watched  GET on COMPANY')
+        console.log('Watched  GET on POSITION')
         
         yield fork(getFlow, URL[action.type], action.id)
 
@@ -63,11 +63,11 @@ export function* getPosWatchcer() {
 
 export function* postPosWatchcer() {
     while (true) {
-        console.log('Watching POST on COMPANY')
+        console.log('Watching POST on POSITION')
 
         const action = yield take([COMPANY.POS_ADD, COMPANY.POS_EDIT])
 
-        console.log('Watched  POST on COMPANY')
+        console.log('Watched  POST on POSITION')
 
         yield fork(postFlow, action.newdata, URL[action.type])
 

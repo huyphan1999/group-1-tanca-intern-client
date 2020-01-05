@@ -54,7 +54,7 @@ export default class Shift extends React.Component {
             <SafeAreaView style={styles.container}>
                 <FlatList
                     data={DATA}
-                    renderItem={({ item }) => <Item data={item} dispatch={this.props.dispatch} onSave={(data) => this.onAddShift(data)} />}
+                    renderItem={({ item }) => <Item data={item}  onSave={(data) => this.onAddShift(data)} />}
                     keyExtractor={item => item.id}
                     style={{ borderBottomWidth: 1, paddingLeft: 10, }}
                 />
