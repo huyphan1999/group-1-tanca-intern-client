@@ -2,29 +2,35 @@ import React, { Component } from 'react'
 import { View, Text, TouchableOpacity,  Alert, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Fontisto';
 import { connect } from 'react-redux';
+import { getParams, getParamsHeader } from '../../../utils/index';
  class ObjectDetails extends Component {
     constructor(props) {
         super(props);
     }
-    static navigationOptions = () => ({
+   
+     static navigationOptions = ({ navigation }) => {
+         const params = getParamsHeader(navigation);
 
-        headerRight: (
-            <TouchableOpacity
-                style={{ paddingRight: 15 }}
-                onPress={() =>
-                    Alert.alert("Lưu thành công!!")
-                }
-            >
-                <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>Lưu</Text>
-            </TouchableOpacity >
-        ),
-        headerTitle: () => (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>Phòng ban</Text>
-            </View>
+         return {
 
-        ),
-    });
+             headerRight: (
+                 <TouchableOpacity
+                     style={{ paddingRight: 15 }}
+                     onPress={() =>
+                         Alert.alert("Lưu thành công!!")
+                     }
+                 >
+                     <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>Lưu</Text>
+                 </TouchableOpacity >
+             ),
+             headerTitle: () => (
+                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>{params.name}</Text>
+                 </View>
+
+             ),
+         }
+     };
     render() {
         var { params } =this.props.navigation.state;
         return (

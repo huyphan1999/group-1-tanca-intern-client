@@ -21,6 +21,7 @@ import AddDepartment from '../Add/Company/AddDepartment';
 import AddPosition from '../Add/Company/AddPosition';
 import Employee from '../Add/Employee/Employee';
 import AddEmployee from '../Add/Employee/AddEmployee';
+import ObjectDetails from '../Add/Company/ObjectDetails';
 import MultiSelect from '../MultiSelect';
 
 const Input_OutputTab = createStackNavigator(
@@ -83,6 +84,8 @@ const Add_Tab = createStackNavigator(
     Employee: Employee,
     AddEmployee: AddEmployee,
     MultiSelect: MultiSelect,
+    ObjectDetails
+
   },
   {
     defaultNavigationOptions: {

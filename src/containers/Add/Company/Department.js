@@ -6,19 +6,22 @@ const DATA = [
     {
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
         title: 'Giám đốc',
-        note:'Phòng Giám Đốc'
+        note:'Phòng Giám Đốc',
+        name: 'Phòng ban'
         
     },
     {
         id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
         title: 'Dịch vụ',
-        note: 'Phòng Dịch Vụ'
+        note: 'Phòng Dịch Vụ',
+        name: 'Phòng ban'
       
     },
     {
         id: '58694a0f-3da1-471f-bd96-145571e29d72',
         title: 'Kế toán',
-        note: 'Phòng Kế Toán'
+        note: 'Phòng Kế Toán',
+        name: 'Phòng ban'
       
     },
 ];
