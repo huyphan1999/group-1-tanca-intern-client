@@ -71,19 +71,15 @@ export default class Add extends Component {
 
 
   //Callback 
-  onSave = data => {
+  /*onSave = data => {
     //this.props.dispatch()
     console.log('Add SAVE CALLBACK');
     console.log(data);
   };
-
+*/
   render() {
     let role = 'Nhân viên';
-    console.log('Add View :');
-    console.log(this.props);
     let {user} = this.props;
-    console.log('User View :');
-    console.log(user);
     if (user.is_root) {
       role = 'Quản lý';
     }

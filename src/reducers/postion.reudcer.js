@@ -1,54 +1,54 @@
-import * as EMP from '../actionTypes/emp.actiontypes';
+import * as COMPANY from '../actionTypes/company.actiontypes';
 
 const initialState = {
     requesting: false,
     successful: false,
-    message: [],
-    data:[],
+    data: [],
 }
 
 const reducer = function companyReducer(state = initialState, action) {
     switch (action.type) {
-        case EMP.EMP_REQUESTING:
+        case COMPANY.POS_REQUESTING:
             return {
                 ...state,
                 requesting: true,
             }
 
-        case EMP.EMP_SUCCESS:
+        case COMPANY.POS_SUCCESS:
             return {
                 ...state,
                 requesting: false,
                 successful: true,
-                employees: action.data
+                data: action.data
             }
 
-        case EMP.EMP_ERROR:
+        case COMPANY.POS_ERROR:
             return {
                 ...state,
-                message: action.error,
+                branch_message: action.error,
                 successful: false,
                 requesting: false
             }
 
-        case EMP.EMP_ADD:
+        case COMPANY.POS_ADD:
             return {
                 ...state,
                 requesting: true,
             }
 
-        case EMP.EMP_DEL:
+        case COMPANY.POS_DEL:
             return {
                 ...state,
                 requesting: true,
             }
-        case EMP.EMP_EDIT:
+        case COMPANY.POS_EDIT:
             return {
                 ...state,
                 requesting: false,
             }
-        default : return state
+
+        default:
+            return state
     }
 }
-
 export default reducer

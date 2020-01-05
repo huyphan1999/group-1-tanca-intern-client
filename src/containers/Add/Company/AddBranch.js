@@ -38,7 +38,7 @@ class AddBranch extends Component {
                     onPress={() => params.onPressHeader()
                     }
                 >
-                    <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>Thêm</Text>
+                    <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>{params.title}</Text>
                 </TouchableOpacity >
             ),
             headerTitle: () => (

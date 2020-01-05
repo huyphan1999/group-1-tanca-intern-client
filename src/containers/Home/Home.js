@@ -13,7 +13,7 @@ import Calendar_Activity from '../Calendar/Calendar.container';
 import TimeKeep_Activity from '../TimeKeep/TimeKeep.container';
 import EmployeeInfo from '../Add/Employee/EmployeeInfo';
 import Logout_Activity from '../Add/Logout';
-import Shift from '../Add/Shift/Shift';
+import Shift from '../Add/Shift/Shift.container';
 import ShiftDetail from '../Add/Shift/ShiftDetail';
 
 import Company from '../Add/Company/Company';

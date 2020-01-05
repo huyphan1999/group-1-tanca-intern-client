@@ -1,4 +1,4 @@
-export const SHIFT_REQUESTING = 'SHIFT_REQUESTING'
+export const EMP_REQUESTING = 'SHIFT_REQUESTING'
 export const SHIFT_SUCCESS = 'SHIFT_SUCCESS'
 export const SHIFT_ERROR = 'SHIFT_ERROR'
 export const SHIFT_ADD = 'SHIFT_ADD'

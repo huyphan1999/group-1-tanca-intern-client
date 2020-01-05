@@ -4,7 +4,7 @@ const initialState = {
     requesting: false,
     successful: false,
     message: [],
-    shifts:[],
+    data:[],
 }
 
 const reducer = function companyReducer(state = initialState, action) {

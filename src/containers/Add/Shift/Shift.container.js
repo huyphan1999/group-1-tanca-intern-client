@@ -1,14 +1,14 @@
-import Employee from './Employee';
+import Shift from './Shift';
 import {connect} from 'react-redux';
 import {getData} from '../../../selectors';
 import {getRequest} from '../../../actions/get.actions';
 
-class EmpContainer extends Employee {
+class ShiftContainer extends Shift {
   constructor(props) {
     super(props);
   }
   componentDidMount = () => {
-      this.props.dispatch(getRequest('SHIFT_REQUESTING','SHIFT','http://p1.tanca.vn/api/shift/list'))
+      this.props.dispatch(getRequest('SHIFT_REQUESTING'))
   };
   
 }
@@ -22,4 +22,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   null,
-)(EmpContainer);
+)(ShiftContainer);

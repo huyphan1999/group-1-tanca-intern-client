@@ -4,7 +4,7 @@ import { View, StyleSheet, Text, TouchableOpacity, Image, ScrollView, SafeAreaVi
 import { CheckBox, Divider } from 'react-native-elements'
 import { connect } from 'react-redux';
 import { navigate } from '../../../utils/navigate';
-import { getParams } from '../../../utils/index';
+import { getParams, getParamsHeader } from '../../../utils/index';
 
 const DATA = [
     {
@@ -21,30 +21,48 @@ const DATA = [
     },
 ];
 
-class ButtonSave extends React.Component {
-    render() {
-        return (
-            <TouchableOpacity style={{ paddingRight: 16 }}>
-                <Text style={{ color: 'white', fontSize: 18 }}>Save</Text>
-            </TouchableOpacity >
-        );
-    }
-}
 class ShiftDetail extends Component {
     constructor(props) {
         super(props);
-        this.state = { checked: [1, 0, 1, 0, 1, 1, 0], branch: [] }
+        var { data } = getParams(this.props);
+        var { onPress } = getParams(this.props);
+        console.log(onPress)
+        this.state = data
     }
-    static navigationOptions = {
-        headerRight: () => <ButtonSave />,
-        headerTitle: () => (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ color: 'white', fontSize: 18 }}>Thông tin cá nhân</Text>
-            </View>
-        ),
+
+    componentDidMount = () => {
+        this.props.navigation.setParams({ onPressHeader: this.onPressHeader });
+    };
+
+    onPressHeader = () => {
+        console.log('onPressed Header')
+        getParams(this.props).onPress(this.state)
+    };
+
+
+    static navigationOptions = ({ navigation }) => {
+        const params = getParamsHeader(navigation);
+
+        console.log(`Params: ${params}`);
+        return {
+            headerRight: (
+                <TouchableOpacity
+                    style={{ paddingRight: 15 }}
+                    onPress={() => params.onPressHeader()}>
+                    <Text style={{ color: 'white', fontSize: 18 }}>Save</Text>
+                </TouchableOpacity>
+            ),
+            headerTitle: () => (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>
+                        Nhân viên
+                    </Text>
+                </View>
+            ),
+        };
     };
     handleCheck = id => {
-        this.state.checked[id] = !this.state.checked[id]
+        this.state.uptime[id] = !this.state.uptime[id]
         this.forceUpdate()
     }
 
@@ -54,11 +72,7 @@ class ShiftDetail extends Component {
     };
 
     render() {
-        console.log(`Shift Detail: ${this.state.branch}`);
-        var params = this.props.navigation;
-        var timeStart = `${params.timeStartHour}:${params.timeStartMinute}`
-        var timeEnd = `${params.timeEndHour}:${params.timeEndMinute}`
-        console.log(params)
+    
         return (
             <ScrollView>
                 <View style={{ flex: 1 }}>
@@ -66,19 +80,19 @@ class ShiftDetail extends Component {
                         <Text style={{ fontSize: 18, backgroundColor: '#e3e7eb', padding: 20, borderBottomWidth: 0.5 }}>TẠO CA</Text>
                         <View style={styles.txtContent}>
                             <Text >Tên ca làm :</Text>
-                            <Text>{params.title}</Text>
+                            <Text>{this.state.title}</Text>
                         </View>
                         <View style={styles.txtContent}>
                             <Text >Mã ca:</Text>
-                            <Text >{params.id}</Text>
+                            <Text >{this.state.id}</Text>
                         </View>
                         <View style={styles.txtContent}>
                             <Text >Bắt đầu lúc:</Text>
-                            <Text>{timeStart}</Text>
+                            <Text>{this.state.timeStart}</Text>
                         </View>
                         <View style={styles.txtContent}>
                             <Text >Kết thúc :</Text>
-                            <Text>{timeEnd}</Text>
+                            <Text>{this.state.timeEnd}</Text>
                         </View>
                     </View>
                     <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
@@ -96,8 +110,8 @@ class ShiftDetail extends Component {
                                     onSelection: (selectedBranch) => this.onSelectBranch(selectedBranch),
                                     options: DATA
                                 })}
-                                style={{flex:1,maxWidth:200}}
-                                >
+                                style={{ flex: 1, maxWidth: 200 }}
+                            >
                                 <Text>{this.state.branch.toString()}</Text></TouchableOpacity>
 
                         </View>
@@ -106,7 +120,7 @@ class ShiftDetail extends Component {
                             <CheckBox
                                 center
                                 size={24}
-                                checked={this.state.checked[0]}
+                                checked={this.state.uptime[0]}
                                 onPress={() => this.handleCheck(0)}
                                 title='Thứ hai'
                                 containerStyle={{ backgroundColor: '#ffffff', borderWidth: 0, padding: 0, }}
@@ -116,7 +130,7 @@ class ShiftDetail extends Component {
                             <CheckBox
                                 center
                                 size={24}
-                                checked={this.state.checked[1]}
+                                checked={this.state.uptime[1]}
                                 onPress={() => this.handleCheck(1)}
                                 title='Thứ Ba'
                                 containerStyle={{ backgroundColor: '#ffffff', borderWidth: 0, padding: 0, marginLeft: -2 }}
@@ -125,7 +139,7 @@ class ShiftDetail extends Component {
                             <CheckBox
                                 center
                                 size={24}
-                                checked={this.state.checked[2]}
+                                checked={this.state.uptime[2]}
                                 onPress={() => this.handleCheck(2)}
                                 title='Thứ tư'
                                 containerStyle={{ backgroundColor: '#ffffff', borderWidth: 0, padding: 0, marginLeft: 1 }}
@@ -134,7 +148,7 @@ class ShiftDetail extends Component {
                             <CheckBox
                                 center
                                 size={24}
-                                checked={this.state.checked[3]}
+                                checked={this.state.uptime[3]}
                                 onPress={() => this.handleCheck(3)}
                                 title='Thứ năm'
                                 containerStyle={{ backgroundColor: '#ffffff', borderWidth: 0, padding: 0, marginLeft: 0, marginLeft: -8, }}
@@ -145,7 +159,7 @@ class ShiftDetail extends Component {
                             <CheckBox
                                 center
                                 size={24}
-                                checked={this.state.checked[4]}
+                                checked={this.state.uptime[4]}
                                 onPress={() => this.handleCheck(4)}
                                 title='Thứ Sáu'
                                 containerStyle={{ backgroundColor: '#ffffff', borderWidth: 0, padding: 0 }}
@@ -154,7 +168,7 @@ class ShiftDetail extends Component {
                             <CheckBox
                                 center
                                 size={24}
-                                checked={this.state.checked[5]}
+                                checked={this.state.uptime[5]}
                                 onPress={() => this.handleCheck(5)}
                                 title='Thứ Bảy'
                                 containerStyle={{ backgroundColor: '#ffffff', borderWidth: 0, padding: 0, marginLeft: -5 }}
@@ -163,7 +177,7 @@ class ShiftDetail extends Component {
                             <CheckBox
                                 center
                                 size={24}
-                                checked={this.state.checked[6]}
+                                checked={this.state.uptime[6]}
                                 onPress={() => this.handleCheck(6)}
                                 title='Chủ nhật'
                                 containerStyle={{ backgroundColor: '#ffffff', borderWidth: 0, padding: 0, marginLeft: -5 }}

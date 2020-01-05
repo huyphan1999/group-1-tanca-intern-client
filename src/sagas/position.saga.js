@@ -1,7 +1,7 @@
 import { take, fork, call, put } from 'redux-saga/effects'
 
-// Our EMP actiontypes
-import * as EMP from '../actionTypes/emp.actiontypes'
+// Our POSITION actiontypes
+import * as COMPANY from '../actionTypes/company.actiontypes'
 import * as URL from './url.constant';
 
 // So that we can modify our User piece of state
@@ -15,9 +15,9 @@ function* postFlow(newdata, url) {
 
     try {
         const res = yield call(postRequest, url, newdata);
-        yield put({ type: EMP.EMP_REQUESTING })
+        yield put({ type: COMPANY.POS_REQUESTING })
     } catch (error) {
-        yield put({ type: EMP.EMP_ERROR, error })
+        yield put({ type: COMPANY.POS_ERROR, error })
     }
     // return the token 
     return true
@@ -29,18 +29,17 @@ function* getFlow(url, id) {
     try {
         const res = yield call(getRequest, url, id);
         if (id) {
-            yield put({ type: EMP.EMP_REQUESTING })
+            yield put({ type: COMPANY.POS_REQUESTING })
 
         } else {
             var { data } = res
-            console.log('Employee reponse')
+            console.log('Poss reponse')
             console.log(data)
-            yield put({ type: EMP.EMP_SUCCESS, data });
+            yield put({ type: COMPANY.POS_SUCCESS, data });
         }
 
-    }
-    catch (error) {
-        yield put({ type: EMP.EMP_ERROR, error })
+    } catch (error) {
+        yield put({ type: COMPANY.POS_ERROR, error })
     }
 
     return true
@@ -48,28 +47,28 @@ function* getFlow(url, id) {
 }
 
 
-export function* getEmpWatchcer() {
+export function* getPosWatchcer() {
     while (true) {
 
-        console.log('Watching GET on EMP')
+        console.log('Watching GET on COMPANY')
 
-        const action = yield take([EMP.EMP_REQUESTING, EMP.EMP_DEL]);
+        const action = yield take([COMPANY.POS_REQUESTING, COMPANY.POS_DEL]);
 
-        console.log('Watched  GET on EMP')
-        console.log(URL[action.type])
+        console.log('Watched  GET on COMPANY')
+        
         yield fork(getFlow, URL[action.type], action.id)
 
     }
 }
 
-export function* postEmpWatchcer() {
+export function* postPosWatchcer() {
     while (true) {
-        console.log('Watching POST on EMP')
+        console.log('Watching POST on COMPANY')
 
-        const action = yield take([EMP.EMP_ADD, EMP.EMP_EDIT])
+        const action = yield take([COMPANY.POS_ADD, COMPANY.POS_EDIT])
 
-        console.log('Watched  POST on EMP')
-        console.log(action)
+        console.log('Watched  POST on COMPANY')
+
         yield fork(postFlow, action.newdata, URL[action.type])
 
     }
