@@ -8,7 +8,7 @@ class EmpContainer extends Employee {
     super(props);
   }
   componentDidMount = () => {
-      this.props.dispatch(getRequest('SHIFT_REQUESTING','SHIFT','http://p1.tanca.vn/api/shift/list'))
+      //this.props.dispatch(getRequest('SHIFT_REQUESTING','SHIFT','http://p1.tanca.vn/api/shift/list'))
   };
   
 }

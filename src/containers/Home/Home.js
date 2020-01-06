@@ -17,8 +17,6 @@ import Position from '../Add/Company/Position.container';
 import Department from '../Add/Company/Department.container';
 import Branch from '../Add/Company/Branch.container';
 import ObjectAdd from '../Add/Company/ObjectAdd';
-import AddDepartment from '../Add/Company/AddDepartment';
-import AddPosition from '../Add/Company/AddPosition';
 import Employee from '../Add/Employee/Employee';
 import AddEmployee from '../Add/Employee/AddEmployee';
 import MultiSelect from '../MultiSelect';
@@ -74,15 +72,13 @@ const Add_Tab = createStackNavigator(
     Logout: Logout_Activity,
     Shift: Shift,
     ShiftDetail: ShiftDetail,
+    Employee: Employee,
+    AddEmployee: AddEmployee,
     Company: Company,
     Position: Position,
     Department: Department,
     Branch: Branch,
-    AddBranch: ObjectAdd,
-    AddDepartment: AddDepartment,
-    AddPosition: AddPosition,
-    Employee: Employee,
-    AddEmployee: AddEmployee,
+    ObjectAdd: ObjectAdd,
     MultiSelect: MultiSelect,
     ObjectDetails: ObjectDetails
   },

@@ -1,11 +1,11 @@
-import Object from './Object';
+import ObjectList from './ObjectList';
 import { connect } from 'react-redux';
 import { getData } from '../../../selectors';
 import { getRequest, postRequest } from '../../../actions/app.actions';
 import { navigate } from '../../../utils/navigate';
 import * as  COMPANY from '../../../actionTypes/company.actiontypes';
 
-class BranchContainer extends Object {
+class BranchContainer extends ObjectList {
     constructor(props) {
         super(props);
     }
@@ -15,7 +15,7 @@ class BranchContainer extends Object {
     };
 
     onPressHeader = () => {
-        navigate('AddBranch', { onPress: data => this.onAddBranch(data) })
+        navigate('ObjectAdd', { onPress: data => this.onAddBranch(data) })
     };
 
     onPressItem = data => {

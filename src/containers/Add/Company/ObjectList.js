@@ -22,13 +22,11 @@ function Item({ data,onPress }) {
     );
 }
 
-export default class Object extends Component {
+export default class ObjectList extends Component {
     
     
     static navigationOptions = ({ navigate, navigation }) => {
         const params = getParamsHeader(navigation);
-
-        console.log(`Params: ${params.onPressHeader}`);
         return {
             headerRight: (
                 <TouchableOpacity

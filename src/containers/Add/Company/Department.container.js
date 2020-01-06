@@ -1,4 +1,4 @@
-import Object from './Object';
+import Object from './ObjectList';
 import { connect } from 'react-redux';
 import { getData } from '../../../selectors';
 import { getRequest, postRequest } from '../../../actions/app.actions';
@@ -15,7 +15,7 @@ class DepartmentContainer extends Object {
     };
 
     onPressHeader = () => {
-        navigate('AddBranch', { onPress: data => this.onAddDepartment(data) })
+        navigate('ObjectAdd', { onPress: data => this.onAddDepartment(data) })
     };
 
     onPressItem = data => {

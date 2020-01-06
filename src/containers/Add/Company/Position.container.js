@@ -1,4 +1,4 @@
-import Object from './Object';
+import Object from './ObjectList';
 import { connect } from 'react-redux';
 import { getData } from '../../../selectors';
 import { getRequest, postRequest } from '../../../actions/app.actions';
@@ -16,7 +16,7 @@ class PositionContainer extends Object {
     };
 
     onPressHeader = () => {
-        navigate('AddBranch', { onPress: data => this.onAddPosition(data) })
+        navigate('ObjectAdd', { onPress: data => this.onAddPosition(data) })
     };
 
     onPressItem = data => {
