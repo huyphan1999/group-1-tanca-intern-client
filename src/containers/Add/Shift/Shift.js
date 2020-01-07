@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, TouchableOpacity,Image} from 'react-native';
 
 import {navigate} from '../../../utils/navigate';
@@ -47,7 +47,33 @@ function Item({data}) {
     );
 }
 
-export default function Shift() {
+export default class Shift extends Component {
+    static navigationOptions = ({ navigate, navigation }) => ({
+
+        headerRight: (
+            <TouchableOpacity
+                style={{ paddingRight: 15 }}
+                onPress={() =>
+                    navigation.navigate('AddShift')
+                }
+            >
+                <Image
+                    source={require('../../image/add_object.png')}
+                    style={{ width: 20, height: 20 }}
+                    tintColor='white'
+
+                />
+            </TouchableOpacity >
+        ),
+        headerTitle: () => (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>Ca làm</Text>
+            </View>
+
+        ),
+    });
+    render(){
+    
     return (
         <SafeAreaView style={styles.container}>
             <FlatList
@@ -58,6 +84,7 @@ export default function Shift() {
             />
         </SafeAreaView>
     );
+}
 }
 
 

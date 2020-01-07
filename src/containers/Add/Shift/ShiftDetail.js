@@ -25,7 +25,7 @@ class ButtonSave extends React.Component {
     render() {
         return (
             <TouchableOpacity style={{ paddingRight: 16 }}>
-                <Text style={{ color: 'white', fontSize: 18 }}>Save</Text>
+                <Text style={{ color: 'white', fontSize: 18 }}>Thêm</Text>
             </TouchableOpacity >
         );
     }
@@ -39,7 +39,7 @@ class ShiftDetail extends Component {
         headerRight: () => <ButtonSave />,
         headerTitle: () => (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ color: 'white', fontSize: 18 }}>Thông tin cá nhân</Text>
+                <Text style={{ color: 'white', fontSize: 18 }}>Tạo ca</Text>
             </View>
         ),
     };
