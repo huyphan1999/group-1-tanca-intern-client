@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -8,15 +8,16 @@ import {
   FlatList,
   Alert,
 } from 'react-native';
-import {SearchBar} from 'react-native-elements';
-import {ListItem} from 'react-native-elements';
+import { SearchBar } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { getParams, getParamsHeader } from '../../../utils/index';
 
 class TitleHeader extends Component {
   render() {
     return (
       <TouchableOpacity
-        style={{flexDirection: 'row'}}
+        style={{ flexDirection: 'row' }}
         onPress={() => {
           Alert.alert('Hiện chi tiết');
         }}>
@@ -25,7 +26,7 @@ class TitleHeader extends Component {
           name="downcircleo"
           size={16}
           color={this.props.color}
-          style={{paddingLeft: 10, paddingRight: 10}}
+          style={{ paddingLeft: 10, paddingRight: 10 }}
         />
       </TouchableOpacity>
     );
@@ -41,76 +42,61 @@ export default class Employee extends Component {
     };
   }
 
-  static navigationOptions = ({navigation}) => ({
-    headerRight: (
-      <TouchableOpacity
-        style={{paddingRight: 15}}
-        onPress={() => navigation.navigate('AddEmployee')}>
-        <Image
-          source={require('../../image/add_object.png')}
-          style={{width: 20, height: 20}}
-          tintColor="white"
-        />
-      </TouchableOpacity>
-    ),
-    headerTitle: () => (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={{color: 'white', fontSize: 18, paddingLeft: 30}}>
-          Danh sách nhân viên
-        </Text>
-      </View>
-    ),
-  });
-  updateSearch = search => {
-    this.setState({search: search});
-  };
-  keyExtractor = (item, index) => index.toString();
-  renderItem = ({item}) => (
+  static navigationOptions = ({ navigate, navigation }) => {
+    const params = getParamsHeader(navigation);
+    return {
+      headerRight: (
+        <TouchableOpacity
+          style={{ paddingRight: 15 }}
+          onPress={() => params.onPressHeader()}>
+          <Image
+            source={require('../../image/add_object.png')}
+            style={{ width: 20, height: 20 }}
+            tintColor='white'
+          />
+        </TouchableOpacity>
+      ),
+      headerTitle: () => (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>
+            Nhân viên
+                </Text>
+        </View>
+      ),
+    };
+
+  }
+
+  renderItem = ({ item }) => (
     <ListItem
       title={item.name}
-      onPress={() => {
-        Alert.alert('Hiện thông tin cá nhân!!');
-      }}
+      onPress={() => this.onPressItem(item)}
       subtitle={item.subtitle}
-      leftAvatar={{source: {uri: item.avatar_url}}}
+      leftAvatar={{ source: { uri: item.avatar_url } }}
       bottomDivider
       chevron
     />
   );
 
   render() {
-    var {search} = this.state;
-    const list = [
-      {
-        name: 'Amy Farha',
-        avatar_url:
-          'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-        subtitle: 'Vice President',
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url:
-          'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman',
-      },
-    ];
+    var { search } = this.state;
 
     return (
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <View>
           <SearchBar
             round
-            placeholder="Tìm kiếm"
+            placeholder="Tên"
             onChangeText={this.updateSearch}
             value={search}
-            searchIcon={{size: 30}}
-            inputStyle={{backgroundColor: '#CBCAC9', color: '#2D2D2D'}}
+            searchIcon={{ size: 30 }}
+            inputStyle={{ backgroundColor: '#CBCAC9', color: '#2D2D2D' }}
             containerStyle={{
               backgroundColor: 'white',
               padding: 10,
               justifyContent: 'center',
             }}
-            inputContainerStyle={{backgroundColor: '#CBCAC9'}}
+            inputContainerStyle={{ backgroundColor: '#CBCAC9' }}
           />
         </View>
         <View
@@ -130,7 +116,7 @@ export default class Employee extends Component {
         <View>
           <FlatList
             keyExtractor={this.keyExtractor}
-            data={list}
+            data={this.props.data}
             renderItem={this.renderItem}
           />
         </View>

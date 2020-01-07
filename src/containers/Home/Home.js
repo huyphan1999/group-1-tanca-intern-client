@@ -17,7 +17,7 @@ import Position from '../Add/Company/Position.container';
 import Department from '../Add/Company/Department.container';
 import Branch from '../Add/Company/Branch.container';
 import ObjectAdd from '../Add/Company/ObjectAdd';
-import Employee from '../Add/Employee/Employee';
+import Employee from '../Add/Employee/Employee.container';
 import AddEmployee from '../Add/Employee/AddEmployee';
 import MultiSelect from '../MultiSelect';
 import ObjectDetails from '../Add/Company/ObjectDetails';

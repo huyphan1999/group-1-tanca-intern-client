@@ -1,41 +1,13 @@
 import React from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 
-import { navigate } from '../../../utils/navigate';
-import { postRequest } from '../../../actions/post.actions';
-const DATA = [
-    {
-        id: 'CA_VAN_PHONG',
-        title: 'Ca Văn Phòng',
-        timeStart: '8:30',
-        timeEnd: '17:30',
-        branch: 'VP Công ty',
-        uptime: [true, false, true, true, true, false,true]
-    },
-    {
-        id: 'CA_VAN_PHONG1',
-        title: 'Ca Văn Phòng',
-        timeStart: '8:30',
-        timeEnd: '17:30',
-        branch: 'VP Công ty',
-        uptime: [true, false, false, true, true, false,true]
+import { getParams, getParamsHeader } from '../../../utils/index';
 
-    },
-    {
-        id: 'CA_VAN_PHONG2',
-        title: 'Ca Văn Phòng',
-        timeStart: '8:30',
-        timeEnd: '17:30',
-        branch: 'VP Công ty',
-        uptime: [false, false, true, false, true, false,true]
-    },
-];
-
-function Item({ data, onSave }) {
+function Item({ data, onPress }) {
     var time = `${data.timeStart}-${data.timeEnd}`
     return (
         <TouchableOpacity style={styles.txtContent}
-            onPress={() => navigate('ShiftDetail', { data, onPress: data => onSave(data) })} >
+            onPress={() => onPress(data)} >
             <Text >{data.title}</Text>
             <Text>{time}</Text>
         </TouchableOpacity>
@@ -44,17 +16,37 @@ function Item({ data, onSave }) {
 
 export default class Shift extends React.Component {
 
-    onAddShift = data => {
-        this.props.dispatch(postRequest('SHIFT_ADD', data))
-        console.log('Add SAVE CALLBACK');
-        console.log(data);
+    static navigationOptions = ({ navigate, navigation }) => {
+        const params = getParamsHeader(navigation);
+        return {
+            headerRight: (
+                <TouchableOpacity
+                    style={{ paddingRight: 15 }}
+                    onPress={() => params.onPressHeader()}>
+                    <Image
+                        source={require('../../image/add_object.png')}
+                        style={{ width: 20, height: 20 }}
+                        tintColor='white'
+                    />
+                </TouchableOpacity>
+            ),
+            headerTitle: () => (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>
+                        Ca
+                    </Text>
+                </View>
+            ),
+        };
+
     }
+
     render() {
         return (
             <SafeAreaView style={styles.container}>
                 <FlatList
-                    data={DATA}
-                    renderItem={({ item }) => <Item data={item}  onSave={(data) => this.onAddShift(data)} />}
+                    data={this.props.data}
+                    renderItem={({ item }) => <Item data={item} onPress={(data) => this.onPressItem(data)} />}
                     keyExtractor={item => item.id}
                     style={{ borderBottomWidth: 1, paddingLeft: 10, }}
                 />

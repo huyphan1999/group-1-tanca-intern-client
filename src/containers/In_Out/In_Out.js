@@ -8,6 +8,7 @@ import {
     SafeAreaView,
     TouchableOpacity
 } from 'react-native';
+
 import { connect } from 'react-redux';
 
 import {IN_REQUESTING} from '../../actionTypes/in.actiontypes';

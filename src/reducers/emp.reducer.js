@@ -4,7 +4,20 @@ const initialState = {
     requesting: false,
     successful: false,
     message: [],
-    data:[],
+    data: [
+        {
+            name: 'Amy Farha',
+            avatar_url:
+                'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+            subtitle: 'Vice President',
+        },
+        {
+            name: 'Chris Jackson',
+            avatar_url:
+                'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+            subtitle: 'Vice Chairman',
+        },
+    ],
 }
 
 const reducer = function companyReducer(state = initialState, action) {
@@ -20,7 +33,7 @@ const reducer = function companyReducer(state = initialState, action) {
                 ...state,
                 requesting: false,
                 successful: true,
-                employees: action.data
+                data: action.data
             }
 
         case EMP.EMP_ERROR:
@@ -47,7 +60,21 @@ const reducer = function companyReducer(state = initialState, action) {
                 ...state,
                 requesting: false,
             }
-        default : return state
+
+        case EMP.EMP_INFOR:
+            return {
+                ...state,
+                requesting: true,
+            }
+        case EMP.EMP_INFOR_SUCESS:
+            return {
+                ...state,
+                requesting: false,
+                infor: action.data
+            }
+
+
+        default: return state
     }
 }
 

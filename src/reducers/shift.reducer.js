@@ -4,7 +4,33 @@ const initialState = {
     requesting: false,
     successful: false,
     message: [],
-    data:[],
+    data: [
+        {
+            id: 'CA_VAN_PHONG',
+            title: 'Ca Văn Phòng',
+            timeStart: '8:30',
+            timeEnd: '17:30',
+            branch: 'VP Công ty',
+            uptime: [true, false, true, true, true, false, true]
+        },
+        {
+            id: 'CA_VAN_PHONG1',
+            title: 'Ca Văn Phòng',
+            timeStart: '8:30',
+            timeEnd: '17:30',
+            branch: 'VP Công ty',
+            uptime: [true, false, false, true, true, false, true]
+    
+        },
+        {
+            id: 'CA_VAN_PHONG2',
+            title: 'Ca Văn Phòng',
+            timeStart: '8:30',
+            timeEnd: '17:30',
+            branch: 'VP Công ty',
+            uptime: [false, false, true, false, true, false, true]
+        },
+    ],
 }
 
 const reducer = function companyReducer(state = initialState, action) {

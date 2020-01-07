@@ -47,17 +47,39 @@ function* getFlow(url, id) {
 
 }
 
+function* getInforFlow(url, id) {
+    console.log('GET INFOR')
+    try {
+        const res = yield call(getRequest, url, id);
+        var { data } = res
+        yield put({ type: EMP.EMP_INFOR_SUCESS, data });
+    }
+    catch (error) {
+        yield put({ type: EMP.EMP_ERROR, error })
+    }
+
+    return true
+
+}
+
+
 
 export function* getEmpWatchcer() {
     while (true) {
 
         console.log('Watching GET on EMP')
 
-        const action = yield take([EMP.EMP_REQUESTING, EMP.EMP_DEL]);
+        const action = yield take([EMP.EMP_REQUESTING, EMP.EMP_DEL,EMP.EMP_INFOR]);
 
+        if (action.type==EMP.EMP_INFOR) {
+            yield fork(getInforFlow, URL[action.type], action.id)
+        }
+        else{
+            yield fork(getFlow, URL[action.type], action.id)
+        }
         console.log('Watched  GET on EMP')
         console.log(URL[action.type])
-        yield fork(getFlow, URL[action.type], action.id)
+       
 
     }
 }
