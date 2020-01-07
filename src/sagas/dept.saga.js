@@ -1,7 +1,7 @@
 import { take, fork, call, put } from 'redux-saga/effects'
 
-// Our SHIFT actiontypes
-import * as SHIFT from '../actionTypes/shift.actiontypes'
+// Our DEPT actiontypes
+import * as COMPANY from '../actionTypes/company.actiontypes'
 import * as URL from './url.constant';
 
 // So that we can modify our User piece of state
@@ -15,9 +15,9 @@ function* postFlow(newdata, url) {
 
     try {
         const res = yield call(postRequest, url, newdata);
-        yield put({ type: SHIFT.SHIFT_REQUESTING })
+        yield put({ type: COMPANY.DEPT_REQUESTING })
     } catch (error) {
-        yield put({ type: SHIFT.SHIFT_ERROR, error })
+        yield put({ type: COMPANY.DEPT_ERROR, error })
     }
     // return the token 
     return true
@@ -29,17 +29,17 @@ function* getFlow(url, id) {
     try {
         const res = yield call(getRequest, url, id);
         if (id) {
-            yield put({ type: SHIFT.SHIFT_REQUESTING })
+            yield put({ type: COMPANY.DEPT_REQUESTING })
 
         } else {
             var { data } = res
-            console.log('Shifts reponse')
+            console.log('Branchs reponse')
             console.log(data)
-            yield put({ type: SHIFT.SHIFT_SUCCESS, data });
+            yield put({ type: COMPANY.DEPT_SUCCESS, data });
         }
 
     } catch (error) {
-        yield put({ type: SHIFT.SHIFT_ERROR, error })
+        yield put({ type: COMPANY.DEPT_ERROR, error })
     }
 
     return true
@@ -47,28 +47,28 @@ function* getFlow(url, id) {
 }
 
 
-export function* getShiftWatchcer() {
+export function* getDeptWatchcer() {
     while (true) {
 
-        console.log('Watching GET on SHIFT')
+        console.log('Watching GET on DEPT')
 
-        const action = yield take([SHIFT.SHIFT_REQUESTING, SHIFT.SHIFT_DEL]);
+        const action = yield take([COMPANY.DEPT_REQUESTING, COMPANY.DEPT_DEL]);
 
-        console.log('Watched  GET on SHIFT')
-        console.log(URL[action.type])
+        console.log('Watched  GET on DEPT')
+        
         yield fork(getFlow, URL[action.type], action.id)
 
     }
 }
 
-export function* postShiftWatchcer() {
+export function* postDeptWatchcer() {
     while (true) {
-        console.log('Watching POST on SHIFT')
+        console.log('Watching POST on DEPT')
 
-        const action = yield take([SHIFT.SHIFT_ADD, SHIFT.SHIFT_EDIT])
+        const action = yield take([COMPANY.DEPT_ADD, COMPANY.DEPT_EDIT])
 
-        console.log('Watched  POST on SHIFT')
-        console.log(action)
+        console.log('Watched  POST on DEPT')
+
         yield fork(postFlow, action.newdata, URL[action.type])
 
     }

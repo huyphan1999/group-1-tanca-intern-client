@@ -8,6 +8,7 @@ import {
     SafeAreaView,
     TouchableOpacity
 } from 'react-native';
+
 import { connect } from 'react-redux';
 
 import {IN_REQUESTING} from '../../actionTypes/in.actiontypes';
@@ -22,14 +23,7 @@ class Input_OutPut_Activity extends Component {
     constructor(props) {
         super(props);
     }
-
-    componentDidUpdate = (prevProps, prevState) => {
-      console.log('Is in updated')
-    };
-    
-
     render() {
-        console.log(this.props)
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 {

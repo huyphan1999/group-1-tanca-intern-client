@@ -7,7 +7,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 //Screens
 import LoginScreen from '../containers/Login/Login.container';
 import SignupScreen from '../containers/Signup/Signup.container';
-import AuthLoading from '../containers/AuthLoading/AuthLoadingContainer';
+import AuthLoading from '../containers/AuthLoading/AuthLoading.container';
 import HomeApp from '../containers/Home/Home';
 
 const AuthStack = createStackNavigator(

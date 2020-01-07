@@ -1,21 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react'
 import { SafeAreaView, View, FlatList, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
-
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { getParams, getParamsHeader } from '../../../utils/index';
 
-function Item({ data, onPress }) {
-    var time = `${data.timeStart}-${data.timeEnd}`
+function Item({ data,onPress }) {
     return (
-        <TouchableOpacity style={styles.txtContent}
+
+
+        <TouchableOpacity style={styles.item}
             onPress={() => onPress(data)} >
-            <Text >{data.title}</Text>
-            <Text>{time}</Text>
+            <Text style={styles.title}>{data.title}</Text>
+            <Icon
+                name='chevron-right'
+                size={20}
+                color='#aaafb3'
+                style={styles.btnIcon}
+            />
+
         </TouchableOpacity>
+
     );
 }
 
-export default class Shift extends React.Component {
-
+export default class ObjectList extends Component {
+    
+    
     static navigationOptions = ({ navigate, navigation }) => {
         const params = getParamsHeader(navigation);
         return {
@@ -33,7 +42,7 @@ export default class Shift extends React.Component {
             headerTitle: () => (
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>
-                        Ca
+                        Nhân viên
                     </Text>
                 </View>
             ),
@@ -41,40 +50,30 @@ export default class Shift extends React.Component {
 
     }
 
+    
     render() {
         return (
             <SafeAreaView style={styles.container}>
                 <FlatList
                     data={this.props.data}
-                    renderItem={({ item }) => <Item data={item} onPress={(data) => this.onPressItem(data)} />}
+                    renderItem={({ item }) => <Item data={item}  onPress={(data) => this.onPressItem(data)}/>}
                     keyExtractor={item => item.id}
-                    style={{ borderBottomWidth: 1, paddingLeft: 10, }}
                 />
             </SafeAreaView>
         )
-    };
+    }
 }
-}
-
-
 const styles = StyleSheet.create({
     container: {
-        marginTop: 10,
+        flex: 1
     },
     item: {
-        backgroundColor: '#f9c2ff',
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 15,
+        borderBottomWidth: 0.4,
     },
     title: {
-        fontSize: 32,
-    },
-    txtContent: {
-        padding: 12,
         fontSize: 16,
-        borderBottomWidth: 0.5,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
     },
 });

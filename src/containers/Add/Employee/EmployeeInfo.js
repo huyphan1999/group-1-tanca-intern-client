@@ -82,6 +82,7 @@ class EmployeeInfo extends Component {
     getParams(this.props).onPress(this.state.data)
   };
 
+  
   static navigationOptions = ({navigation}) => {
     const params = getParamsHeader(navigation);
 

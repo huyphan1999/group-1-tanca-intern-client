@@ -2,6 +2,7 @@ import { take, fork, call, put } from 'redux-saga/effects'
 
 // Our EMP actiontypes
 import * as EMP from '../actionTypes/emp.actiontypes'
+import * as URL from './url.constant';
 
 // So that we can modify our User piece of state
 
@@ -10,44 +11,57 @@ import { postRequest, getRequest } from '../utils/request'
 import { navigate } from '../utils/navigate';
 
 
-function* postFlow(newdata, target, url) {
+function* postFlow(newdata, url) {
 
     try {
         const res = yield call(postRequest, url, newdata);
-        yield put({ type: target + '_REQUESTING' })
+        yield put({ type: EMP.EMP_REQUESTING })
     } catch (error) {
-        console.log(target)
-        yield put({ type: target + '_ERROR', error })
-
+        yield put({ type: EMP.EMP_ERROR, error })
     }
     // return the token 
     return true
 }
 
 
-function* getFlow(target, url, id) {
+function* getFlow(url, id) {
 
     try {
-        console.log('Get in EMP  ' + target)
         const res = yield call(getRequest, url, id);
         if (id) {
-            var { data } = res
-            yield put({ type: target + '_SUCCESS', data });
+            yield put({ type: EMP.EMP_REQUESTING })
 
         } else {
-            yield put({ type: target + '_REQUESTING' })
+            var { data } = res
+            console.log('Employee reponse')
+            console.log(data)
+            yield put({ type: EMP.EMP_SUCCESS, data });
         }
 
-    } catch (error) {
-
-        console.log(target)
-        yield put({ type: target + '_ERROR', error })
-
+    }
+    catch (error) {
+        yield put({ type: EMP.EMP_ERROR, error })
     }
 
     return true
 
 }
+
+function* getInforFlow(url, id) {
+    console.log('GET INFOR')
+    try {
+        const res = yield call(getRequest, url, id);
+        var { data } = res
+        yield put({ type: EMP.EMP_INFOR_SUCESS, data });
+    }
+    catch (error) {
+        yield put({ type: EMP.EMP_ERROR, error })
+    }
+
+    return true
+
+}
+
 
 
 export function* getEmpWatchcer() {
@@ -55,11 +69,17 @@ export function* getEmpWatchcer() {
 
         console.log('Watching GET on EMP')
 
-        const action = yield take([EMP.EMP_REQUESTING, EMP.EMP_DEL]);
+        const action = yield take([EMP.EMP_REQUESTING, EMP.EMP_DEL,EMP.EMP_INFOR]);
 
+        if (action.type==EMP.EMP_INFOR) {
+            yield fork(getInforFlow, URL[action.type], action.id)
+        }
+        else{
+            yield fork(getFlow, URL[action.type], action.id)
+        }
         console.log('Watched  GET on EMP')
-
-        yield fork(getFlow, action.target, action.url, action.id)
+        console.log(URL[action.type])
+       
 
     }
 }
@@ -71,8 +91,8 @@ export function* postEmpWatchcer() {
         const action = yield take([EMP.EMP_ADD, EMP.EMP_EDIT])
 
         console.log('Watched  POST on EMP')
-
-        yield fork(postFlow, action.newdata, action.target, action.url)
+        console.log(action)
+        yield fork(postFlow, action.newdata, URL[action.type])
 
     }
 }

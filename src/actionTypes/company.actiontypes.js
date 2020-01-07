@@ -15,6 +15,7 @@ export const DEPT_ADD = 'DEPT_ADD'
 export const DEPT_DEL = 'DEPT_DEL'
 export const DEPT_EDIT = 'DEPT_EDIT'
 
+
 // Request of POSITION
 export const POS_REQUESTING = 'POS_REQUESTING'
 export const POS_SUCCESS = 'POS_SUCCESS'
