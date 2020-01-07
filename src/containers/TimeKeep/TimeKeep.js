@@ -64,22 +64,32 @@ function Item({ data }) {
 
 export default class Timekeep_Activity extends Component {
 
-    static navigationOptions =
-        {
-            title: 'Lịch sử chấm công'
-        }
+    static navigationOptions = () => ({
+
+        headerTitle: () => (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ color: 'white', fontSize: 18 }}>
+                    Lịch sử chấm công
+                 </Text>
+            </View>
+        ),
+    });
+   
 
     render() {
+       
 
         return (
-            this.props.isLoading
-                ?
+           
+                this.props.isLoading ?
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <ActivityIndicator size="large" color="#00ff00" />
                     <StatusBar barStyle="default" />
                 </View>
                 :
                 <SafeAreaView style={styles.container}>
+                  
+
                     <SectionList
                         sections={DATA}
                         keyExtractor={(item, index) => item + index}
@@ -90,6 +100,8 @@ export default class Timekeep_Activity extends Component {
                         stickySectionHeadersEnabled={true}
                     />
                 </SafeAreaView>
+            
+           
         );
     }
 }

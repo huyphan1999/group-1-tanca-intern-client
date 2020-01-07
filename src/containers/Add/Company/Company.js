@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { navigate } from '../../../utils/navigate'
+import { navigate } from '../../../utils/navigate';
 class Choose extends Component {
     render() {
         return (
@@ -51,6 +51,7 @@ export default class Company extends Component {
             </View>
 
         ),
+       
     });
 
     render() {

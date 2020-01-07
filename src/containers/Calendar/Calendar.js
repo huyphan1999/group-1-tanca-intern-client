@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { ButtonGroup } from 'react-native-elements';
 import {
   StyleSheet,
   Text,
@@ -67,22 +68,56 @@ function Item({ data }) {
 
 export default class Calendar_Activity extends Component {
 
-  static navigationOptions =
-    {
-      title: 'Lịch công'
+  static navigationOptions = () => ({
+
+    headerTitle: () => (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ color: 'white', fontSize: 18 }}>
+        Lịch công
+                 </Text>
+      </View>
+    ),
+  });
+  constructor() {
+    super()
+    this.state = {
+      selectedIndex: 2
     }
+    this.updateIndex = this.updateIndex.bind(this)
+  }
+  updateIndex(selectedIndex) {
+    this.setState({ selectedIndex })
+  }
+
+  
+  
 
   render() {
     console.log(this.props)
+    const buttons = ['Ngày công', 'Công việc'];
+    const { selectedIndex } = this.state
     return (
-      this.props.isLoading
-        ?
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <ActivityIndicator size="large" color="#00ff00" />
-          <StatusBar barStyle="default" />
-        </View>
-        :
+      // this.props.isLoading
+      //   ?
+      //   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      //     <ActivityIndicator size="large" color="#00ff00" />
+      //     <StatusBar barStyle="default" />
+      //   </View>
+      //   :
         <SafeAreaView style={styles.container}>
+        <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
+          <ButtonGroup
+            onPress={this.updateIndex}
+            selectedIndex={selectedIndex}
+            selectedButtonStyle={backgroundColor='#00ff00'}
+            buttons={buttons}
+            containerStyle={{ height: 30, width: 300, borderRadius: 15, borderColor:'#00ff00'}} 
+           
+            />
+
+          </View>
+       
+            
           <SectionList
             sections={DATA}
             keyExtractor={(item, index) => item + index}
@@ -120,6 +155,7 @@ const styles = StyleSheet.create({
   data: {
     fontSize: 24,
   },
+  
 
 });
 

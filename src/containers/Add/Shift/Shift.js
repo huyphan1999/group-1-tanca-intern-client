@@ -54,7 +54,7 @@ export default class Shift extends React.Component {
         )
     };
 }
-}
+
 
 
 const styles = StyleSheet.create({
