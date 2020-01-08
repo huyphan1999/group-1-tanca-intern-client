@@ -19,6 +19,7 @@ import Branch from '../Add/Company/Branch.container';
 import ObjectAdd from '../Add/Company/ObjectAdd';
 import Employee from '../Add/Employee/Employee.container';
 import AddEmployee from '../Add/Employee/AddEmployee';
+// import ObjectDetails from '../Add/Company/ObjectDetails';
 import MultiSelect from '../MultiSelect';
 import ObjectDetails from '../Add/Company/ObjectDetails';
 
@@ -26,13 +27,17 @@ const Input_OutputTab = createStackNavigator(
   {
     Input_Output: Input_Output_Activity,
   },
+  
   {
+    navigationOptions: {
+      tabBarLabel: 'Vào/Ra',
+    },
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#0091EA',
+        backgroundColor:'#0bd967',
       },
       headerTintColor: '#fff',
-      title: 'Input_Output Tab',
+      title: ' Input_OutputTab'
     },
   },
 );
@@ -41,12 +46,15 @@ const Calendar_Tab = createStackNavigator(
     Calendar: Calendar_Activity,
   },
   {
+    navigationOptions: {
+      tabBarLabel: 'Lịch công',
+    },
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#0091EA',
+        backgroundColor: '#0bd967',
       },
       headerTintColor: '#fff',
-      title: 'Calendar Tab',
+      title: ' Calendar_Tab'
     },
   },
 );
@@ -55,12 +63,15 @@ const TimeKeep_Tab = createStackNavigator(
     TimeKeep: TimeKeep_Activity,
   },
   {
+    navigationOptions: {
+      tabBarLabel: 'Chấm công',
+    },
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#0091EA',
+        backgroundColor: '#0bd967',
       },
       headerTintColor: '#fff',
-      title: 'TimeKeep Tab',
+      title: ' TimeKeep_Tab'
     },
   },
 );
@@ -83,12 +94,17 @@ const Add_Tab = createStackNavigator(
     ObjectDetails: ObjectDetails
   },
   {
+    navigationOptions: {
+      tabBarLabel: 'Thêm',
+    },
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#0091EA',
+        backgroundColor: '#0bd967',
       },
       headerTintColor: '#FFFFFF',
-      title: 'Add Tab',
+      title:' Add_Tab'
+      
+
     },
   },
 );
@@ -109,6 +125,8 @@ const Home = createBottomTabNavigator(
             <Image
               source={require('../image/in_output.png')}
               style={{ width: 20, height: 20 }}
+              tintColor={tintColor}
+              focused={focused}
             />
           );
         }
@@ -117,6 +135,8 @@ const Home = createBottomTabNavigator(
             <Image
               source={require('../image/calendar.png')}
               style={{ width: 20, height: 20 }}
+              tintColor={tintColor}
+              focused={focused}
             />
           );
         }
@@ -125,6 +145,8 @@ const Home = createBottomTabNavigator(
             <Image
               source={require('../image/time_keep.png')}
               style={{ width: 20, height: 20 }}
+              tintColor={tintColor}
+              focused={focused}
             />
           );
         }
@@ -133,13 +155,16 @@ const Home = createBottomTabNavigator(
             <Image
               source={require('../image/add.png')}
               style={{ width: 20, height: 20 }}
+              tintColor={tintColor}
+              focused={focused}
             />
           );
         }
       },
     }),
     tabBarOptions: {
-      activeTintColor: '#FF6F00',
+      
+      activeTintColor: '#0bd967',
       inactiveTintColor: '#263238',
     },
   },

@@ -111,6 +111,7 @@ export default class Add extends Component {
               containerStyle={{flex: 2, marginLeft: 20}}
               source={require('../image/admin.png')}
               showEditButton
+              
             />
 
             <Text style={{paddingTop: 10, fontSize: 18}}>

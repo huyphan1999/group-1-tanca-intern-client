@@ -2,10 +2,8 @@
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import React, { Component } from 'react';
 import {
-    StyleSheet,
     Text,
     View,
-    SafeAreaView,
     TouchableOpacity
 } from 'react-native';
 
@@ -16,16 +14,25 @@ import { getData } from '../../selectors';
 
 class Input_OutPut_Activity extends Component {
 
-    static navigationOptions =
-        {
-            title: 'Vào/Ra ca',
-        };
+    static navigationOptions = () => ({
+       
+        headerTitle: () => (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ color: 'white', fontSize: 18 }}>
+                    Vào - Ra Ca
+                 </Text>
+            </View>
+        ),
+    });
+  
 
     constructor(props) {
         super(props);
     }
     render() {
         return (
+           
+
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 {
                     this.props.isIn ?
@@ -44,7 +51,7 @@ class Input_OutPut_Activity extends Component {
                             <Icon
                                 name='user-lock'
                                 size={100}
-                                color='#40ff00'
+                                color='#0bd967'
                             />
                             <Text style={{ marginTop: 10, }}>Vào ca</Text>
                         </TouchableOpacity>
@@ -60,4 +67,5 @@ class Input_OutPut_Activity extends Component {
 const mapStateToProps = (state) => ({
     isIn: state.user.isIn
 });
+
 export default connect(mapStateToProps, null)(Input_OutPut_Activity)

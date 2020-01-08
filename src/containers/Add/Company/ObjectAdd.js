@@ -16,9 +16,6 @@ export default class ObjectAdd extends Component {
     }
 
     onPressHeader = () => {
-        this.setState({
-            spinner: !this.state.spinner
-          });
         getParams(this.props).onPress(this.state)
     };
 
@@ -56,23 +53,7 @@ export default class ObjectAdd extends Component {
         return (
 
             <View style={{ flex: 1, backgroundColor: '#e3e7eb' }}>
-                <Spinner
-                    visible={this.state.spinner}
-                    textContent={'Loading...'}
-                />
-                <View style={{
-                    backgroundColor: 'white',
-                    flexDirection: 'row', justifyContent: 'flex-start', paddingLeft: 10, paddingRight: 10, fontSize: 16, borderBottomWidth: 0.5, alignItems: 'center'
-                }}>
-
-                    <Text >Vùng:</Text>
-                    <TextInput
-                        style={{ height: 40, fontSize: 14, paddingLeft: 42 }}
-                        placeholder="Vùng"
-                        onChangeText={(Name) => this.setState({ Name })}
-                        value={this.state.Name}
-                    />
-                </View>
+                
                 <View style={{
                     backgroundColor: 'white',
                     flexDirection: 'row', justifyContent: 'flex-start', paddingLeft: 15, paddingRight: 10, fontSize: 16, borderBottomWidth: 0.5, alignItems: 'center'
