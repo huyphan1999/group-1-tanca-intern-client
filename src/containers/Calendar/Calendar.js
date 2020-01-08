@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import moment from 'moment'
 import {
   StyleSheet,
   Text,
@@ -30,8 +31,8 @@ const DATA = [
 ];
 
 function Item({ data }) {
-  return (
 
+  return (
     <TouchableOpacity
       style={styles.item}
     >
@@ -47,7 +48,7 @@ function Item({ data }) {
           size={10}
           style={{ paddingRight: 10, }}
         />
-        <Text style={{ paddingRight: 10, fontWeight: 'bold' }}>{data.number}</Text>
+        <Text style={{ paddingRight: 10, fontWeight: 'bold' }}>00:00-00:00</Text>
         <Icon
           name='chevron-right'
           size={16}
@@ -74,6 +75,7 @@ export default class Calendar_Activity extends Component {
 
   render() {
     console.log(this.props)
+    moment.locale('vi')
     return (
       this.props.isLoading
         ?
@@ -84,11 +86,11 @@ export default class Calendar_Activity extends Component {
         :
         <SafeAreaView style={styles.container}>
           <SectionList
-            sections={DATA}
+            sections={this.props.data}
             keyExtractor={(item, index) => item + index}
             renderItem={({ item }) => <Item data={item} />}
             renderSectionHeader={({ section: { date } }) => (
-              <Text style={styles.header}>{date}</Text>
+              <Text style={styles.header}>{moment(date).locale('vi').format('LLLL')}</Text>
             )}
             stickySectionHeadersEnabled={true}
           />

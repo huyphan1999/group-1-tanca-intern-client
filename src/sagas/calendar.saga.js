@@ -6,15 +6,16 @@ import {
 } from '../actionTypes/calendar.actiontypes'
 
 import { getRequest } from '../utils/request'
+import { transformSection } from '../utils';
 
-const calendarUrl = 'https://reqres.in/api/register'
+const calendarUrl = 'http://p1.tanca.vn/api/shift/list'
 
 function* getCalendarFlow() {
     try {
         const res = yield call(getRequest, calendarUrl);
-        var {data}=res;
-
-        yield put({ type: CALENDAR_SUCCESS,data })
+        var { data } = res;
+        let transdata = transformSection(data)
+        yield put({ type: CALENDAR_SUCCESS, data: transdata })
     } catch (error) {
         yield put({ type: CALENDAR_ERROR, error })
     }

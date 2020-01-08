@@ -24,7 +24,6 @@ class BranchContainer extends ObjectList {
         navigate('ObjectDetails', { data, onPress: data => this.onSaveBranch(data), onDel: id => this.onDelBranch(id) })
     }
 
-
     onAddBranch = data => {
         this.props.dispatch(postRequest(COMPANY.BRANCH_ADD, data))
         console.log('Add SAVE CALLBACK');

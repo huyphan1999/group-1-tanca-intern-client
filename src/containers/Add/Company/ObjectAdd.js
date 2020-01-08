@@ -2,26 +2,37 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image, ScrollView, Alert, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Fontisto';
 import { getParams, getParamsHeader } from '../../../utils/index';
+import Spinner from 'react-native-loading-spinner-overlay';
+
 export default class ObjectAdd extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             Name: '',
-            Note: ''
+            Note: '',
+            spinner: false
         }
     }
 
-    componentDidMount = () => {
-        this.props.navigation.setParams({ onPressHeader: this.onPressHeader });
-    };
-
     onPressHeader = () => {
+        this.setState({
+            spinner: !this.state.spinner
+          });
         getParams(this.props).onPress(this.state)
     };
 
+    componentDidMount = () => {
+        console.log('Did mount')
+        this.props.navigation.setParams({ onPressHeader: this.onPressHeader });
+    };
 
-    static navigationOptions = ({navigation}) => ({
+    componentDidUpdate = (prevProps, prevState) => {
+        console.log('Did update')
+    };
+
+
+    static navigationOptions = ({ navigation }) => ({
 
         headerRight: (
             <TouchableOpacity
@@ -43,7 +54,12 @@ export default class ObjectAdd extends Component {
 
     render() {
         return (
+
             <View style={{ flex: 1, backgroundColor: '#e3e7eb' }}>
+                <Spinner
+                    visible={this.state.spinner}
+                    textContent={'Loading...'}
+                />
                 <View style={{
                     backgroundColor: 'white',
                     flexDirection: 'row', justifyContent: 'flex-start', paddingLeft: 10, paddingRight: 10, fontSize: 16, borderBottomWidth: 0.5, alignItems: 'center'

@@ -31,7 +31,7 @@ export default class ObjectList extends Component {
             headerRight: (
                 <TouchableOpacity
                     style={{ paddingRight: 15 }}
-                    onPress={() => params.onPressHeader()}>
+                    onPress={params&&params.onPressHeader} >
                     <Image
                         source={require('../../image/add_object.png')}
                         style={{ width: 20, height: 20 }}

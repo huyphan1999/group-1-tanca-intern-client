@@ -1,30 +1,10 @@
-// export function postRequest(url, data) {
-//   return new Promise((resolve) => {
-//     fetch(url, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         /*'Authorization':`Bearer ${global.token}`*/
-//       },
-//       body: JSON.stringify(data),
-//     })
-//     .then(response => {
-//       response.json().then((json) => {
-//         resolve({
-//           json,
-//           response
-//         })
-//       });
-//     })
-//   });
-// }
 
 export async function postRequest(url, data) {
   const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      /*'Authorization':`Bearer ${global.token}`*/
+      'Authorization':`Bearer ${global.token}`
 
     },
     body: JSON.stringify(data),

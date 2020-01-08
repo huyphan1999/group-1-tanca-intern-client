@@ -12,6 +12,7 @@ import {
 import { connect } from 'react-redux';
 
 import {IN_REQUESTING} from '../../actionTypes/in.actiontypes';
+import { getData } from '../../selectors';
 
 class Input_OutPut_Activity extends Component {
 
