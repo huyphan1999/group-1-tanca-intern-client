@@ -74,7 +74,7 @@ export default class Calendar_Activity extends Component {
     headerTitle: () => (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text style={{ color: 'white', fontSize: 18 }}>
-        Lịch công
+          Lịch công
                  </Text>
       </View>
     ),
@@ -90,41 +90,41 @@ export default class Calendar_Activity extends Component {
     this.setState({ selectedIndex })
   }
 
-  
-  
+
+
 
   render() {
     console.log(this.props)
     const buttons = ['Ngày công', 'Công việc'];
     const { selectedIndex } = this.state
     return (
-      // this.props.isLoading
-      //   ?
-      //   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      //     <ActivityIndicator size="large" color="#00ff00" />
-      //     <StatusBar barStyle="default" />
-      //   </View>
-      //   :
+      this.props.isLoading?
+
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
+          <ActivityIndicator size="large" color="#00ff00" />
+          <StatusBar barStyle="default" />
+        </View>
+
+        :
         <SafeAreaView style={styles.container}>
-        <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
-          <ButtonGroup
-            onPress={this.updateIndex}
-            selectedIndex={selectedIndex}
-            selectedButtonStyle={backgroundColor='#00ff00'}
-            buttons={buttons}
-            containerStyle={{ height: 30, width: 300, borderRadius: 15, borderColor:'#00ff00'}} 
-           
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center',maxHeight:80 }}>
+            <ButtonGroup
+              onPress={this.updateIndex}
+              selectedIndex={selectedIndex}
+              selectedButtonStyle={backgroundColor = '#00ff00'}
+              buttons={buttons}
+              containerStyle={{ height: 30, width: 300, borderRadius: 15, borderColor: '#00ff00' }}
+
             />
 
           </View>
-       
-            
+
           <SectionList
             sections={this.props.data}
             keyExtractor={(item, index) => item + index}
             renderItem={({ item }) => <Item data={item} />}
             renderSectionHeader={({ section: { date } }) => (
-              <Text style={styles.header}>{moment(date).locale('vi').format('LLLL')}</Text>
+              <Text style={styles.header}>{date}</Text>
             )}
             stickySectionHeadersEnabled={true}
           />
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   data: {
     fontSize: 24,
   },
-  
+
 
 });
 

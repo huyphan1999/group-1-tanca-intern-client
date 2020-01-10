@@ -14,6 +14,7 @@ import initStore from './store/store.config';
 import { Provider } from 'react-redux';
 import NavigationService from './navigation/NavigationService';
 import Home from './containers/Home/Home';
+import Navigation from './navigation/index';
 
 
 
@@ -25,7 +26,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Home ref={navigatorRef => {
+        <Navigation ref={navigatorRef => {
           NavigationService.setTopLevelNavigator(navigatorRef);
         }} />
       </Provider>

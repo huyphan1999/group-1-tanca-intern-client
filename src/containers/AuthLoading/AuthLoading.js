@@ -7,13 +7,24 @@ import {
   View,
 } from 'react-native';
 
+import {
+  BallIndicator,
+  BarIndicator,
+  DotIndicator,
+  MaterialIndicator,
+  PacmanIndicator,
+  PulseIndicator,
+  SkypeIndicator,
+  UIActivityIndicator,
+  WaveIndicator,
+} from 'react-native-indicators';
+
 export default class AuthLoadingScreen extends React.Component {
   render() {
     console.log('Auth loading render')
     return (
       <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-        <ActivityIndicator size="large" color="#00ff00" />
-        <StatusBar barStyle="default" />
+        <BarIndicator color="green" size={100} count={4}/>
       </View>
     );
   }

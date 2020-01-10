@@ -31,7 +31,7 @@ export default createAppContainer(
   createSwitchNavigator(
     {
       AuthLoading:AuthLoading,
-      Auth:AuthStack,
+      Auth: AuthStack,
       Home: HomeApp
     },
     {

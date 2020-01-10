@@ -31,7 +31,7 @@ const reducer = function UserReducer(state = initialSate, action) {
 
     case USER_UNSET:
       return {
-        ...state, token: null, user: {}
+        ...state, token: null, user: {}, isIn: false
       }
 
     case USER_IN:

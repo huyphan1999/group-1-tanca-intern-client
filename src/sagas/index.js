@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
 import { inWatcher } from './in.saga';
 import { watchAppInitial } from './app.saga';
-import { loginWatchcer } from './login.saga';
+import { loginWatchcer,logoutWatcher } from './login.saga';
 import { signupWatcher } from './signup.saga';
 import { timekeepWatcher } from './timekeep.saga';
 import { calendarWatcher } from './calendar.saga';
@@ -20,7 +20,7 @@ function* rootSaga() {
     //    Auth saga
     loginWatchcer(),signupWatcher(),
 
-    watchAppInitial(),
+    watchAppInitial(),logoutWatcher(),
 
 
     //   Attendance saga

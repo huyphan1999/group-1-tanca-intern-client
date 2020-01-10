@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, CheckBox } from 'react-native';
-import { connect } from 'react-redux';
-import { loginRequest } from '../../actions/login.action';
 import Spinner from 'react-native-loading-spinner-overlay';
+import signupRequest from '../../actions/signup.action';
 
-import { getData } from '../../selectors/index';
-class Login extends Component {
+export default class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
             checked: false,
             name: null,
             phone_number: null
-        }
+        };
     }
     render() {
-        let { name, phone_number } = this.state;
+        console.log(this.state)
         return (
             <View>
                 <Spinner
@@ -23,11 +21,11 @@ class Login extends Component {
                     textContent={'Loading...'}
                 />
                 <View style={styles.textHeader}>
-                    <Text style={styles.txtSign}>Đăng nhập</Text>
+                    <Text style={styles.txtSign}>Đăng kí</Text>
                 </View>
                 <View style={styles.textContent}>
-                    <Text style={{ fontSize: 20 }}>Xin hãy nhập tên cơ quan</Text>
-                    <Text style={{ fontSize: 20 }}>và số điện thoại của bạn</Text>
+                    <Text style={{ fontSize: 20 }}>Nhập tên cơ quan</Text>
+                    <Text style={{ fontSize: 20 }}>Và sô điện thoại của bạn</Text>
                 </View>
                 <View style={styles.textInput}>
                     <View style={styles.textInputContainer} >
@@ -46,22 +44,21 @@ class Login extends Component {
                             value={this.state.phone_number}
                         />
                     </View>
-
+                    <View>
+                    </View>
                     <View style={{ paddingTop: 20 }}>
                         <TouchableOpacity
                             style={styles.loginBtn}
-                            onPress={() => this.props.loginRequest({ name, phone_number })}
+                            onPress={() => this.props.dispatch(signupRequest(this.state.name, this.state.phone_number))}
                         >
-                            <Text>Đăng nhập</Text>
+                            <Text>SIGN UP</Text>
 
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity style={{
                         justifyContent: 'center', alignItems: 'center', paddingTop: 40
-                    }}
-                        onPress={() => this.props.navigation.navigate('SignUp')}
-                    >
-                        <Text style={{ color: '#39e394', fontSize: 16 }}>  Dùng thử miễn phí ngay</Text>
+                    }}>
+                        <Text style={{ color: '#39e394', fontSize: 16 }}> Dùng thử miễn phí ngay</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.checkBox}>
@@ -70,13 +67,15 @@ class Login extends Component {
                             value={this.state.checked}
                             onValueChange={() => this.setState({ checked: !this.state.checked })}
                         />
-                        <Text style={{ marginTop: 5 }}> Tôi đã đọc và đồng ý với các điều khoản</Text>
+                        <Text style={{ marginTop: 5 }}> Tôi đã đọc và đồng ý với các điều khoản </Text>
                     </View>
                 </View>
             </View>
         )
     }
 }
+
+
 
 const styles = StyleSheet.create(
     {
@@ -140,13 +139,3 @@ const styles = StyleSheet.create(
         }
     });
 
-function mapDispatchToProps(dispatch) {
-    return {
-        loginRequest: ({ name, phone_number }) => dispatch(loginRequest({ name, phone_number }))
-    }
-}
-const mapStateToProps = state => ({
-    isLoading: getData(state, 'login', 'requesting')
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login)

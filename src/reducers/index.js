@@ -1,4 +1,5 @@
 import {combineReducers} from 'redux';
+import in_out from './in.reducer';
 import app from './app.reducer';
 import user from './user.reducer';
 import login from './login.reducer';
@@ -13,7 +14,7 @@ import timekeep from './timekeep.reducer';
 
 export default combineReducers({
     app,user,login,signup,
-    shift,emp,
+    shift,emp,in_out,
     calendar,timekeep,
     dept,branch,position
 });

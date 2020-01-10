@@ -1,6 +1,6 @@
 
 // Shift Urls
-export const SHIFT_REQUESTING = 'http://p1.tanca.vn/api/shift/list'
+export const SHIFT_REQUESTING = 'http://p1.tanca.vn/api/shift/listbyuser'
 export const SHIFT_ADD = 'http://p1.tanca.vn/api/shift/register'
 export const SHIFT_DEL = 'SHIFT_DEL'
 export const SHIFT_EDIT = 'SHIFT_EDIT'

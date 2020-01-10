@@ -1,6 +1,4 @@
-import { take, fork, cancel, call, put } from 'redux-saga/effects'
-import { NavigationActions } from 'react-navigation'
-import { SwitchActions } from 'react-navigation';
+import { take, fork, cancel, call, put,takeLatest } from 'redux-saga/effects'
 // Our login actiontypes
 import {
   LOGIN_REQUESTING,
@@ -20,19 +18,21 @@ import { postRequest } from '../utils/request'
 import { USER_UNSET } from '../actionTypes/user.actiontypes'
 import {navigate} from '../utils/navigate';
 
-const loginUrl = 'https://reqres.in/api/login';
+const loginUrl = 'http://p1.tanca.vn/api/auth/login';
 
 function* logout() {
   // dispatches the User_UNSET action
+  console.log('LOG OUT')
   yield put(unsetUSER())
+  navigate('AuthStack')
 }
 
-function* loginFlow(email, password) {
+function* loginFlow(name, phone_number) {
 
   try {
     const res = yield call(postRequest, loginUrl, {
-      name:email,
-      phone_number:password
+      name,
+      phone_number
     });
     yield console.log(`Reponse:${res}`);
 
@@ -63,9 +63,16 @@ console.log(error)
 export function* loginWatchcer() {
   while (true) {
     console.log('Watching LOGIN')
-    const { email, password } = yield take(LOGIN_REQUESTING)
+    const { name, phone_number } = yield take(LOGIN_REQUESTING)
     console.log('Watched LOGIN')
-    console.log({ email, password })
-    yield fork(loginFlow, email, password)
+    console.log({ name, phone_number })
+    yield fork(loginFlow, name, phone_number)
+    console.log('Watched LOGOUT')
+    
   }
+}
+
+export function* logoutWatcher() {
+  console.log('Watching LOG_OUT')
+  yield takeLatest('LOG_OUT',logout)
 }

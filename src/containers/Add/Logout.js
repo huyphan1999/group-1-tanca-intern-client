@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity,Alert } from 'react-native';
-export default class Logout extends Component {
+import { connect } from 'react-redux';
+
+class Logout extends Component {
     static navigationOptions = {
-       
+
         headerTitle: () => (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ color: 'white', fontSize: 18,paddingRight:20 }}>Cài đặt</Text>
@@ -10,8 +12,13 @@ export default class Logout extends Component {
 
         ),
     };
+
+    ProcessLogout=()=>{
+        this.props.dispatch({type:'LOG_OUT'})
+    }
+
     render() {
-        
+
         return (
             <View style={{ flex: 1, backgroundColor:'#e6e6e6',paddingTop:40}}>
                 <TouchableOpacity
@@ -35,3 +42,5 @@ export default class Logout extends Component {
         )
     }
 }
+
+export default connect()(Logout)

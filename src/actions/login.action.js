@@ -3,10 +3,10 @@ import {
 } from '../actionTypes/login.actiontypes'
 
 
-export const loginRequest = function loginRequest({ email, password }) {
+export const loginRequest = function loginRequest({ name, phone_number }) {
   return {
     type: LOGIN_REQUESTING,
-    email,
-    password,
+    name,
+    phone_number,
   }
 }

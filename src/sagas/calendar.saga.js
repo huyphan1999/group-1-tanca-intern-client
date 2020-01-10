@@ -14,7 +14,10 @@ function* getCalendarFlow() {
     try {
         const res = yield call(getRequest, calendarUrl);
         var { data } = res;
+        console.log('CALENDAR DATA')
+        console.log(data)
         let transdata = transformSection(data)
+        console.log(transdata)
         yield put({ type: CALENDAR_SUCCESS, data: transdata })
     } catch (error) {
         yield put({ type: CALENDAR_ERROR, error })

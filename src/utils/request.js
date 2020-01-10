@@ -9,7 +9,6 @@ export async function postRequest(url, data) {
     },
     body: JSON.stringify(data),
   });
-  console.log('Fetched')
   const json = await response.json();
   if (response.ok) {
     return json;

@@ -5,22 +5,32 @@ import {
     SIGNUP_ERROR,
 } from '../actionTypes/signup.actiontypes'
 
-import { postRequest } from '../utils/request'
+import {
+    setUSER,
+  } from '../actions/user.action'
 
-const signupUrl = 'https://reqres.in/api/register'
+import { postRequest } from '../utils/request'
+import { navigate } from '../utils/navigate';
+
+
+const signupUrl = 'http://p1.tanca.vn/api/shop/register'
 
 function* signupFlow(action) {
     try {
-        const { email, password } = action
+        const { name, phone_number } = action
 
-        const res = yield call(postRequest, loginUrl, {
-            email,
-            password
+        const res = yield call(postRequest, signupUrl, {
+            name,
+            phone_number,
+            name:'1237@gmail.com'
         });
-        const { token } = res;
-        yield put(setUSER(token))
+        const { data } = res;
+        yield put(setUSER(data))
+        navigate('Home')
         yield put({ type: SIGNUP_SUCCESS })
+
     } catch (error) {
+        console.log(error)
         yield put({ type: SIGNUP_ERROR, error })
     }
 }

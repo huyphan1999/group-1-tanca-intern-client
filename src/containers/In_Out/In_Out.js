@@ -9,13 +9,17 @@ import {
 
 import { connect } from 'react-redux';
 
-import {IN_REQUESTING} from '../../actionTypes/in.actiontypes';
+import { IN_REQUESTING } from '../../actionTypes/in.actiontypes';
+import {
+    DotIndicator,
+    MaterialIndicator,
+} from 'react-native-indicators';
 import { getData } from '../../selectors';
 
 class Input_OutPut_Activity extends Component {
 
     static navigationOptions = () => ({
-       
+
         headerTitle: () => (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ color: 'white', fontSize: 18 }}>
@@ -24,20 +28,20 @@ class Input_OutPut_Activity extends Component {
             </View>
         ),
     });
-  
+
 
     constructor(props) {
         super(props);
     }
     render() {
         return (
-           
+
 
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 {
                     this.props.isIn ?
 
-                        <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => this.props.dispatch({type:IN_REQUESTING})}>
+                        <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => this.props.dispatch({ type: IN_REQUESTING })}>
                             <Icon
                                 name='user-clock'
                                 size={100}
@@ -45,17 +49,22 @@ class Input_OutPut_Activity extends Component {
                             />
                             <Text style={{ marginTop: 10, }}>Ra ca</Text>
                         </TouchableOpacity>
-
                         :
-                        <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => this.props.dispatch({type:IN_REQUESTING})}>
+                        <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => this.props.dispatch({ type: IN_REQUESTING })}>
                             <Icon
                                 name='user-lock'
                                 size={100}
                                 color='#0bd967'
                             />
-                            <Text style={{ marginTop: 10, }}>Vào ca</Text>
+                            <Text style={{ margin: 10, }}>Vào ca</Text>
                         </TouchableOpacity>
 
+                }
+                {
+                    this.props.isLoading &&
+                    <View style={{height:15}}>
+                        <DotIndicator color='green' />
+                    </View>
                 }
 
             </View>
@@ -65,7 +74,8 @@ class Input_OutPut_Activity extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    isIn: state.user.isIn
+    isIn: state.user.isIn,
+    isLoading: state.in_out.requesting
 });
 
 export default connect(mapStateToProps, null)(Input_OutPut_Activity)
