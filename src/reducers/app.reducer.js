@@ -13,6 +13,7 @@ function appReducer(state = intialState, action) {
       });
     default:
       return state;
+      
   }
 }
 
