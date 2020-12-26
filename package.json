@@ -1,5 +1,5 @@
 {
-  "name": "tancaIntern",
+  "name": "app",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -12,7 +12,9 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.3",
     "@react-native-community/datetimepicker": "^2.1.0",
+    "babel-plugin-module-resolver": "^4.1.0",
     "moment": "^2.24.0",
+    "native-base": "2.13.8",
     "react": "16.9.0",
     "react-native": "0.61.0",
     "react-native-btr": "^1.1.5",
@@ -36,6 +38,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
+    "@babel/plugin-proposal-export-default-from": "^7.12.1",
     "@babel/runtime": "^7.7.4",
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-jest": "^24.9.0",

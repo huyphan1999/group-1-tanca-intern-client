@@ -1,15 +1,15 @@
-import { put, takeEvery } from 'redux-saga/effects';
-import { NavigationActions } from 'react-navigation';
+import {put, takeEvery} from 'redux-saga/effects';
+import {NavigationActions} from 'react-navigation';
 
-import { INITIALIZE_APP } from '../actionTypes/app.actiontypes';
-import { select } from 'redux-saga/effects'
-import { setToken } from '../utils/token';
-import { getUserToken } from '../selectors/index';
+import {INITIALIZE_APP} from '../actionTypes/app.actiontypes';
+import {select} from 'redux-saga/effects';
+import {setToken} from '../utils/token';
+import {getUserToken} from '../selectors/index';
 
 function* initializeApp() {
-  console.log('initializeApp saga')
-  token = yield select(getUserToken);
-  setToken(token)
+  console.log('initializeApp saga');
+  let token = yield select(getUserToken);
+  setToken(token);
 }
 
 export function* watchAppInitial() {

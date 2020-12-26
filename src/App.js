@@ -6,29 +6,29 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import initStore from './store/store.config';
+import initStore from "./store/store.config";
 
-
-import { Provider } from 'react-redux';
-import NavigationService from './navigation/NavigationService';
-import Home from './containers/Home/Home';
-import Navigation from './navigation/index';
-
-
+import { Provider } from "react-redux";
+import NavigationService from "./navigation/NavigationService";
+import Home from "./containers/Home/Home";
+import Navigation from "./navigation/index";
+import Test from "containers/TestScreen/index.js";
 
 const store = initStore();
 
-
 class App extends Component {
-
   render() {
+    // return <Test />;
+
     return (
       <Provider store={store}>
-        <Navigation ref={navigatorRef => {
-          NavigationService.setTopLevelNavigator(navigatorRef);
-        }} />
+        <Navigation
+          ref={(navigatorRef) => {
+            NavigationService.setTopLevelNavigator(navigatorRef);
+          }}
+        />
       </Provider>
     );
   }
@@ -36,7 +36,7 @@ class App extends Component {
 
 export default App;
 
- /* constructor(props) {
+/* constructor(props) {
      super(props)
  
      this.state = {
