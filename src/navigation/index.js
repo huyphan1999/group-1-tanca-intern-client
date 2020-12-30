@@ -20,6 +20,7 @@ const AuthStack = createStackNavigator(
       },
       headerTintColor: "#fff",
     },
+    initialRouteName: "SignUp",
   }
 );
 
@@ -31,7 +32,7 @@ export default createAppContainer(
       Home: HomeApp,
     },
     {
-      initialRouteName: "Auth",
+      initialRouteName: "AuthLoading",
     }
   )
 );

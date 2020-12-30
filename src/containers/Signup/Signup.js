@@ -1,141 +1,146 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, CheckBox } from 'react-native';
-import Spinner from 'react-native-loading-spinner-overlay';
-import signupRequest from '../../actions/signup.action';
+import React, { Component } from "react";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+
+import {
+  Container,
+  Header,
+  Content,
+  CheckBox,
+  Form,
+  Item,
+  Input,
+  Text,
+  Icon,
+} from "native-base";
+import * as variables from "themes/variables/color";
+import { Button } from "components/ui";
+
+import Spinner from "react-native-loading-spinner-overlay";
+import signupRequest from "../../actions/signup.action";
 
 export default class SignUp extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            checked: false,
-            name: null,
-            phone_number: null
-        };
-    }
-    render() {
-        console.log(this.state)
-        return (
-            <View>
-                <Spinner
-                    visible={this.props.isLoading}
-                    textContent={'Loading...'}
-                />
-                <View style={styles.textHeader}>
-                    <Text style={styles.txtSign}>Đăng kí</Text>
-                </View>
-                <View style={styles.textContent}>
-                    <Text style={{ fontSize: 20 }}>Nhập tên cơ quan</Text>
-                    <Text style={{ fontSize: 20 }}>Và sô điện thoại của bạn</Text>
-                </View>
-                <View style={styles.textInput}>
-                    <View style={styles.textInputContainer} >
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder='Tên cơ quan'
-                            onChangeText={(text) => this.setState({ name: text })}
-                            value={this.state.name}
-                        />
-                    </View>
-                    <View style={styles.textInputContainer} >
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder='Số điện thoại'
-                            onChangeText={(text) => this.setState({ phone_number: text })}
-                            value={this.state.phone_number}
-                        />
-                    </View>
-                    <View>
-                    </View>
-                    <View style={{ paddingTop: 20 }}>
-                        <TouchableOpacity
-                            style={styles.loginBtn}
-                            onPress={() => this.props.dispatch(signupRequest(this.state.name, this.state.phone_number))}
-                        >
-                            <Text>SIGN UP</Text>
+  static navigationOptions = {
+    headerShown: false,
+  };
 
-                        </TouchableOpacity>
-                    </View>
-                    <TouchableOpacity style={{
-                        justifyContent: 'center', alignItems: 'center', paddingTop: 40
-                    }}>
-                        <Text style={{ color: '#39e394', fontSize: 16 }}> Dùng thử miễn phí ngay</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.checkBox}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <CheckBox
-                            value={this.state.checked}
-                            onValueChange={() => this.setState({ checked: !this.state.checked })}
-                        />
-                        <Text style={{ marginTop: 5 }}> Tôi đã đọc và đồng ý với các điều khoản </Text>
-                    </View>
-                </View>
-            </View>
-        )
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      checked: false,
+      name: null,
+      phone_number: null,
+    };
+  }
+  render() {
+    const { name, phone_number } = this.state;
+    return (
+      <Container>
+        <View style={styles.container}>
+          <Spinner visible={this.props.isLoading} textContent={"Loading..."} />
+          <View style={styles.textHeader}>
+            <Icon name="adn" type="FontAwesome5" style={{ fontSize: 80 }} />
+            <Text style={styles.txtSign}>Đăng kí dùng thử</Text>
+          </View>
+          <View style={styles.textContent}>
+            <Text style={{ fontSize: 20 }}>Xin hãy nhập tên cơ quan</Text>
+            <Text style={{ fontSize: 20 }}>và số điện thoại của bạn</Text>
+          </View>
+
+          <Form>
+            <Item>
+              <Input
+                placeholder="Tên cơ quan"
+                onChangeText={(text) => this.setState({ name: text })}
+                value={this.state.name}
+              />
+            </Item>
+            <Item>
+              <Input
+                placeholder="Số điện thoại"
+                onChangeText={(text) => this.setState({ phone_number: text })}
+                value={this.state.phone_number}
+              />
+            </Item>
+          </Form>
+
+          <Button
+            block
+            success
+            onPress={() =>
+              this.props.dispatch(signupRequest(name, phone_number))
+            }
+          >
+            <Text>Đăng kí</Text>
+          </Button>
+          <Button
+            onPress={() => this.props.navigation.navigate("Login")}
+            transparent
+            block
+          >
+            <Text style={{ color: variables.mainColor, fontSize: 16 }}>
+              {" "}
+              Quay về đăng nhập
+            </Text>
+          </Button>
+        </View>
+      </Container>
+    );
+  }
 }
 
-
-
-const styles = StyleSheet.create(
-    {
-        container: {
-            flex: 1,
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'stretch',
-        },
-        textHeader: {
-            height: 80,
-            backgroundColor: '#39e394',
-            justifyContent: 'center',
-            alignItems: 'center'
-        },
-        txtSign: {
-            color: '#ffffff',
-            fontSize: 20,
-            marginTop: 10,
-
-        },
-        textInput: {
-            justifyContent: 'flex-start',
-            backgroundColor: '#f2fcf8',
-            alignItems: 'center'
-        },
-        textContent: {
-            height: 80,
-            backgroundColor: '#ffffff',
-            justifyContent: 'center',
-            alignContent: 'center',
-            alignItems: 'center'
-
-        },
-        textInputContainer: {
-            width: 390,
-            marginTop: 20,
-            backgroundColor: '#ffffff',
-            height: 60,
-            paddingHorizontal: 10,
-            borderRadius: 6,
-        },
-        textInput: {
-            fontSize: 20,
-        },
-        loginBtn: {
-
-            width: 390,
-            height: 45,
-            borderRadius: 6,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: '#39e394',
-            fontSize: 16,
-        },
-        checkBox: {
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            paddingTop: 80
-        }
-    });
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "stretch",
+  },
+  textHeader: {
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#fff",
+    paddingTop: 10,
+  },
+  txtSign: {
+    color: "#111d5e",
+    fontSize: 40,
+    marginTop: 10,
+  },
+  textInput: {
+    justifyContent: "flex-start",
+    backgroundColor: "#f2fcf8",
+    alignItems: "center",
+  },
+  textContent: {
+    height: 80,
+    backgroundColor: "#ffffff",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+  },
+  textInputContainer: {
+    width: 390,
+    marginTop: 20,
+    backgroundColor: "#ffffff",
+    height: 60,
+    paddingHorizontal: 10,
+    borderRadius: 6,
+  },
+  textInput: {
+    fontSize: 20,
+  },
+  loginBtn: {
+    width: 390,
+    height: 45,
+    borderRadius: 6,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#39e394",
+    fontSize: 16,
+  },
+  checkBox: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

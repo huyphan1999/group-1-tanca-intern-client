@@ -59,6 +59,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 80,
   },
+
+  radio: {
+    flexDirection: "row",
+    flex: 1,
+    marginRight: 5,
+  },
 });
 
 export default styles;

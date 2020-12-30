@@ -1,56 +1,61 @@
-import { all } from 'redux-saga/effects';
-import { inWatcher } from './in.saga';
-import { watchAppInitial } from './app.saga';
-import { loginWatchcer,logoutWatcher } from './login.saga';
-import { signupWatcher } from './signup.saga';
-import { timekeepWatcher } from './timekeep.saga';
-import { calendarWatcher } from './calendar.saga';
-import { postEmpWatchcer, getEmpWatchcer } from './emp.saga';
-import { postDeptWatchcer, getDeptWatchcer } from './dept.saga';
-import { postPosWatchcer, getPosWatchcer } from './position.saga';
-import { getShiftWatchcer, postShiftWatchcer } from './shift.saga';
-import { postBranchWatchcer, getBranchWatchcer } from './branch.saga';
+import { all } from "redux-saga/effects";
+import { inWatcher } from "./in.saga";
+import { watchAppInitial } from "./app.saga";
+import {
+  loginWatchcer,
+  logoutWatcher,
+  signupWatcher,
+  onloginSucessWatchcer,
+} from "./user.saga";
+import { timekeepWatcher } from "./timekeep.saga";
+import { calendarWatcher } from "./calendar.saga";
+import { postEmpWatchcer, getEmpWatchcer } from "./emp.saga";
+import { postDeptWatchcer, getDeptWatchcer } from "./dept.saga";
+import { postPosWatchcer, getPosWatchcer } from "./position.saga";
+import { getShiftWatchcer, postShiftWatchcer } from "./shift.saga";
+import { postBranchWatchcer, getBranchWatchcer } from "./branch.saga";
 
 function* rootSaga() {
   yield all([
     //    In/out saga
     inWatcher(),
 
-
     //    Auth saga
-    loginWatchcer(),signupWatcher(),
 
-    watchAppInitial(),logoutWatcher(),
-
+    loginWatchcer(),
+    signupWatcher(),
+    watchAppInitial(),
+    logoutWatcher(),
+    onloginSucessWatchcer(),
 
     //   Attendance saga
 
-     timekeepWatcher(), 
+    timekeepWatcher(),
 
+    //  Calendar saga
 
-     //  Calendar saga
-
-     calendarWatcher(),
-
+    calendarWatcher(),
 
     //    Company saga
 
-    postDeptWatchcer(), getDeptWatchcer(),
+    postDeptWatchcer(),
+    getDeptWatchcer(),
 
-    postPosWatchcer(),  getPosWatchcer(),
+    postPosWatchcer(),
+    getPosWatchcer(),
 
-    postBranchWatchcer(), getBranchWatchcer(),
-
+    postBranchWatchcer(),
+    getBranchWatchcer(),
 
     //    Shift saga
 
-    getShiftWatchcer(), postShiftWatchcer(),
-
+    getShiftWatchcer(),
+    postShiftWatchcer(),
 
     //    Employee saga
 
-    postEmpWatchcer(), getEmpWatchcer(),
-    
-  ])
+    postEmpWatchcer(),
+    getEmpWatchcer(),
+  ]);
 }
 export default rootSaga;

@@ -10,11 +10,14 @@ import React, { Component } from "react";
 
 import initStore from "./store/store.config";
 
+import { Root, StyleProvider } from "native-base";
 import { Provider } from "react-redux";
 import NavigationService from "./navigation/NavigationService";
 import Home from "./containers/Home/Home";
 import Navigation from "./navigation/index";
 import Test from "containers/TestScreen/index.js";
+
+import getTheme from "app/native-base-theme/components";
 
 const store = initStore();
 
@@ -24,11 +27,15 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <Navigation
-          ref={(navigatorRef) => {
-            NavigationService.setTopLevelNavigator(navigatorRef);
-          }}
-        />
+        <StyleProvider style={getTheme()}>
+          <Root>
+            <Navigation
+              ref={(navigatorRef) => {
+                NavigationService.setTopLevelNavigator(navigatorRef);
+              }}
+            />
+          </Root>
+        </StyleProvider>
       </Provider>
     );
   }

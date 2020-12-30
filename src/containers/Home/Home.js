@@ -1,45 +1,45 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import { Image } from 'react-native';
-import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
-import Add_Activity from '../Add/Add.container';
-import Input_Output_Activity from '../In_Out/In_Out';
-import Calendar_Activity from '../Calendar/Calendar.container';
-import TimeKeep_Activity from '../TimeKeep/TimeKeep.container';
-import EmployeeInfo from '../Add/Employee/EmployeeInfo';
-import Logout_Activity from '../Add/Logout';
-import Shift from '../Add/Shift/Shift.container';
-import ShiftDetail from '../Add/Shift/ShiftDetail';
-import Company from '../Add/Company/Company';
-import Position from '../Add/Company/Position.container';
-import Department from '../Add/Company/Department.container';
-import Branch from '../Add/Company/Branch.container';
-import ObjectAdd from '../Add/Company/ObjectAdd';
-import Employee from '../Add/Employee/Employee.container';
-import AddEmployee from '../Add/Employee/AddEmployee';
+import React from "react";
+import { Image } from "react-native";
+import { createStackNavigator } from "react-navigation-stack";
+import { createAppContainer } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation-tabs";
+import Add_Activity from "../Add/Add.container";
+import Input_Output_Activity from "../In_Out/In_Out";
+import Calendar_Activity from "../Calendar/Calendar.container";
+import TimeKeep_Activity from "../TimeKeep/TimeKeep.container";
+import EmployeeInfo from "../Add/Employee/EmployeeInfo";
+import Logout_Activity from "../Add/Logout";
+import Shift from "../Add/Shift/Shift.container";
+import ShiftDetail from "../Add/Shift/ShiftDetail";
+import Company from "../Add/Company/Company";
+import Position from "../Add/Company/Position.container";
+import Department from "../Add/Company/Department.container";
+import Branch from "../Add/Company/Branch.container";
+import ObjectAdd from "../Add/Company/ObjectAdd";
+import Employee from "../Add/Employee/Employee.container";
+import AddEmployee from "../Add/Employee/AddEmployee";
 // import ObjectDetails from '../Add/Company/ObjectDetails';
-import MultiSelect from '../MultiSelect';
-import ObjectDetails from '../Add/Company/ObjectDetails';
+import MultiSelect from "components/ui/MultiSelect";
+import ObjectDetails from "../Add/Company/ObjectDetails";
 
 const Input_OutputTab = createStackNavigator(
   {
     Input_Output: Input_Output_Activity,
   },
-  
+
   {
     navigationOptions: {
-      tabBarLabel: 'Vào/Ra',
+      tabBarLabel: "Vào/Ra",
     },
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor:'#0bd967',
+        backgroundColor: "#0bd967",
       },
-      headerTintColor: '#fff',
-      title: ' Input_OutputTab'
+      headerTintColor: "#fff",
+      title: " Input_OutputTab",
     },
-  },
+  }
 );
 const Calendar_Tab = createStackNavigator(
   {
@@ -47,16 +47,16 @@ const Calendar_Tab = createStackNavigator(
   },
   {
     navigationOptions: {
-      tabBarLabel: 'Lịch công',
+      tabBarLabel: "Lịch công",
     },
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#0bd967',
+        backgroundColor: "#0bd967",
       },
-      headerTintColor: '#fff',
-      title: ' Calendar_Tab'
+      headerTintColor: "#fff",
+      title: " Calendar_Tab",
     },
-  },
+  }
 );
 const TimeKeep_Tab = createStackNavigator(
   {
@@ -64,16 +64,16 @@ const TimeKeep_Tab = createStackNavigator(
   },
   {
     navigationOptions: {
-      tabBarLabel: 'Chấm công',
+      tabBarLabel: "Chấm công",
     },
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#0bd967',
+        backgroundColor: "#0bd967",
       },
-      headerTintColor: '#fff',
-      title: ' TimeKeep_Tab'
+      headerTintColor: "#fff",
+      title: " TimeKeep_Tab",
     },
-  },
+  }
 );
 
 const Add_Tab = createStackNavigator(
@@ -91,22 +91,20 @@ const Add_Tab = createStackNavigator(
     Branch: Branch,
     ObjectAdd: ObjectAdd,
     MultiSelect: MultiSelect,
-    ObjectDetails: ObjectDetails
+    ObjectDetails: ObjectDetails,
   },
   {
     navigationOptions: {
-      tabBarLabel: 'Thêm',
+      tabBarLabel: "Thêm",
     },
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#0bd967',
+        backgroundColor: "#0bd967",
       },
-      headerTintColor: '#FFFFFF',
-      title:' Add_Tab'
-      
-
+      headerTintColor: "#FFFFFF",
+      title: " Add_Tab",
     },
-  },
+  }
 );
 
 const Home = createBottomTabNavigator(
@@ -120,40 +118,40 @@ const Home = createBottomTabNavigator(
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
-        if (routeName === 'Input_Output') {
+        if (routeName === "Input_Output") {
           return (
             <Image
-              source={require('../image/in_output.png')}
+              source={require("../image/in_output.png")}
               style={{ width: 20, height: 20 }}
               tintColor={tintColor}
               focused={focused}
             />
           );
         }
-        if (routeName === 'Calendar') {
+        if (routeName === "Calendar") {
           return (
             <Image
-              source={require('../image/calendar.png')}
+              source={require("../image/calendar.png")}
               style={{ width: 20, height: 20 }}
               tintColor={tintColor}
               focused={focused}
             />
           );
         }
-        if (routeName === 'TimeKeep') {
+        if (routeName === "TimeKeep") {
           return (
             <Image
-              source={require('../image/time_keep.png')}
+              source={require("../image/time_keep.png")}
               style={{ width: 20, height: 20 }}
               tintColor={tintColor}
               focused={focused}
             />
           );
         }
-        if (routeName === 'Add') {
+        if (routeName === "Add") {
           return (
             <Image
-              source={require('../image/add.png')}
+              source={require("../image/add.png")}
               style={{ width: 20, height: 20 }}
               tintColor={tintColor}
               focused={focused}
@@ -163,11 +161,10 @@ const Home = createBottomTabNavigator(
       },
     }),
     tabBarOptions: {
-      
-      activeTintColor: '#0bd967',
-      inactiveTintColor: '#263238',
+      activeTintColor: "#0bd967",
+      inactiveTintColor: "#263238",
     },
-  },
+  }
 );
 
 export default createAppContainer(Home);
