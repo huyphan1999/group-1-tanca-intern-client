@@ -20,6 +20,8 @@ class BranchContainer extends ObjectList {
       onPressHeader: this.onPressHeader,
       title: "Chi nhánh",
     });
+
+    
   };
 
   getListBranch = () => {

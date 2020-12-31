@@ -32,19 +32,6 @@
     "body": ["import { Row } from \"components/ui\";", ""],
     "description": "Import Common UI"
   },
-  "showPicker": {
-    "prefix": "picker-show",
-    "body": [
-      "showPicker({",
-      "      onSelection: this.${1:onselect},",
-      "      multiple: false,",
-      "      selectedOptions: [this.state.${2:selectedOptions}],",
-      "      apiUrl: `${configs.apiUrl}${3:route}`,",
-      "      title: ${4:title}",
-      "})"
-    ],
-    "description": "showPicker"
-  },
   "async function": {
     "prefix": "asyncFunc",
     "body": [
@@ -54,5 +41,10 @@
       "};"
     ],
     "description": "async function"
+  },
+  "Import picker": {
+    "prefix": "imp-picker",
+    "body": ["import { Picker } from \"components/ui\";", ""],
+    "description": "Import picker"
   }
 }

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import {
   View,
   StyleSheet,
@@ -7,23 +7,24 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+} from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
-import {navigate} from '../../utils/navigate';
-import {Avatar} from 'react-native-elements';
+import { navigate } from "../../utils/navigate";
+import { Avatar } from "react-native-elements";
 class Choose extends Component {
   render() {
     return (
       <TouchableOpacity
         style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
+          flexDirection: "row",
+          justifyContent: "space-between",
           padding: 15,
           borderBottomWidth: 0.4,
         }}
-        onPress={() => navigate(this.props.route)}>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        onPress={() => navigate(this.props.route)}
+      >
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <View>
             <Icon
               name={this.props.iconName1}
@@ -32,7 +33,7 @@ class Choose extends Component {
               style={styles.btnIcon}
             />
           </View>
-          <View style={{paddingLeft: 10, fontFamily: 'Open Sans'}}>
+          <View style={{ paddingLeft: 10, fontFamily: "Open Sans" }}>
             <Text>{this.props.txtName}</Text>
           </View>
         </View>
@@ -41,36 +42,36 @@ class Choose extends Component {
           name={this.props.iconName2}
           size={16}
           color="#aaafb3"
-          style={{paddingRight: 20}}
+          style={{ paddingRight: 20 }}
         />
       </TouchableOpacity>
     );
   }
 }
 export default class Add extends Component {
-  static navigationOptions = ({navigation}) => ({
+  static navigationOptions = ({ navigation }) => ({
     headerRight: (
       <TouchableOpacity
-        style={{paddingRight: 15}}
-        onPress={() => navigation.navigate('Logout')}>
+        style={{ paddingRight: 15 }}
+        onPress={() => navigation.navigate("Logout")}
+      >
         <Image
-          source={require('../image/service_logout.png')}
-          style={{width: 20, height: 20}}
+          source={require("../image/service_logout.png")}
+          style={{ width: 20, height: 20 }}
           tintColor="white"
         />
       </TouchableOpacity>
     ),
     headerTitle: () => (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={{color: 'white', fontSize: 18, paddingLeft: 40}}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text style={{ color: "white", fontSize: 18, paddingLeft: 40 }}>
           Quản lý tài khoản
         </Text>
       </View>
     ),
   });
 
-
-  //Callback 
+  //Callback
   /*onSave = data => {
     //this.props.dispatch()
     console.log('Add SAVE CALLBACK');
@@ -78,58 +79,60 @@ export default class Add extends Component {
   };
 */
   render() {
-    let role = 'Nhân viên';
-    let {user} = this.props;
+    let role = "Nhân viên";
+    let { user } = this.props;
     if (user.is_root) {
-      role = 'Quản lý';
+      role = "Quản lý";
     }
     return (
       <ScrollView>
         <View
           style={{
             flex: 1,
-            backgroundColor: '#f5fcff',
-          }}>
+            backgroundColor: "#f5fcff",
+          }}
+        >
           <View
             style={{
               flex: 2,
-              backgroundColor: '#e3e7eb',
-              alignItems: 'center',
-              justifyContent: 'center',
+              backgroundColor: "#e3e7eb",
+              alignItems: "center",
+              justifyContent: "center",
               paddingTop: 10,
-            }}>
+            }}
+          >
             <Avatar
               size={150}
               rounded
               onPress={() =>
-                navigate('EmployeeInfo', {
+                navigate("EmployeeInfo", {
                   data: user,
-                  onPress: data => this.onSave(data),
+                  onPress: (data) => this.onSave(data),
                 })
               }
               activeOpacity={0.7}
-              containerStyle={{flex: 2, marginLeft: 20}}
-              source={require('../image/admin.png')}
+              containerStyle={{ flex: 2, marginLeft: 20 }}
+              source={require("../image/admin.png")}
               showEditButton
-              
             />
 
-            <Text style={{paddingTop: 10, fontSize: 18}}>
+            <Text style={{ paddingTop: 10, fontSize: 18 }}>
               {this.props.user.full_name}
             </Text>
-            <Text style={{color: '#aaafb3', fontSize: 16}}>
-              {role} - {user.id}
+            <Text style={{ color: "#aaafb3", fontSize: 16 }}>
+              {role} - {user.name}
             </Text>
           </View>
-          <View style={{flex: 3, backgroundColor: '#ffffff'}}>
+          <View style={{ flex: 3, backgroundColor: "#ffffff" }}>
             <Text
               style={{
-                color: '#aaafb3',
+                color: "#aaafb3",
                 fontSize: 18,
-                backgroundColor: '#e3e7eb',
+                backgroundColor: "#e3e7eb",
                 padding: 10,
                 borderBottomWidth: 0.4,
-              }}>
+              }}
+            >
               CÔNG CỤ QUẢN LÝ
             </Text>
             <Choose
@@ -150,7 +153,7 @@ export default class Add extends Component {
               txtName="Nhân viên"
               route="Employee"
             />
-            <Choose
+            {/* <Choose
               iconName1="calendar-check"
               iconName2="chevron-right"
               txtName="Sắp xếp lịch công"
@@ -173,19 +176,20 @@ export default class Add extends Component {
               iconName2="chevron-right"
               txtName="Web admin"
               route="Shift"
-            />
+            /> */}
           </View>
 
-          <View style={{flex: 1, backgroundColor: '#ffffff'}}>
+          <View style={{ flex: 1, backgroundColor: "#ffffff" }}>
             <Text
               style={{
-                color: '#aaafb3',
+                color: "#aaafb3",
                 fontSize: 18,
-                backgroundColor: '#e3e7eb',
+                backgroundColor: "#e3e7eb",
                 padding: 10,
                 borderBottomWidth: 0.4,
                 borderTopWidth: 0.4,
-              }}>
+              }}
+            >
               ỨNG DỤNG
             </Text>
             <Choose
@@ -216,14 +220,14 @@ export default class Add extends Component {
 }
 const styles = StyleSheet.create({
   button: {
-    alignItems: 'center',
-    backgroundColor: '#43A047',
+    alignItems: "center",
+    backgroundColor: "#43A047",
     padding: 12,
     width: 280,
     marginTop: 12,
   },
 
   text: {
-    color: '#fff',
+    color: "#fff",
   },
 });

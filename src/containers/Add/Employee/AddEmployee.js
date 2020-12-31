@@ -1,96 +1,97 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Alert, TextInput } from 'react-native';
-import Icon from 'react-native-vector-icons/Fontisto';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import moment from 'moment';
-import { getParams, getParamsHeader } from '../../../utils/index';
+import React, { Component } from "react";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  Platform,
+} from "react-native";
 
-class TextInputCom extends Component {
-  render() {
-    return (
-      <View
-        style={{
-          backgroundColor: 'white',
-          padding: 10,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          fontSize: 16,
-          borderBottomWidth: 0.5,
-          alignItems: 'center',
-        }}>
-        <Text>{this.props.name}</Text>
-        <TextInput
-          style={{ height: 40, fontSize: 14, paddingLeft: 30 }}
-          onChangeText={nameText => this.setState({ nameText })}
-          value={this.props.nameText}
-          onTouchStart={() => Alert.alert('Danh sách !!!')}
-        />
-      </View>
-    );
-  }
-}
+import {
+  Container,
+  Content,
+  List,
+  ListItem,
+  Separator,
+  Icon,
+  Text,
+  Left,
+  Right,
+  Thumbnail,
+  Input,
+} from "native-base";
+import DateTimePicker from "@react-native-community/datetimepicker";
+
+import { Radio, Picker, Row } from "components/ui";
+
+import moment from "moment";
+import { Avatar } from "react-native-elements";
+import { getParams, getParamsHeader } from "../../../utils";
+
+import * as actions from "actions";
+import * as types from "actionTypes";
+import configs from "configs/server.config";
+import { getRequest, postRequest } from "utils/request";
+import { navigate, goBack, showPicker } from "utils/navigate";
 
 export default class AddEmployee extends Component {
   constructor(props) {
     super(props);
-
+    console.log("EmpInfor View");
+    console.log(this.props);
     this.state = {
-      Name: '',
-      Note: '',
-      Allow: 'Nhân viên',
-      Phone: '',
-      Region: 'HCM',
-      Branch: 'ht',
-      Department: 'Ban Giám Đốc',
-      Position: 'CHP',
-      Address: '',
       date: new Date(),
-      mode: 'date',
+      mode: "date",
       show: false,
-
-
     };
   }
 
+  handleTextInput = (value, key) => {
+    this.setState({ [key]: value });
+  };
+
   componentDidMount = () => {
     this.props.navigation.setParams({ onPressHeader: this.onPressHeader });
+    this.setState(getParams(this.props).data);
   };
 
   onPressHeader = () => {
-    getParams(this.props).onPress(this.state)
+    console.log("onPressed Header");
+    getParams(this.props).onPress(this.state);
   };
 
-  on
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = ({ navigation }) => {
+    const params = getParamsHeader(navigation);
 
-    headerRight: (
-      <TouchableOpacity
-        style={{ paddingRight: 15 }}
-        onPress={() =>
-          getParamsHeader(navigation).onPressHeader()
-        }
-      >
-        <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>{getParamsHeader(navigation).onDel?'Lưu':'Thêm'}</Text>
-      </TouchableOpacity >
-    ),
-    headerTitle: () => (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ color: 'white', fontSize: 18, paddingLeft: 40 }}>{getParamsHeader(navigation).onDel?'Thông tin':'Thêm nhân viên'}</Text>
-      </View>
-
-    ),
-  });
+    console.log(`Params: ${params}`);
+    return {
+      headerRight: (
+        <TouchableOpacity onPress={() => params.onPressHeader()}>
+          <Text style={{ color: "white", fontSize: 18 }}>Save</Text>
+        </TouchableOpacity>
+      ),
+      headerTitle: () => (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <Text style={{ color: "white", fontSize: 18 }}>
+            Quản lý tài khoản
+          </Text>
+        </View>
+      ),
+    };
+  };
 
   setDate = (event, date) => {
     date = date || this.state.date;
     this.setState({
-      show: Platform.OS === 'ios' ? true : false,
+      show: Platform.OS === "ios" ? true : false,
       date,
     });
   };
 
-  show = mode => {
+  show = (mode) => {
     this.setState({
       show: true,
       mode,
@@ -98,161 +99,226 @@ export default class AddEmployee extends Component {
   };
 
   datepicker = () => {
-    this.show('date');
+    this.show("date");
   };
 
   timepicker = () => {
-    this.show('time');
+    this.show("time");
   };
+
+  onSexRadioChange = (value) => {
+    console.log("onSexRadioChange", value);
+    this.setState({ sex: value });
+  };
+
+  onValueChange = (value) => {
+    this.setState({ selected: value });
+  };
+
+  onSelectBranch = (branch) => {
+    this.setState({ branch: branch, branch_id: branch.id });
+    goBack();
+  };
+
+  onSelectDept = (dep) => {
+    this.setState({ dep: dep, dep_id: dep.id });
+    goBack();
+  };
+
   render() {
-    var params = getParams(this.props)
-    const { show, date, mode } = this.state;
-    const dates = moment(this.state.date).format('DD-MM-YYYY');
+    const { show, date, mode, data } = this.state;
+    const dates = moment(this.state.date).format("DD-MM-YYYY");
+
+    console.log(this.state);
+
     return (
-      <View style={{ flex: 1, backgroundColor: '#e3e7eb' }}>
-        <View
-          style={{
-            backgroundColor: 'white',
-            padding: 10,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            fontSize: 16,
-            borderBottomWidth: 0.5,
-            alignItems: 'center',
-          }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <View style={{ paddingRight: 10 }}>
-              <Icon name="rectangle" size={5} color="red" />
-            </View>
-            <Text>Họ và tên:</Text>
-          </View>
-
-          <TextInput
-            style={{ height: 40, fontSize: 14, paddingLeft: 30 }}
-            placeholder="Họ và tên"
-            onChangeText={Name => this.setState({ Name })}
-            value={this.state.Name}
-          />
-        </View>
-
-        <View
-          style={{
-            backgroundColor: 'white',
-            padding: 10,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            fontSize: 16,
-            borderBottomWidth: 0.5,
-            alignItems: 'center',
-          }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <View style={{ paddingRight: 10 }}>
-              <Icon name="rectangle" size={5} color="#11CE43" />
-            </View>
-
-            <Text>Quyền truy cập:</Text>
-          </View>
-
-          <TextInput
-            style={{ height: 40, fontSize: 14, paddingLeft: 30 }}
-            onChangeText={Allow => this.setState({ Allow })}
-            value={this.state.Allow}
-            onTouchStart={() => Alert.alert('Danh sách quyền truy cập!!!')}
-          />
-        </View>
-        <View
-          style={{
-            backgroundColor: 'white',
-            padding: 10,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            fontSize: 16,
-            borderBottomWidth: 0.5,
-            alignItems: 'center',
-          }}>
-          <Text>Số điện thoại:</Text>
-
-          <TextInput
-            style={{ height: 40, fontSize: 14, paddingLeft: 30 }}
-            placeholder="Số điện thoại"
-            onChangeText={Phone => this.setState({ Phone })}
-            value={this.state.Phone}
-          />
-        </View>
-
-        <TextInputCom name="Vùng" nameText={this.state.Region} />
-        <TextInputCom name="Chi nhánh" nameText={this.state.Branch} />
-        <TextInputCom name="Phòng ban" nameText={this.state.Department} />
-        <TextInputCom name="Chức vụ" nameText={this.state.Position} />
-
-        <View
-          style={{
-            backgroundColor: 'white',
-            padding: 10,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            fontSize: 16,
-            borderBottomWidth: 0.5,
-            alignItems: 'center',
-          }}>
-          <Text>Ngày sinh:</Text>
-          <View>
-            <TouchableOpacity onPress={this.datepicker}>
-              <Text>{dates}</Text>
-            </TouchableOpacity>
-          </View>
-          {show && (
-            <DateTimePicker
-              value={date}
-              mode={mode}
-              is24Hour={true}
-              display="default"
-              onChange={this.setDate}
+      <Container>
+        <Content>
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "#e3e7eb",
+              alignItems: "center",
+              justifyContent: "center",
+              paddingTop: 10,
+            }}
+          >
+            <Thumbnail
+              style={{ height: 150, width: 150 }}
+              source={require("../../image/admin.png")}
             />
-          )}
-        </View>
-        <View
-          style={{
-            backgroundColor: 'white',
-            padding: 10,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            fontSize: 16,
-            borderBottomWidth: 0.5,
-            alignItems: 'center',
-          }}>
-          <Text>Địa chỉ:</Text>
-          <TextInput
-            style={{ height: 40, fontSize: 14, paddingLeft: 30 }}
-            placeholder="Địa chỉ"
-            onChangeText={Address => this.setState({ Address })}
-            value={this.state.Address}
-          />
-        </View>
-
-        {params.onDel &&
-          <View style={{ flex: 1, backgroundColor: '#e6e6e6', paddingTop: 40 }}>
-            <TouchableOpacity
-              onPress={() => Alert.alert(
-                'Thông báo',
-                'Bạn chắc chắn muốn xóa ?',
-                [
-                  { text: 'Hủy', onPress: () => console.log('Cancel Pressed!') },
-                  { text: 'Đồng ý', onPress: () => params.onDel(params.data.id) },
-                ],
-                { cancelable: false }
-              )}>
-
-              <Text
-                style={{ color: '#db3b3b', borderBottomWidth: 0.4, borderTopWidth: 0.4, backgroundColor: '#fcfcfc', padding: 20 }}
-              >
-                Xóa
-         </Text>
-            </TouchableOpacity>
           </View>
-        }
+          <Separator group bordered>
+            <Text>Thông tin cá nhân</Text>
+          </Separator>
+          {/* <ListItem>
+            <Left>
+              <Text>Mã NV</Text>
+            </Left>
+            <Right>
+              <Input
+                onChangeText={(text) => this.handleTextInput(text, "id")}
+                style={styles.inputTxt}
+                placeholder="Mã NV"
+                value={this.state.id}
+              />
+            </Right>
+          </ListItem> */}
 
-      </View>
+          <ListItem>
+            <Left>
+              <Text>Họ tên</Text>
+            </Left>
+            <Right>
+              <Input
+                onChangeText={(text) => this.handleTextInput(text, "name")}
+                style={styles.inputTxt}
+                placeholder="Tên NV"
+                value={this.state.name}
+              />
+            </Right>
+          </ListItem>
+
+          <ListItem>
+            <Left>
+              <Text>Giới tính</Text>
+            </Left>
+            <Right>
+              <View style={styles.txtContent}>
+                <Radio
+                  title="Nam"
+                  value="1"
+                  checked={this.state.sex}
+                  onPress={this.onSexRadioChange}
+                />
+                <Radio
+                  title="Nữ"
+                  value="0"
+                  checked={this.state.sex}
+                  onPress={this.onSexRadioChange}
+                />
+              </View>
+            </Right>
+          </ListItem>
+
+          <ListItem>
+            <Left>
+              <Text>Địa chỉ</Text>
+            </Left>
+            <Right>
+              <Input
+                onChangeText={(text) => this.handleTextInput(text, "address")}
+                style={styles.inputTxt}
+                placeholder="Địa chỉ"
+                value={this.state.address}
+              />
+            </Right>
+          </ListItem>
+
+          <ListItem>
+            <Left>
+              <Text>Ngày sinh</Text>
+            </Left>
+            <Right>
+              <TouchableOpacity onPress={this.datepicker}>
+                <Text>{dates}</Text>
+              </TouchableOpacity>
+            </Right>
+
+            {show && (
+              <DateTimePicker
+                value={date}
+                mode={mode}
+                is24Hour={true}
+                display="default"
+                onChange={this.setDate}
+              />
+            )}
+          </ListItem>
+
+          <ListItem last>
+            <Left>
+              <Text>Số điện thoại</Text>
+            </Left>
+            <Right>
+              <Input
+                onChangeText={(text) =>
+                  this.handleTextInput(text, "phone_number")
+                }
+                style={styles.inputTxt}
+                placeholder="SĐT"
+                value={this.state.phone_number}
+              />
+            </Right>
+          </ListItem>
+
+          <Separator group bordered>
+            <Text>Công ty</Text>
+          </Separator>
+          <ListItem>
+            <Left>
+              <Text>Phòng ban</Text>
+            </Left>
+            <Right>
+              <Picker
+                displayText={this.state.dep && this.state.dep.name}
+                onSelection={this.onSelectDept}
+                selectedOptions={[this.state.dep]}
+                placeholder="Chọn phòng ban"
+                multiple={false}
+                route="dep/list"
+              />
+            </Right>
+          </ListItem>
+          <ListItem last>
+            <Left>
+              <Text>Chi nhánh</Text>
+            </Left>
+            <Right>
+              <Picker
+                displayText={this.state.branch && this.state.branch.name}
+                onSelection={this.onSelectBranch}
+                selectedOptions={[this.state.branch]}
+                placeholder="Chọn chi nhánh"
+                multiple={false}
+                route="branch/list"
+              />
+            </Right>
+          </ListItem>
+        </Content>
+      </Container>
     );
   }
 }
+const styles = StyleSheet.create({
+  txtContent: {
+    flexDirection: "row",
+  },
+  MainContainer: {
+    flex: 1,
+    backgroundColor: "#FFF8E1",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: Platform.OS === "ios" ? 20 : 0,
+  },
+  txtInfo: {
+    color: "#9c9c9c",
+    fontSize: 16,
+    textAlign: "auto",
+    borderStyle: "solid",
+  },
+
+  inputTxt: {
+    height: 30,
+    padding: 0,
+    fontSize: 14,
+  },
+
+  txtSperator: {
+    fontSize: 20,
+  },
+  raido: {
+    flexDirection: "row",
+    marginRight: 5,
+  },
+});

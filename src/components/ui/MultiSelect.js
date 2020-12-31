@@ -90,7 +90,9 @@ class MultipleSelect extends Component {
   };
 
   isSelected = (option) => {
-    return this.state.selectedOptions.some((item) => item.id === option.id);
+    return this.state.selectedOptions.some(
+      (item) => item && item.id === option.id
+    );
   };
 
   renderIndicator = (option) => {

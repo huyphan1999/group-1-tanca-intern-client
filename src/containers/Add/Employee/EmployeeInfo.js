@@ -20,72 +20,45 @@ import {
   Right,
   Thumbnail,
   Input,
-  Picker,
 } from "native-base";
-import { TextInput } from "react-native-gesture-handler";
-import { RadioGroup } from "react-native-btr";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-import { Radio } from "components/ui";
+import { Radio, Picker } from "components/ui";
 
 import moment from "moment";
 import { Avatar } from "react-native-elements";
 import { getParams, getParamsHeader } from "../../../utils";
+
+import * as actions from "actions";
+import * as types from "actionTypes";
+import configs from "configs/server.config";
+import { getRequest, postRequest } from "utils/request";
+import { navigate, goBack, showPicker } from "utils/navigate";
+
 class EmployeeInfo extends Component {
   constructor(props) {
     super(props);
     console.log("EmpInfor View");
     console.log(this.props);
     this.state = {
-      radioButtons: [
-        {
-          label: "Nam",
-          value: "Nam",
-          checked: true,
-          color: "black",
-          disabled: false,
-          flexDirection: "row",
-          size: 6,
-        },
-
-        {
-          label: "Nữ",
-          value: "Nữ",
-          checked: false,
-          color: "black",
-          disabled: false,
-          flexDirection: "row",
-          size: 6,
-        },
-      ],
-      Address: "Hoàng Diệu 2, Thủ Đức",
-      Phone: "+84112233444",
-      Department: "Văn phòng",
-      Position: "Nhân sự",
-      Branch: "VP Công ty",
-      Region: "HCM",
-      Salary: "1000",
       date: new Date(),
-
       mode: "date",
       show: false,
-      data: getParams(this.props).data,
     };
   }
 
-  handleTextInput = (text, field) => {
-    var newdata = { ...this.state.data };
-    newdata[field] = text;
-    this.setState({ data: newdata });
+  handleTextInput = (value, key) => {
+    this.setState({ [key]: value });
   };
 
   componentDidMount = () => {
     this.props.navigation.setParams({ onPressHeader: this.onPressHeader });
+    this.setState(getParams(this.props).data);
   };
 
   onPressHeader = () => {
     console.log("onPressed Header");
-    getParams(this.props).onPress(this.state.data);
+    getParams(this.props).onPress(this.state);
   };
 
   static navigationOptions = ({ navigation }) => {
@@ -142,13 +115,21 @@ class EmployeeInfo extends Component {
     this.setState({ selected: value });
   };
 
+  onSelectBranch = (branch) => {
+    this.setState({ branch: branch, branch_id: branch.id });
+    goBack();
+  };
+
+  onSelectDept = (dep) => {
+    this.setState({ dep: dep, dep_id: dep.id });
+    goBack();
+  };
+
   render() {
-    const { show, date, mode } = this.state;
+    const { show, date, mode, data } = this.state;
     const dates = moment(this.state.date).format("DD-MM-YYYY");
-    let selectedItem = this.state.radioButtons.find((e) => e.checked == true);
-    selectedItem = selectedItem
-      ? selectedItem.value
-      : this.state.radioButtons[0].value;
+
+    console.log(this.state);
 
     return (
       <Container>
@@ -179,6 +160,7 @@ class EmployeeInfo extends Component {
                 onChangeText={(text) => this.handleTextInput(text, "id")}
                 style={styles.inputTxt}
                 placeholder="Mã NV"
+                value={this.state.id}
               />
             </Right>
           </ListItem>
@@ -192,6 +174,7 @@ class EmployeeInfo extends Component {
                 onChangeText={(text) => this.handleTextInput(text, "name")}
                 style={styles.inputTxt}
                 placeholder="Tên NV"
+                value={this.state.name}
               />
             </Right>
           </ListItem>
@@ -227,6 +210,7 @@ class EmployeeInfo extends Component {
                 onChangeText={(text) => this.handleTextInput(text, "address")}
                 style={styles.inputTxt}
                 placeholder="Địa chỉ"
+                value={this.state.address}
               />
             </Right>
           </ListItem>
@@ -258,9 +242,12 @@ class EmployeeInfo extends Component {
             </Left>
             <Right>
               <Input
-                onChangeText={(text) => this.handleTextInput(text, "phone")}
+                onChangeText={(text) =>
+                  this.handleTextInput(text, "phone_number")
+                }
                 style={styles.inputTxt}
                 placeholder="SĐT"
+                value={this.state.phone_number}
               />
             </Right>
           </ListItem>
@@ -274,193 +261,33 @@ class EmployeeInfo extends Component {
             </Left>
             <Right>
               <Picker
-                mode="dropdown"
-                iosIcon={<Icon name="arrow-down" />}
-                headerBackButtonText="Baaack!"
-                selectedValue={this.state.selected}
-                onValueChange={this.onValueChange}
-                placeholder="Phòng ban"
-                note={false}
-              >
-                <Picker.Item label="Wallet" value="key0" />
-                <Picker.Item label="ATM Card" value="key1" />
-                <Picker.Item label="Debit Card" value="key2" />
-                <Picker.Item label="Credit Card" value="key3" />
-                <Picker.Item label="Net Banking" value="key4" />
-              </Picker>
+                displayText={this.state.dep && this.state.dep.name}
+                onSelection={this.onSelectDept}
+                selectedOptions={[this.state.dep]}
+                placeholder="Chọn phòng ban"
+                multiple={false}
+                route="dep/list"
+              />
             </Right>
           </ListItem>
           <ListItem last>
-            <Text>Lee Allen</Text>
+            <Left>
+              <Text>Chi nhánh</Text>
+            </Left>
+            <Right>
+              <Picker
+                displayText={this.state.branch && this.state.branch.name}
+                onSelection={this.onSelectBranch}
+                selectedOptions={[this.state.branch]}
+                placeholder="Chọn chi nhánh"
+                multiple={false}
+                route="branch/list"
+              />
+            </Right>
           </ListItem>
         </Content>
       </Container>
     );
-
-    //   <ScrollView>
-    //     <View style={{ flex: 1 }}>
-
-    //       <View style={{ flex: 1, backgroundColor: "#ffffff" }}>
-    //         <Text
-    //           style={{
-    //             fontSize: 18,
-    //             backgroundColor: "#e3e7eb",
-    //             padding: 20,
-    //             borderBottomWidth: 0.5,
-    //           }}
-    //         >
-    //           THÔNG TIN CÁ NHÂN
-    //         </Text>
-    //         <View style={styles.txtContent}>
-    //           <Text>Mã NV :</Text>
-    //           <TextInput
-    //             style={{
-    //               height: 40,
-    //               fontSize: 14,
-    //               justifyContent: "center",
-    //               alignItems: "center",
-    //             }}
-    //             placeholder="Mã NV"
-    //             onChangeText={(id) => this.handleTextInput(id, "id")}
-    //             value={this.state.data.id}
-    //           />
-    //         </View>
-    //         <View
-    //           style={{
-    //             flexDirection: "row",
-    //             justifyContent: "space-between",
-    //             paddingLeft: 10,
-    //             paddingRight: 10,
-    //             fontSize: 16,
-    //             borderBottomWidth: 0.5,
-    //             alignItems: "center",
-    //           }}
-    //         >
-    //           <Text>Họ và tên:</Text>
-
-    //           <TextInput
-    //             style={{
-    //               height: 40,
-    //               fontSize: 14,
-    //               justifyContent: "center",
-    //               alignItems: "center",
-    //             }}
-    //             placeholder="Họ và Tên!"
-    //             onChangeText={(FullName) =>
-    //               this.handleTextInput(FullName, "full_name")
-    //             }
-    //             value={this.state.data.full_name}
-    //           />
-    //         </View>
-    //         <View
-    //           style={{
-    //             flexDirection: "row",
-    //             justifyContent: "space-around",
-    //             padding: 10,
-    //             fontSize: 16,
-    //             borderBottomWidth: 0.5,
-    //             alignItems: "center",
-    //           }}
-    //         >
-    //           <Text style={{ paddingRight: 200 }}>Giới tính:</Text>
-    //           {/* <RadioGroup
-    //             color="#0277BD"
-    //             labelStyle={{ fontSize: 14 }}
-    //             radioButtons={this.state.radioButtons}
-    //             onPress={(radioButtons) => this.setState({ radioButtons })}
-    //             style={{ flexDirection: "row", height: 25 }}
-    //           /> */}
-
-    //           <CheckBox
-    //             title="Nam"
-    //             checkedIcon="dot-circle-o"
-    //             uncheckedIcon="circle-o"
-    //             checked={true}
-    //           />
-
-    //           <CheckBox
-    //             title="Nữ"
-    //             checkedIcon="dot-circle-o"
-    //             uncheckedIcon="circle-o"
-    //             checked={true}
-    //           />
-    //         </View>
-    //         <Text
-    //           style={{
-    //             justifyContent: "center",
-    //             padding: 10,
-    //             fontSize: 16,
-    //             borderBottomWidth: 0.5,
-    //             alignItems: "center",
-    //           }}
-    //         >
-    //           Selected Item: {selectedItem}
-    //         </Text>
-
-    //         <View style={styles.txtContent}>
-    //           <Text>Ngày sinh:</Text>
-    //           <View>
-    //             <TouchableOpacity onPress={this.datepicker}>
-    //               <Text>{dates}</Text>
-    //             </TouchableOpacity>
-    //           </View>
-    //           {show && (
-    //             <DateTimePicker
-    //               value={date}
-    //               mode={mode}
-    //               is24Hour={true}
-    //               display="default"
-    //               onChange={this.setDate}
-    //             />
-    //           )}
-    //         </View>
-    //         <View style={styles.txtContent}>
-    //           <Text>Địa chỉ:</Text>
-    //           <Text style={styles.txtInfo}>{this.state.Address}</Text>
-    //         </View>
-
-    //         <View style={styles.txtContent}>
-    //           <Text>Số điện thoại :</Text>
-    //           <Text style={styles.txtInfo}>{this.state.Phone}</Text>
-    //         </View>
-    //       </View>
-    //       <View style={{ flex: 1, backgroundColor: "#ffffff" }}>
-    //         <Text
-    //           style={{
-    //             fontSize: 18,
-    //             backgroundColor: "#e3e7eb",
-    //             padding: 20,
-    //             paddingTop: 40,
-    //             borderTopWidth: 0.5,
-    //             borderBottomWidth: 0.5,
-    //           }}
-    //         >
-    //           CÔNG TY
-    //         </Text>
-    //         <View style={styles.txtContent}>
-    //           <Text>Phòng ban :</Text>
-    //           <Text style={styles.txtInfo}>{this.state.Department}</Text>
-    //         </View>
-    //         <View style={styles.txtContent}>
-    //           <Text>Chức vụ :</Text>
-    //           <Text style={styles.txtInfo}>{this.state.Position}</Text>
-    //         </View>
-    //         <View style={styles.txtContent}>
-    //           <Text>Chi nhánh :</Text>
-    //           <Text style={styles.txtInfo}>{this.state.Branch}</Text>
-    //         </View>
-    //         <View style={styles.txtContent}>
-    //           <Text>Vùng :</Text>
-    //           <Text style={styles.txtInfo}>{this.state.Region}</Text>
-    //         </View>
-    //         <View style={styles.txtContent}>
-    //           <Text>Lương/Giờ công :</Text>
-    //           <Text style={styles.txtInfo}>{this.state.Salary}</Text>
-    //         </View>
-    //       </View>
-    //     </View>
-    //   </ScrollView>
-    // );
   }
 }
 const styles = StyleSheet.create({
